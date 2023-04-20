@@ -1,0 +1,16 @@
+.list-group-item:hover {
+    background-color: lightgray;
+    cursor: pointer;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.rounded-circle {
+    object-fit: cover;
+    width: 49px;
+    height: 49px;
+}
+
+#contact-list, #chat {
+    height: 65vh;
+}
