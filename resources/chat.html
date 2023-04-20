@@ -32,20 +32,25 @@
             <div class="card border-0">
 
               <!-- User details -->
-              <div class="card-header d-flex align-items-center light-gray">
+              <div class="card-header d-flex align-items-center bg-light-gray rounded-0">
                   <div>
-                    <img src="img/jellyfish.jpeg" alt="avatar" class="rounded-circle" />
+                    <img src="img/jellyfish.jpeg" class="rounded-circle" alt="avatar" />
                   </div>
                   <span class="w-100 ms-4 fw-bold">Hemi</span>
-                  <i class="bi bi-person-plus me-2"></i>
+                  <i class="bi bi-three-dots-vertical me-2"></i>
+              </div>
+
+              <!-- Search bar -->
+              <div class="card-header input-group bg-white">
+                <input type="text" class="form-control rounded-pill bg-light-gray" placeholder="Search" />
               </div>
 
               <!-- Contacts -->
-              <div class="crad-body">
+              <div class="card-body p-0">
                 <ul class="list-group list-group-flush overflow-auto" id="contact-list">
                   <li class="list-group-item d-flex align-items-center mx-0">
                     <div>
-                      <img src="img/whale.jpeg" alt="avatar" class="rounded-circle" />
+                      <img src="img/whale.jpeg" class="rounded-circle" alt="avatar" />
                     </div>
                     <div class="w-100 ms-4">
                       <div>Yuval Grofman</div>
@@ -58,7 +63,7 @@
                   </li>
                   <li class="list-group-item d-flex align-items-center mx-0">
                     <div>
-                      <img src="img/pelican.jpeg" alt="avatar" class="rounded-circle" />
+                      <img src="img/pelican.jpeg" class="rounded-circle" alt="avatar" />
                     </div>
                     <div class="w-100 ms-4">
                       <div>Jonathan Moiseyev</div>
@@ -73,7 +78,7 @@
                   </li>
                   <li class="list-group-item d-flex align-items-center mx-0">
                     <div>
-                      <img src="img/seal.jpeg" alt="avatar" class="rounded-circle" />
+                      <img src="img/seal.jpeg" class="rounded-circle" alt="avatar" />
                     </div>
                     <div class="w-100 ms-4">
                       <div>Jonathan Kelsi</div>
@@ -85,7 +90,7 @@
                         1
                       </span>
                     </div>
-                  </li>
+                  </li>                  
                 </ul>
               </div>
 
@@ -97,19 +102,19 @@
           <div class="card border-0">
 
             <!-- Recipient details -->
-            <div class="card-header d-flex align-items-center light-gray">
+            <div class="card-header d-flex align-items-center bg-light-gray rounded-0">
               <div>
-                <img src="img/whale.jpeg" alt="avatar" class="rounded-circle" />
+                <img src="img/whale.jpeg" class="rounded-circle" alt="avatar" />
               </div>
               <span class="w-100 ms-4 text-muted">Yuval Grofman</span>
             </div>
 
             <!-- Messages -->
-            <div class="card-body overflow-auto light-orange" id="chat">
+            <div class="card-body overflow-auto bg-light-orange" id="chat">
             </div>
 
             <!-- Typing area -->
-            <div class="card-footer input-group light-gray">
+            <div class="card-footer input-group bg-light-gray rounded-0">
               <input type="text" class="form-control rounded-pill" placeholder="Type a message" />
             </div>
 
