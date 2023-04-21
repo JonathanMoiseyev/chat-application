@@ -5,3 +5,15 @@
 .bg-light-orange {
     background-color: #efeae2;
 }
+
+.bg-mint {
+    background-color: #d9fdd3;
+}
+
+.max-width-60 {
+    max-width: 60%;
+}
+
+.rounded-4 {
+    border-radius: 1.25rem;
+}
