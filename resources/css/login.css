@@ -1,0 +1,17 @@
+.form-check-input:focus {
+    background-color: #5469D4;              
+}
+
+.form-check-input:checked {
+    background-color: #5469D4;              
+    border-color: #5469D4;
+}
+
+.login-font {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+a:hover {
+    color: #5469D4;
+}

@@ -17,3 +17,29 @@
 .rounded-4 {
     border-radius: 1.25rem;
 }
+
+.w-80 {
+    width: 80%;  
+}
+
+.w-30 {
+    width: 30%;  
+}
+
+.light-purple {
+    color: #5469D4;
+}
+
+.bg-light-purple {
+    background-color: #5469D4;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #5469D4;
+}
+
+.darken-on-hover:hover {
+    filter: brightness(0.85);
+    cursor: pointer;
+}
