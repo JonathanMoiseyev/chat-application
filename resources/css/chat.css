@@ -11,10 +11,6 @@
     height: 49px;
 }
 
-.form-control:focus {
-    box-shadow: none;
-}
-
 #contact-list, #chat {
     height: 65vh;
 }
