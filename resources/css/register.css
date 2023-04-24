@@ -1,0 +1,25 @@
+.form-check-input:focus {
+    background-color: #5469D4;
+}
+
+.form-check-input:checked {
+    background-color: #5469D4;
+    border-color: #5469D4;
+}
+
+.register-font {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.mb-mid {
+    margin-bottom: 2.25rem !important;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+.mt-8 {
+    margin-top: 10rem !important;
+}
