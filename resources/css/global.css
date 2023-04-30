@@ -1,33 +1,21 @@
-.bg-light-gray {
-    background-color: #f0f2f5;
-}
-
-.bg-light-orange {
-    background-color: #efeae2;
-}
-
-.bg-mint {
-    background-color: #d9fdd3;
+.rounded-4 {
+    border-radius: 1.25rem;
 }
 
 .max-width-60 {
     max-width: 60%;
 }
 
-.rounded-4 {
-    border-radius: 1.25rem;
-}
-
-.w-80 {
-    width: 80%;  
+.w-20 {
+    width: 20%;  
 }
 
 .w-30 {
     width: 30%;  
 }
 
-.w-20 {
-    width: 20%;  
+.w-80 {
+    width: 80%;  
 }
 
 .light-purple {
@@ -36,6 +24,10 @@
 
 .bg-light-purple {
     background-color: #5469D4;
+}
+
+.bg-light-gray {
+    background-color: #f0f2f5;
 }
 
 .form-control:focus {
