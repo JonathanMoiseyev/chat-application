@@ -7,19 +7,7 @@
     border-color: #5469D4;
 }
 
-.register-font {
-    font-size: 15px;
-    font-weight: 600;
-}
-
-.mb-mid {
-    margin-bottom: 2.25rem !important;
-}
-
-.fw-600 {
-    font-weight: 600;
-}
-
-.mt-8 {
-    margin-top: 10rem !important;
+.container {
+    min-width: 520px;
+    max-width: 650px;
 }
