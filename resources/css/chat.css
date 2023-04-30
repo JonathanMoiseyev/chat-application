@@ -1,16 +1,20 @@
-.list-group-item:hover {
-    background-color: lightgray;
-    cursor: pointer;
-    margin-left: 3px;
-    margin-right: 3px;
-}
-
 .rounded-circle {
     object-fit: cover;
     width: 49px;
     height: 49px;
 }
 
+.dropdown-item:active {
+    filter: brightness(0.85);
+    color: inherit;
+    background-color: inherit;
+}
+
 #contact-list, #chat {
     height: 65vh;
+}
+
+#menu:focus {
+    box-shadow: none;
+    background-image: linear-gradient(rgb(0 0 0/10%) 0 0);
 }
