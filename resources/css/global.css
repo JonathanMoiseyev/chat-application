@@ -18,6 +18,10 @@
     width: 80%;  
 }
 
+.fw-600 {
+    font-weight: 600;
+}
+
 .light-purple {
     color: #5469D4;
 }
