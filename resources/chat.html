@@ -21,6 +21,36 @@
     <link rel="stylesheet" href="css/chat.css" />
   </head>
 
+  <!-- the modal for adding a new chat -->
+  <div class="modal fade" id="newChat">
+    <div class="modal-dialog">
+      <div class="modal-content p-2">
+
+        <div class="modal-header border-0">
+          <h1 class="modal-title fs-5">Add new contact</h1>
+
+          <button class="btn rounded-circle darken-on-hover" data-bs-dismiss="modal">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+
+        <div class="modal-body d-flex align-items-center">
+          <div class="w-100">
+            <input type="text" class="form-control" placeholder="Contact's identifier">
+          </div>
+
+          <span>
+            <button class="btn darken-on-hover" data-bs-dismiss="modal">
+              <i class="bi bi-person-fill-add"></i>
+            </button>
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
   <body class="p-4">
     <!-- Chat application -->
     <main class="container shadow">
@@ -34,12 +64,19 @@
                 <img src="img/jellyfish.jpeg" class="rounded-circle" alt="avatar" />
               </div>
               <span class="w-100 ms-4 fw-bold">Hemi</span>
+
+
               <div class="dropdown">
                 <button class="btn rounded-circle darken-on-hover" id="menu" data-bs-toggle="dropdown">
                   <i class="bi bi-three-dots-vertical"></i>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end p-0">
-                  <li class="dropdown-item darken-on-hover">New chat</li>
+                  <li>
+                    <button type="button" class="btn dropdown-item darken-on-hover" data-bs-toggle="modal" data-bs-target="#newChat">
+                      New chat
+                    </button>
+                  </li>
+
                   <li><a class="dropdown-item darken-on-hover" href="login.html">Logout</a></li>
                 </ul>
               </div>
