@@ -39,9 +39,9 @@ website remember your account login.
 
 ### Sign in page
     The name of the file that has the page: "login.html"
-This is the page that you will see when signing int to the app.
+This is the page that you will see when signing in into the app.
 
-To sign you'll need to input a username, and a password.
+To sign in you'll need to input a username, and a password.
 
 When signing in, you will have the option to make the
 website remember your account login.
