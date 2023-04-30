@@ -24,7 +24,6 @@
   </head>
 
   <body class="p-5">
-
     <main class="container w-30 p-5 mt-5 shadow bg-white">
       <div class="row">
         <div class="col col-12">
@@ -32,39 +31,39 @@
             <div class="card-body">
               <!-- Title -->
               <div class="h3 mb-5">Create your account</div>
-                
+
               <!-- Signup form -->
               <form>
                 <!-- Username input -->
                 <div class="fw-600 mb-4">
                   <label for="register-username" class="form-label">Username</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="register-username"
-                  />
+                  <input type="text" class="form-control" id="register-username" />
                 </div>
-                
+
                 <!-- Password input -->
                 <div class="fw-600 mb-4">
                   <label for="register-passwd" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="register-passwd" />
+                </div>
+
+                <!-- Confirm password input -->
+                <div class="fw-600 mb-4">
+                  <label for="register-confirm-passwd" class="form-label"
+                    >Confirm password</label
+                  >
                   <input
                     type="password"
                     class="form-control"
-                    id="register-passwd"
+                    id="register-confirm-passwd"
                   />
                 </div>
-                
+
                 <!-- Display name -->
                 <div class="fw-600 mb-4">
                   <label for="register-display-name" class="form-label"
                     >Display name</label
                   >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="register-display-name"
-                  />
+                  <input type="text" class="form-control" id="register-display-name" />
                 </div>
 
                 <!-- Picture -->
@@ -80,12 +79,16 @@
 
                 <!-- Remember me -->
                 <div class="form-check fw-600 mb-4">
-                  <input type="checkbox" class="form-check-input" id="register-remember-me" />
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="register-remember-me"
+                  />
                   <label class="form-check-label small" for="register-remember-me"
                     >Remember me</label
                   >
                 </div>
-                
+
                 <!-- Submit and redirection to sign in -->
                 <div class="d-flex flex-column">
                   <button
@@ -110,6 +113,5 @@
         </div>
       </div>
     </main>
-    
   </body>
 </html>
