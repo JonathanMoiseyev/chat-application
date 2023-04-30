@@ -1,3 +1,5 @@
+/* Global Classes */
+
 .rounded-4 {
     border-radius: 1.25rem;
 }
@@ -32,6 +34,11 @@
 
 .bg-light-gray {
     background-color: #f0f2f5;
+}
+
+/* Global Settings */
+body {
+    background-color: #FBFCF8;
 }
 
 .form-control:focus {
