@@ -1,53 +1,70 @@
-# AP2-A1
+# Getting Started with Create React App
 
-This repository provides the html pages for a chat application.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Available Scripts
 
-## Download the project
-You can download the project by going to your terminal, and typing the following command:
+In the project directory, you can run:
 
-    git clone 'https://github.com/yuvalgrofman/AP2-A1'
+### `npm start`
 
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-## The pages
-### Location inside the projects
-All the pages are located in the resources folder of the project.
+### `npm test`
 
-### Viewing the pages
-To view the pages, we recommend opening them in your favourite browser.
-We already tested them in Google Chrome, Firefox, and Microsoft Edge.
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+### `npm run build`
 
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-### Chat page
-    The name of the file that has the page: "chat.html"
-This is the chat page that you will see while using the app.
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-It has different chats, and a menu (3 dots) button, which has 2
-options, which are logging out, and adding a new chat.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### Register page
-    The name of the file that has the page: "register.html"
-This is the page that you will see when signing up to the app.
+### `npm run eject`
 
-To make an account you'll need to input a username, a password,
-a display name, and a picture.
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-When registering, you will have the option to make the
-website remember your account login.
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-### Sign in page
-    The name of the file that has the page: "login.html"
-This is the page that you will see when signing in into the app.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-To sign in you'll need to input a username, and a password.
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-When signing in, you will have the option to make the
-website remember your account login.
+## Learn More
 
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-## Authors
-[Jonathan Kelsi](https://github.com/JonathanKelsi)  
-[Jonathan Moiseyev](https://github.com/JonathanMoiseyev)  
-[Yuval Grofman](https://github.com/yuvalgrofman)
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
