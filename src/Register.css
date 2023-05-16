@@ -11,3 +11,9 @@
     min-width: 520px !important;
     max-width: 650px !important;
 }
+
+.error-message {
+    color: red;
+    font-size: 1rem;
+    font-weight: 700;
+}
