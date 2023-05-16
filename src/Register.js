@@ -3,6 +3,42 @@ import './Register.css';
 import './global.css'
 
 function Register() {
+  const [user, setUser] = React.useState({
+    username: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const [error, setError] = React.useState('');
+
+  const handleChange = (name, value) => {
+    setUser({
+      ...user,
+      [name]: value.trim(),
+    });
+  }
+
+  const validate = (event) => {
+    event.preventDefault();
+    let error = '';
+
+    if (!user.username) {
+      error = 'Username is required';
+    } else if (!user.password) {
+      error = 'Password is required';
+    } else if (!/\d/.test(user.password)) {
+      error = 'Password must contain at least one number';
+    } else if (!/[a-zA-Z]/.test(user.password)) {
+      error = 'Password must contain at least one letter';
+    } else if (!user.confirmPassword) {
+      error = 'Confirm password is required';
+    } else if (user.password !== user.confirmPassword) {
+      error = 'Confirm password is not match';
+    } 
+
+    setError(error);
+  }
+
   return (
     <div className="p-5">
       <main className="container w-30 p-5 mt-5 shadow bg-white">
@@ -14,13 +50,20 @@ function Register() {
                 <div className="h3 mb-5">Create your account</div>
 
                 {/*Signup form*/}
-                <form>
+                <form onSubmit={validate}>
                   {/*Username input*/}
                   <div className="fw-600 mb-4">
                     <label htmlFor="register-username" className="form-label">
                       Username
                     </label>
-                    <input type="text" className="form-control" id="register-username" />
+                    <input type="text" name="username"
+                      className="form-control input"
+                      id="register-username"  value={user.username}
+                      onChange={({ target }) => {
+                        handleChange(target.name, target.value);
+                      }}
+                    />
+                    {/* <p className="error-message">{error.username}</p> */}
                   </div>
 
                   {/*Password input*/}
@@ -28,7 +71,13 @@ function Register() {
                     <label htmlFor="register-passwd" className="form-label">
                       Password
                     </label>
-                    <input type="password" className="form-control" id="register-passwd" />
+                    <input type="password" name="password" value={user.password}
+                      className="form-control input" id="register-passwd"
+                      onChange={({ target }) => {
+                        handleChange(target.name, target.value);
+                      }}
+                    />
+                    {/* <p className="error-message">{error.password}</p> */}
                   </div>
 
                   {/*Confirm password input*/}
@@ -36,7 +85,14 @@ function Register() {
                     <label htmlFor="register-confirm-passwd" className="form-label">
                       Confirm password
                     </label>
-                    <input type="password" className="form-control" id="register-confirm-passwd" />
+                    <input type="password" name="confirmPassword"
+                      className="form-control input" value={user.confirmPassword}
+                      id="register-confirm-passwd" 
+                      onChange={({ target }) => {
+                        handleChange(target.name, target.value);
+                      }}
+                    />
+                    {/* <p className="error-message">{error.confirmPassword}</p> */}
                   </div>
 
                   {/*Display name*/}
@@ -65,6 +121,8 @@ function Register() {
 
                   {/*Submit and redirection to sign in*/}
                   <div className="d-flex flex-column">
+                    <p className="error-message bold mx-auto mb-3">{error}</p>
+
                     <button type="submit" className="btn bg-light-purple darken-on-hover w-100 text-white fw-600 py-2 mb-4">
                       Register
                     </button>
