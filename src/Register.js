@@ -7,6 +7,7 @@ function Register() {
     username: '',
     password: '',
     confirmPassword: '',
+    displayName: '',
   });
 
   const [error, setError] = React.useState('');
@@ -34,7 +35,9 @@ function Register() {
       error = 'Confirm password is required';
     } else if (user.password !== user.confirmPassword) {
       error = 'Confirm password is not match';
-    } 
+    } else if (!user.displayName) {
+      error = 'Display name is required';
+    }
 
     setError(error);
   }
@@ -100,7 +103,13 @@ function Register() {
                     <label htmlFor="register-display-name" className="form-label">
                       Display name
                     </label>
-                    <input type="text" className="form-control" id="register-display-name" />
+                    <input type="text" className="form-control"
+                      id="register-display-name" name="displayName"
+                      value={user.displayName}
+                      onChange={({ target }) => {
+                        handleChange(target.name, target.value);
+                      }}
+                    />
                   </div>
 
                   {/*Picture*/}
