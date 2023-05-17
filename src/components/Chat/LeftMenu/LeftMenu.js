@@ -1,9 +1,8 @@
 import React from "react";
-import "./Contact/Contact.js";
-import ContactList from "./Contact/ContactList.js";
+import ContactList from "./ContactList/ContactList.js";
 import SearchBar from "./SearchBar/SearchBar.js";
 
-function LeftMenu() {
+function LeftMenu(props) {
     return (
         <div className="col-4 p-0 border-end">
             <div className="card border-0">
@@ -75,7 +74,7 @@ function LeftMenu() {
                     </div>
                 </div>
                 <SearchBar />
-                <ContactList />
+                <ContactList contacts={props.contacts} />
             </div>
         </div>
     );

@@ -2,12 +2,12 @@ import React from "react";
 import "./Chat.css";
 import LeftMenu from "./LeftMenu/LeftMenu";
 
-function Chat() {
+function Chat(props) {
   return (
     <main className="container shadow mt-4">
       <div className="row">
-        {/* User and Contacts */}
-        <LeftMenu />
+        <LeftMenu {...props}/>
+        
         {/* Chat and Recipient  */}
         <div className="col-8 p-0">
           <div className="card border-0">
