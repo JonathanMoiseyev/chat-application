@@ -1,10 +1,10 @@
 import React from "react";
 
 function SearchBar({setSearch}) {
-    const searchBox = useRef(null);
+    // const searchBox = useRef(null);
 
     const search = function() {
-        setSearch(searchBox.current.value);
+        // setSearch(searchBox.current.value);
     }
 
     return (
@@ -13,7 +13,7 @@ function SearchBar({setSearch}) {
                 type="text"
                 className="form-control rounded-pill bg-light-gray"
                 placeholder="Search"
-                ref={searchBox}
+                // ref={searchBox}
                 onKeyUp={search}
             />
         </div>
