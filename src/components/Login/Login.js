@@ -2,7 +2,7 @@ import LoginCard from './LoginCard';
 
 function Login() {
     return (
-        <main className="container w-30 p-5 mt-5 shadow bg-white">
+        <main className="container login-container w-30 p-5 mt-5 shadow bg-white">
             <div className="row">
                 <div className="col col-12">
                     <LoginCard/>
