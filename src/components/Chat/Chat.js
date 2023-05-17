@@ -4,7 +4,7 @@ import LeftMenu from "./LeftMenu/LeftMenu";
 
 function Chat(props) {
     return (
-        <main className="container shadow mt-4">
+        <main className="container shadow mt-4" id="chat-app">
             <div className="row">
                 <LeftMenu {...props} />
 
