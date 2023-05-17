@@ -2,6 +2,9 @@ import React from 'react';
 import './Register.css';
 import userDetails from '../../db/userDetails.js';
 import { useNavigate } from 'react-router-dom';
+import InputField from './InputField.js'; 
+import RememberMeButton from './RememberMeButton.js';
+import Link from './Link.js';
 
 function Register() {
   const navigate = useNavigate();
@@ -69,78 +72,47 @@ function Register() {
                 {/*Signup form*/}
                 <form>
                   {/*Username input*/}
-                  <div className="fw-600 mb-4">
-                    <label htmlFor="register-username" className="form-label">
-                      Username
-                    </label>
-                    <input type="text" name="username"
-                      className="form-control input"
-                      id="register-username"  value={user.username}
-                      onChange={({ target }) => {
-                        handleChange(target.name, target.value);
-                      }}
-                    />
-                    {/* <p className="error-message">{error.username}</p> */}
-                  </div>
+                  <InputField text="username" name="username" type="text"
+                    id="register-username" value={user.username}
+                    handleChange={({ target }) => {
+                      handleChange(target.name, target.value);
+                    }}
+                  />
 
                   {/*Password input*/}
-                  <div className="fw-600 mb-4">
-                    <label htmlFor="register-passwd" className="form-label">
-                      Password
-                    </label>
-                    <input type="password" name="password" value={user.password}
-                      className="form-control input" id="register-passwd"
-                      onChange={({ target }) => {
-                        handleChange(target.name, target.value);
-                      }}
-                    />
-                    {/* <p className="error-message">{error.password}</p> */}
-                  </div>
+                  <InputField text="password" name="password" type="password"
+                    id="register-passwd" value={user.password}
+                    handleChange={({ target }) => {
+                      handleChange(target.name, target.value);
+                    }}
+                  />
 
                   {/*Confirm password input*/}
-                  <div className="fw-600 mb-4">
-                    <label htmlFor="register-confirm-passwd" className="form-label">
-                      Confirm password
-                    </label>
-                    <input type="password" name="confirmPassword"
-                      className="form-control input" value={user.confirmPassword}
-                      id="register-confirm-passwd" 
-                      onChange={({ target }) => {
-                        handleChange(target.name, target.value);
-                      }}
-                    />
-                    {/* <p className="error-message">{error.confirmPassword}</p> */}
-                  </div>
+                  <InputField text="confirm password" name="confirmPassword" type="password"
+                    id="register-confirm-passwd" value={user.confirmPassword}
+                    handleChange={({ target }) => {
+                      handleChange(target.name, target.value);
+                    }}
+                  />
 
                   {/*Display name*/}
-                  <div className="fw-600 mb-4">
-                    <label htmlFor="register-display-name" className="form-label">
-                      Display name
-                    </label>
-                    <input type="text" className="form-control"
-                      id="register-display-name" name="displayName"
-                      value={user.displayName}
-                      onChange={({ target }) => {
-                        handleChange(target.name, target.value);
-                      }}
-                    />
-                  </div>
+                  <InputField text="display name" name="displayName" type="text"
+                    id="register-display-name" value={user.displayName}
+                    handleChange={({ target }) => {
+                      handleChange(target.name, target.value);
+                    }}
+                  />
 
                   {/*Picture*/}
-                  <div className="fw-600 mb-4">
-                    <label htmlFor="register-picture" className="form-label">
-                      Picture
-                    </label>
-                    <input type="file" className="form-control" id="register-picture" accept="image/*" />
-                  </div>
+                  <InputField text="picture" name="picture" type="file"
+                    id="register-picture" value={user.picture}
+                    handleChange={({ target }) => {
+                      handleChange(target.name, target.value);
+                    }}
+                  />
 
                   {/*Remember me*/}
-                  <div className="form-check fw-600 mb-4">
-                    <input type="checkbox" className="form-check-input" id="register-remember-me" />
-                    <label className="form-check-label small" htmlFor="register-remember-me">
-                      Remember me
-                    </label>
-                  </div>
+                  <RememberMeButton id="register-remember-me" />
 
                   {/*Submit and redirection to sign in*/}
                   <div className="d-flex flex-column">
@@ -151,10 +123,7 @@ function Register() {
                     </button>
 
                     <div className="mx-auto">
-                      <span>Already have an account?&nbsp;</span>
-                      <a className="text-decoration-none darken-on-hover light-purple fw-600" href="login.html">
-                        Sign In
-                      </a>
+                      <Link initialText="Already have an account?&nbsp;" linkText="Sign in" link="/login" />
                     </div>
                   </div>
                 </form>
