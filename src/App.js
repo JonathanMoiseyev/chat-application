@@ -1,23 +1,23 @@
-import './App.css';
+
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.css";
+import Chat from "./components/Chat/Chat";
+import contacts from "./db/contacs";
+import Login from './components/Login/Login';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const props = { contacts: contacts };
+
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/chat" element={<Chat {...props} />} />
+                <Route path="/login" element={<Login/>} />
+
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App;
