@@ -1,5 +1,5 @@
 function Chat() {
-    return (<></>);
+    return (<p>Hello Wolrd</p>);
 }
 
 export default Chat;
