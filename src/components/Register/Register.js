@@ -53,7 +53,6 @@ function Register() {
     userDetails.displayName = user.displayName;
     userDetails.img = user.img;
 
-    console.log(userDetails);
     navigate('/login');
   }
 
