@@ -1,0 +1,52 @@
+/* Global Classes */
+
+.rounded-4 {
+    border-radius: 1.25rem;
+}
+
+.max-width-60 {
+    max-width: 60%;
+}
+
+.w-20 {
+    width: 20%;  
+}
+
+.w-30 {
+    width: 30%;  
+}
+
+.w-80 {
+    width: 80%;  
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+.light-purple {
+    color: #5469D4;
+}
+
+.bg-light-purple {
+    background-color: #5469D4;
+}
+
+.bg-light-gray {
+    background-color: #f0f2f5;
+}
+
+/* Global Settings */
+body {
+    background-color: #FBFCF8;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #5469D4;
+}
+
+.darken-on-hover:hover {
+    filter: brightness(0.85);
+    cursor: pointer;
+}

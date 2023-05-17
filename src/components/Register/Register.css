@@ -1,0 +1,19 @@
+.form-check-input:focus {
+    background-color: #5469D4 !important;
+}
+
+.form-check-input:checked {
+    background-color: #5469D4 !important;
+    border-color: #5469D4 !important;
+}
+
+.container {
+    min-width: 520px !important;
+    max-width: 650px !important;
+}
+
+.error-message {
+    color: red;
+    font-size: 1rem;
+    font-weight: 700;
+}
