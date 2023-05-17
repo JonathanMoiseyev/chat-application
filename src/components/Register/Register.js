@@ -1,7 +1,11 @@
 import React from 'react';
 import './Register.css';
+import userDetails from '../../db/user.js';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
+  const navigate = useNavigate();
+
   const [user, setUser] = React.useState({
     username: '',
     password: '',
@@ -36,9 +40,21 @@ function Register() {
       error = 'Confirm password is not match';
     } else if (!user.displayName) {
       error = 'Display name is required';
+    } else {
+      handleSubmit();
     }
 
     setError(error);
+  }
+
+  const handleSubmit = () => {
+    userDetails.username = user.username;
+    userDetails.password = user.password;
+    userDetails.displayName = user.displayName;
+    userDetails.img = user.img;
+
+    console.log(userDetails);
+    navigate('/login');
   }
 
   return (
@@ -52,7 +68,7 @@ function Register() {
                 <div className="h3 mb-5">Create your account</div>
 
                 {/*Signup form*/}
-                <form onSubmit={validate}>
+                <form>
                   {/*Username input*/}
                   <div className="fw-600 mb-4">
                     <label htmlFor="register-username" className="form-label">
@@ -131,7 +147,7 @@ function Register() {
                   <div className="d-flex flex-column">
                     <p className="error-message bold mx-auto mb-3">{error}</p>
 
-                    <button type="submit" className="btn bg-light-purple darken-on-hover w-100 text-white fw-600 py-2 mb-4">
+                    <button type="submit" onClick={validate} className="btn bg-light-purple darken-on-hover w-100 text-white fw-600 py-2 mb-4">
                       Register
                     </button>
 
