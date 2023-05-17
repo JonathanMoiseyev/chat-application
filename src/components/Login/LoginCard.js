@@ -1,5 +1,4 @@
 import './login.css';
-import './global.css';
 
 import InputField from './InputField';
 import CheckboxField from './CheckboxField';
