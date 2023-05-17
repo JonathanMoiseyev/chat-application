@@ -1,6 +1,5 @@
 import React from 'react';
 import './Register.css';
-import './global.css'
 
 function Register() {
   const [user, setUser] = React.useState({
