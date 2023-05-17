@@ -11,7 +11,7 @@ function SearchBar({doSearch}) {
                 className="form-control rounded-pill bg-light-gray"
                 placeholder="Search"
                 ref={searchBox}
-                onKeyUp={doSearch(searchBox.current.value)}
+                onKeyUp={() => doSearch(searchBox.current.value)}
             />
         </div>
     );
