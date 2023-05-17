@@ -1,6 +1,6 @@
 import React from 'react';
 import './Register.css';
-import userDetails from '../../db/user.js';
+import userDetails from '../../db/userDetails.js';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
