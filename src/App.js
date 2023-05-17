@@ -1,19 +1,23 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Chat from './components/Chat/Chat';
+
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.css";
+import Chat from "./components/Chat/Chat";
+import contacts from "./db/contacs";
 import Login from './components/Login/Login';
 
-
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/chat" element={<Chat/>} />
-        <Route path="/login" element={<Login/>} />
+    const props = { contacts: contacts };
 
-      </Routes>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/chat" element={<Chat {...props} />} />
+                <Route path="/login" element={<Login/>} />
+
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App;
