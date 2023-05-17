@@ -1,5 +1,4 @@
 import React from "react";
-import { useRef } from "react";
 import ContactList from "./ContactList/ContactList.js";
 import SearchBar from "./SearchBar/SearchBar.js";
 
