@@ -3,12 +3,12 @@ import ContactList from "./ContactList/ContactList.js";
 import SearchBar from "./SearchBar/SearchBar.js";
 import UserOptions from "./UserOptions/UserOptions.js";
 
-function LeftMenu(props) {
-    const [effectiveContacts, setEffectiveContacts] = React.useState(props.contacts);
+function LeftMenu({contacts, userDetails, messages}) {
+    const [effectiveContacts, setEffectiveContacts] = React.useState(contacts);
 
     const doSearch = function (query) {
         setEffectiveContacts(
-            props.contacts.filter((contact) =>
+            contacts.filter((contact) =>
                 query === undefined
                     ? true
                     : contact.name.toLowerCase().includes(query.toLowerCase())
