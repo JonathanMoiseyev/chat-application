@@ -7,7 +7,7 @@ function ChatArea({user, chosenContact}) {
     return (
         <div className="col-8 p-0">
             <div className="card border-0">
-                <RecipientDetails />           
+                <RecipientDetails chosenContact={chosenContact}/>           
                 <MessageBoard />
                 <TypingArea />
             </div>

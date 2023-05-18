@@ -1,10 +1,6 @@
 import React from "react";
 
 function OptionsDropdown({setUser}) {
-    const logout = function() {
-        setUser(null);
-    }
-
     return (
         <div className="dropdown">
             <button
@@ -26,7 +22,7 @@ function OptionsDropdown({setUser}) {
                     </button>
                 </li>
                 <li>
-                    <a className="dropdown-item darken-on-hover" onClick={logout()}>
+                    <a className="dropdown-item darken-on-hover">
                         Logout
                     </a>
                 </li>
