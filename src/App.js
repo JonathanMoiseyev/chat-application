@@ -6,7 +6,7 @@ import Register from "./components/Register/Register";
 
 function App() {
     // const [user, setUser] = useState(null);
-    let user = 'Hemi'
+    let user = 'hemi'
 
     return (
         <BrowserRouter>

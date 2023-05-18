@@ -3,11 +3,11 @@ import ContactList from "./ContactList/ContactList.js";
 import SearchBar from "./SearchBar/SearchBar.js";
 import UserOptions from "./UserOptions/UserOptions.js";
 
-import contactsDB from "../../../db/contacsDB.js";
 import usersDB from "../../../db/usersDB.js";
 
 function LeftMenu({user, setChosenContact}) {
-    const userContacts = contactsDB[user].map((contact) => usersDB[contact]);
+
+    const userContacts = usersDB[user].contacts.map((contact) => usersDB[contact]);
     const [effectiveContacts, setEffectiveContacts] = useState(userContacts);
 
     const doSearch = function(query) {

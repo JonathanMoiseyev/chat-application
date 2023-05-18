@@ -17,7 +17,7 @@ function Contact({ contact, setChosenContact }) {
         }
 
         // Update what conversation is being displayed 
-        setChosenContact(contact);
+        setChosenContact(contact.username);
     };
 
     return (
