@@ -6,7 +6,7 @@ import UserOptions from "./UserOptions/UserOptions.js";
 function LeftMenu({contacts, userDetails, messages, setConv}) {
     const [effectiveContacts, setEffectiveContacts] = React.useState(contacts);
 
-    const doSearch = function (query) {
+    const doSearch = function(query) {
         setEffectiveContacts(
             contacts.filter((contact) =>
                 query === undefined
