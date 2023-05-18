@@ -8,9 +8,7 @@ import Register from "./components/Register/Register";
 import userDB from "./db/usersDB.js";
 
 function App() {
-    // const [user, setUser] = useState(null);
-    let user = userDB['hemi'];
-    let setUser = () => {};
+    const [user, setUser] = useState(null);
 
     return (
         <BrowserRouter>
@@ -18,7 +16,7 @@ function App() {
                 <Route
                     path="/"
                     element={
-                        user == null ? <Login /> : <Chat user={user} setUser={setUser} />
+                        user == null ? <Login setUser={setUser}/> : <Chat user={user} setUser={setUser} />
                     }
                 />
                 <Route path="/register" element={<Register />} />
