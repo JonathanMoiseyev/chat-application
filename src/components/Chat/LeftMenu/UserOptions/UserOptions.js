@@ -2,7 +2,7 @@ import React from "react";
 import AddUserModal from "./AddUserModal";
 import OptionsDropdown from "./OptionsDropdown";
 
-function UserOptions() {
+function UserOptions({user, setUser}) {
     return (
         <>
             <AddUserModal />
@@ -11,14 +11,14 @@ function UserOptions() {
                 <>
                     <div>
                         <img
-                            src="img/jellyfish.jpeg"
+                            src={user.img}
                             className="rounded-circle"
                             alt="avatar"
                         />
                     </div>
-                    <span className="w-100 ms-4 fw-bold">Hemi</span>
+                    <span className="w-100 ms-4 fw-bold">{user.displayName}</span>
                 </>
-                <OptionsDropdown />
+                <OptionsDropdown setUser={setUser} />
             </div>
         </>
     );

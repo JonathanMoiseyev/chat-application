@@ -10,6 +10,8 @@ function Contact({ contact, setChosenContact }) {
         // Remove the darkening from other contacts
         const otherContactsRefs = contactRef.current.parentElement.children;
 
+        console.log(otherContactsRefs)
+
         for (let i = 0; i < otherContactsRefs.length; i++) {
             if (otherContactsRefs[i] !== contactRef.current) {
                 otherContactsRefs[i].style.filter = "brightness(100%)";
