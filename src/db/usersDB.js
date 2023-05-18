@@ -23,7 +23,7 @@ let usersDB = {
     "jonathanK": {
         username: "jonathanK",
         password: "12345",
-        displayName: "Jonathn Kelsi",
+        displayName: "Jonathan Kelsi",
         img: "",
         contacts: ["hemi"],
     },
