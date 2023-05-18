@@ -1,6 +1,6 @@
 import React from 'react';
 import './Register.css';
-import userDetails from '../../db/userDetails.js';
+import userDetails from '../../db/usersDB.js';
 import { useNavigate } from 'react-router-dom';
 import InputField from './InputField.js'; 
 import RememberMeButton from './RememberMeButton.js';
