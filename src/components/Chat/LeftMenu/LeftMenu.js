@@ -21,7 +21,7 @@ function LeftMenu({contacts, userDetails, messages, setConv}) {
             <div className="card border-0">
                 <UserOptions />
                 <SearchBar doSearch={doSearch} />
-                <ContactList contacts={effectiveContacts} setConv={setConv} />
+                <ContactList contacts={effectiveContacts} setConv={setConv} messages={messages} />
             </div>
         </div>
     );

@@ -3,9 +3,13 @@ import "./Chat.css";
 import LeftMenu from "./LeftMenu/LeftMenu";
 import ChatArea from "./ChatArea/ChatArea";
 
-function Chat({contacts, userDetails, messages}) {
+import userDetails from "../../db/userDetails";
+import contacts from "../../db/contacs";
+import messages from "../../db/messages";
+
+function Chat() {
     const [conversation, setConversation] = React.useState("");
-    
+
     return (
         <main className="container shadow mt-4" id="chat-app">
             <div className="row">
@@ -15,7 +19,7 @@ function Chat({contacts, userDetails, messages}) {
                     messages={messages}
                     setConv={setConversation}
                 />
-                <ChatArea conversation={conversation}/>
+                <ChatArea conversation={conversation} messages={messages}/>
             </div>
         </main>
     );

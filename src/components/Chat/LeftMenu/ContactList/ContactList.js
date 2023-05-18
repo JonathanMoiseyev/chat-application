@@ -1,7 +1,7 @@
 import React from "react";
 import Contact from "./Contact.js";
 
-function ContactList({ contacts, setConv }) {
+function ContactList({ contacts, setConv, messages }) {
     const contactComponents = contacts.map((contact, key) => (
         <Contact {...contact} setConv={setConv} key={key} />
     ));

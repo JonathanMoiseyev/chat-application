@@ -1,7 +1,7 @@
 import {React, useRef} from "react";
 
 
-function Contact({ img, name, lastMessage, date, setConv }) {
+function Contact({ img, name, messages, date, setConv }) {
     const contactRef = useRef(null);
 
     const pickConversation = function () {
@@ -32,7 +32,7 @@ function Contact({ img, name, lastMessage, date, setConv }) {
             </div>
             <div className="w-100 ms-4">
                 <div>{name}</div>
-                <small className="text-muted">{lastMessage}</small>
+                <small className="text-muted">{}</small>
             </div>
             <div>
                 <small className="text-muted me-2">{date}</small>
