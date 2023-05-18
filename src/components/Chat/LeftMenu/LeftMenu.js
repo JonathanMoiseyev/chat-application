@@ -3,7 +3,7 @@ import ContactList from "./ContactList/ContactList.js";
 import SearchBar from "./SearchBar/SearchBar.js";
 import UserOptions from "./UserOptions/UserOptions.js";
 
-function LeftMenu({contacts, userDetails, messages}) {
+function LeftMenu({contacts, userDetails, messages, setConv}) {
     const [effectiveContacts, setEffectiveContacts] = React.useState(contacts);
 
     const doSearch = function (query) {
@@ -21,7 +21,7 @@ function LeftMenu({contacts, userDetails, messages}) {
             <div className="card border-0">
                 <UserOptions />
                 <SearchBar doSearch={doSearch} />
-                <ContactList contacts={effectiveContacts} />
+                <ContactList contacts={effectiveContacts} setConv={setConv} />
             </div>
         </div>
     );

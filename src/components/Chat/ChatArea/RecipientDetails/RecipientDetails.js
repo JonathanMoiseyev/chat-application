@@ -1,6 +1,8 @@
 import React from "react";
 
 function RecipientDetails({img, name}) {
+    
+
     return (
         <div className="card-header d-flex align-items-center bg-light-gray rounded-0">
             <div>
