@@ -1,23 +1,27 @@
-
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
+import { useState } from "react";
+import { BrowserRouter, Routes, Route, redirect } from "react-router-dom";
 import Chat from "./components/Chat/Chat";
-import Login from './components/Login/Login';
+import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
-import contacts from "./db/contacs";
 
+// Temp
+import userDB from "./db/usersDB.js";
 
 function App() {
-    const props = { contacts: contacts };
+    // const [user, setUser] = useState(null);
+    let user = userDB['hemi'];
+    let setUser = () => {};
 
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/chat" element={<Chat {...props} />} />
-                <Route path="/login" element={<Login/>} />
-                <Route path="/register" element={<Register/>} />                
-
+                <Route
+                    path="/"
+                    element={
+                        user == null ? <Login /> : <Chat user={user} setUser={setUser} />
+                    }
+                />
+                <Route path="/register" element={<Register />} />
             </Routes>
         </BrowserRouter>
     );

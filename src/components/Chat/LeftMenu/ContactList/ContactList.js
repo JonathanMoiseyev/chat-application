@@ -1,8 +1,10 @@
 import React from "react";
 import Contact from "./Contact.js";
 
-function ContactList({contacts}) {    
-    const contactComponents = contacts.map((contact) => <Contact {...contact}/>);
+function ContactList({ contacts, setChosenContact }) {
+    const contactComponents = contacts.map((contact, key) => (
+        <Contact contact={contact} setChosenContact={setChosenContact} key={key} />
+    ));
 
     return (
         <div className="card-body p-0">
