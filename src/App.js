@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Chat from "./components/Chat/Chat";
 import Login from "./components/Login/Login";

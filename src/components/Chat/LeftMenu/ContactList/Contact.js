@@ -1,5 +1,4 @@
 import {React, useRef} from "react";
-import usersDB from "../../../../db/usersDB";
 
 function Contact({ contact, setChosenContact }) {
     const contactRef = useRef(null);
@@ -21,8 +20,6 @@ function Contact({ contact, setChosenContact }) {
         setChosenContact(contact);
     };
 
-    const contactDetails = usersDB[contact];
-
     return (
         <li
             className="list-group-item d-flex align-items-center mx-0 darken-on-hover"
@@ -30,14 +27,14 @@ function Contact({ contact, setChosenContact }) {
             ref={contactRef}
         >
             <div>
-                <img src={contactDetails.img} className="rounded-circle" alt="avatar" />
+                <img src={contact.img} className="rounded-circle" alt="avatar" />
             </div>
             <div className="w-100 ms-4">
-                <div>{contactDetails.img}</div>
+                <div>{contact.displayName}</div>
                 <small className="text-muted">{}</small>
             </div>
             <div>
-                <small className="text-muted me-2">{contactDetails.img}</small>
+                <small className="text-muted me-2">{}</small>
                 <span className="badge bg-light-purple rounded-pill float-end me-2">
                     14
                 </span>

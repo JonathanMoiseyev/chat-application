@@ -4,9 +4,10 @@ import SearchBar from "./SearchBar/SearchBar.js";
 import UserOptions from "./UserOptions/UserOptions.js";
 
 import contactsDB from "../../../db/contacsDB.js";
+import usersDB from "../../../db/usersDB.js";
 
 function LeftMenu({user, setChosenContact}) {
-    const userContacts = contactsDB[user];
+    const userContacts = contactsDB[user].map((contact) => usersDB[contact]);
     const [effectiveContacts, setEffectiveContacts] = useState(userContacts);
 
     const doSearch = function(query) {
@@ -14,7 +15,7 @@ function LeftMenu({user, setChosenContact}) {
             userContacts.filter((contact) =>
                 query === undefined
                     ? true
-                    : contact.name.toLowerCase().includes(query.toLowerCase())
+                    : contact.displayName.toLowerCase().includes(query.toLowerCase())
             )
         );
     };
