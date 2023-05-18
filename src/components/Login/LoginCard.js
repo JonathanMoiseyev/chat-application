@@ -4,8 +4,25 @@ import InputField from './InputField';
 import CheckboxField from './CheckboxField';
 import SubmitFormButton from './SubmitFormButton';
 import HrefLink from './HrefLink';
+import {useState} from "react";
+import usersDB from "../../db/usersDB";
 
-function LoginCard() {
+
+
+
+function LoginCard({setUser}) {
+    let [inputUsername, setInputUsername] = useState("")
+    let [inputPassword, setInputPassword] = useState("")
+
+    const signInFunction = (event) => {
+        event.preventDefault();
+        if (usersDB[inputUsername] != undefined) {
+            if (usersDB[inputUsername].password == inputPassword) {
+                setUser(usersDB[inputUsername]);
+            }
+        }
+    }
+
     return (
         <div className="border-0 card">
             <div className="card-body">
@@ -19,12 +36,17 @@ function LoginCard() {
                     <InputField 
                         labelOfInputField="Username"
                         idOfInputField="login-username"
+                        updateFunction={setInputUsername}
+                        variableToUpdate={inputUsername}
+
                     />
 
                     {/* Password input */}
                     <InputField 
                         labelOfInputField="Password"
                         idOfInputField="login-passwd"
+                        updateFunction={setInputPassword}
+                        variableToUpdate={inputPassword}
                         additionalWritingAfterLabel="Forgot Password?"
                     />
                     
@@ -39,7 +61,10 @@ function LoginCard() {
                     
                     <div className="d-flex flex-column">
                         {/* Submit button */}
-                        <SubmitFormButton writingOnButton="Continue"/>
+                        <SubmitFormButton
+                            writingOnButton="Continue"
+                            signInFunction={signInFunction}
+                        />
                         
                         {/* redirection to sign up */}
                         <HrefLink

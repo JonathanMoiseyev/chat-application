@@ -1,8 +1,10 @@
 import './login.css';
+import {useRef} from "react";
 
+function InputField({labelOfInputField, idOfInputField, updateFunction, additionalWritingAfterLabel, variableToUpdate}) {
+    const inputReference = useRef(null);
 
-function InputField({labelOfInputField, idOfInputField, additionalWritingAfterLabel}) {
-  return (
+    return (
     <div className="fw-600 mb-4">
         <label htmlFor={idOfInputField} className="form-label fw-600">
             {labelOfInputField}
@@ -10,7 +12,14 @@ function InputField({labelOfInputField, idOfInputField, additionalWritingAfterLa
         <a className="float-end text-decoration-none darken-on-hover light-purple">
             {additionalWritingAfterLabel}
         </a>
-        <input type="text" className="form-control" id={idOfInputField}/>
+        <input 
+            type="text"
+            className="form-control"
+            id={idOfInputField}
+            ref={inputReference}
+
+            onChange={() => updateFunction(inputReference.current.value)}
+        />
     </div>
   );
 }
