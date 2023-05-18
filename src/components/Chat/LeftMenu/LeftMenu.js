@@ -6,7 +6,6 @@ import UserOptions from "./UserOptions/UserOptions.js";
 import usersDB from "../../../db/usersDB.js";
 
 function LeftMenu({user, setChosenContact}) {
-
     const userContacts = usersDB[user].contacts.map((contact) => usersDB[contact]);
     const [effectiveContacts, setEffectiveContacts] = useState(userContacts);
 
