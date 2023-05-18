@@ -4,7 +4,7 @@ import LeftMenu from "./LeftMenu/LeftMenu";
 import ChatArea from "./ChatArea/ChatArea";
 
 function Chat({ user, setUser }) {
-    const [chosenContact, setChosenContact] = useState("");
+    const [chosenContact, setChosenContact] = useState(null);
 
     return (
         <main className="container shadow mt-4" id="chat-app">
