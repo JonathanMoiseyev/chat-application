@@ -1,9 +1,9 @@
 import React from "react";
 import Contact from "./Contact.js";
 
-function ContactList({ contacts, setConv, messages }) {
+function ContactList({ contacts, setChosenContact }) {
     const contactComponents = contacts.map((contact, key) => (
-        <Contact {...contact} setConv={setConv} key={key} />
+        <Contact contact={contact} setChosenContact={setChosenContact} key={key} />
     ));
 
     return (

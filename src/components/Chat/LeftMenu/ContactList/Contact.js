@@ -1,7 +1,7 @@
 import {React, useRef} from "react";
+import usersDB from "../../../../db/usersDB";
 
-
-function Contact({ img, name, messages, date, setConv }) {
+function Contact({ contact, setChosenContact }) {
     const contactRef = useRef(null);
 
     const pickConversation = function () {
@@ -9,17 +9,19 @@ function Contact({ img, name, messages, date, setConv }) {
         contactRef.current.style.filter = "brightness(90%)";
 
         // Remove the darkening from other contacts
-        const contacts = contactRef.current.parentElement.children;
+        const otherContactsRefs = contactRef.current.parentElement.children;
 
-        for (let i = 0; i < contacts.length; i++) {
-            if (contacts[i] !== contactRef.current) {
-                contacts[i].style.filter = "brightness(100%)";
+        for (let i = 0; i < otherContactsRefs.length; i++) {
+            if (otherContactsRefs[i] !== contactRef.current) {
+                otherContactsRefs[i].style.filter = "brightness(100%)";
             }
         }
 
         // Update what conversation is being displayed 
-        setConv({ name, img });
+        setChosenContact(contact);
     };
+
+    const contactDetails = usersDB[contact];
 
     return (
         <li
@@ -28,14 +30,14 @@ function Contact({ img, name, messages, date, setConv }) {
             ref={contactRef}
         >
             <div>
-                <img src={img} className="rounded-circle" alt="avatar" />
+                <img src={contactDetails.img} className="rounded-circle" alt="avatar" />
             </div>
             <div className="w-100 ms-4">
-                <div>{name}</div>
+                <div>{contactDetails.img}</div>
                 <small className="text-muted">{}</small>
             </div>
             <div>
-                <small className="text-muted me-2">{date}</small>
+                <small className="text-muted me-2">{contactDetails.img}</small>
                 <span className="badge bg-light-purple rounded-pill float-end me-2">
                     14
                 </span>

@@ -1,14 +1,17 @@
-import React from "react";
+import {useState} from "react";
 import ContactList from "./ContactList/ContactList.js";
 import SearchBar from "./SearchBar/SearchBar.js";
 import UserOptions from "./UserOptions/UserOptions.js";
 
-function LeftMenu({contacts, userDetails, messages, setConv}) {
-    const [effectiveContacts, setEffectiveContacts] = React.useState(contacts);
+import contactsDB from "../../../db/contacsDB.js";
+
+function LeftMenu({user, setChosenContact}) {
+    const userContacts = contactsDB[user];
+    const [effectiveContacts, setEffectiveContacts] = useState(userContacts);
 
     const doSearch = function(query) {
         setEffectiveContacts(
-            contacts.filter((contact) =>
+            userContacts.filter((contact) =>
                 query === undefined
                     ? true
                     : contact.name.toLowerCase().includes(query.toLowerCase())
@@ -21,7 +24,7 @@ function LeftMenu({contacts, userDetails, messages, setConv}) {
             <div className="card border-0">
                 <UserOptions />
                 <SearchBar doSearch={doSearch} />
-                <ContactList contacts={effectiveContacts} setConv={setConv} messages={messages} />
+                <ContactList contacts={effectiveContacts} setChosenContact={setChosenContact} />
             </div>
         </div>
     );
