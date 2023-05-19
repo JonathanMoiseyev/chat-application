@@ -37,6 +37,7 @@ function LoginCard({setUser}) {
                         labelOfInputField="Username"
                         idOfInputField="login-username"
                         updateFunction={setInputUsername}
+                        inputType="text"
                     />
 
                     {/* Password input */}
@@ -44,6 +45,7 @@ function LoginCard({setUser}) {
                         labelOfInputField="Password"
                         idOfInputField="login-passwd"
                         updateFunction={setInputPassword}
+                        inputType="password"
 
                         additionalWritingAfterLabel="Forgot Password?"
                     />

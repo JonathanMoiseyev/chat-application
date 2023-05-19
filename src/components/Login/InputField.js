@@ -1,7 +1,7 @@
 import './login.css';
 import {useRef} from "react";
 
-function InputField({labelOfInputField, idOfInputField, updateFunction, additionalWritingAfterLabel}) {
+function InputField({labelOfInputField, idOfInputField, updateFunction, inputType, additionalWritingAfterLabel}) {
     const inputReference = useRef(null);
 
     return (
@@ -13,7 +13,7 @@ function InputField({labelOfInputField, idOfInputField, updateFunction, addition
             {additionalWritingAfterLabel}
         </a>
         <input 
-            type="text"
+            type={inputType}
             className="form-control"
             id={idOfInputField}
             ref={inputReference}
