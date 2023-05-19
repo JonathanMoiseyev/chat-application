@@ -1,7 +1,7 @@
 import './login.css';
 import {useRef} from "react";
 
-function InputField({labelOfInputField, idOfInputField, updateFunction, additionalWritingAfterLabel, variableToUpdate}) {
+function InputField({labelOfInputField, idOfInputField, updateFunction, additionalWritingAfterLabel}) {
     const inputReference = useRef(null);
 
     return (
