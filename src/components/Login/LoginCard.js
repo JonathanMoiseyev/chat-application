@@ -1,7 +1,6 @@
 import './login.css';
 
 import InputField from './InputField';
-import CheckboxField from './CheckboxField';
 import SubmitFormButton from './SubmitFormButton';
 import HrefLink from './HrefLink';
 import {useState} from "react";
@@ -14,14 +13,22 @@ function LoginCard({setUser}) {
     let [inputUsername, setInputUsername] = useState("")
     let [inputPassword, setInputPassword] = useState("")
 
+    let[inputErrorMessage, setInputErrorMessage] = useState("")
+
+
     const signInFunction = (event) => {
         event.preventDefault();
         if (usersDB[inputUsername] != undefined) {
             if (usersDB[inputUsername].password == inputPassword) {
                 setUser(usersDB[inputUsername]);
+                return
             }
         }
+
+        setInputErrorMessage("Wrong username and/or password")
     }
+
+
 
     return (
         <div className="border-0 card">
@@ -37,8 +44,7 @@ function LoginCard({setUser}) {
                         labelOfInputField="Username"
                         idOfInputField="login-username"
                         updateFunction={setInputUsername}
-                        variableToUpdate={inputUsername}
-
+                        inputType="text"
                     />
 
                     {/* Password input */}
@@ -46,16 +52,14 @@ function LoginCard({setUser}) {
                         labelOfInputField="Password"
                         idOfInputField="login-passwd"
                         updateFunction={setInputPassword}
-                        variableToUpdate={inputPassword}
+                        inputType="password"
+
                         additionalWritingAfterLabel="Forgot Password?"
                     />
-                    
-                    {/* Remember me */}
-                    <CheckboxField 
-                        tytleOfCheckboxField="Remember me"
-                        idOfCheckboxField="login-remember-me"
-                    />
-                    
+
+
+                    {/* Error message */}
+                    <span className="error-message">{inputErrorMessage}</span>
 
 
                     
