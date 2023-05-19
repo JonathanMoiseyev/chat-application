@@ -16,13 +16,17 @@ function LeftMenu({ user, setUser, setChosenContact }) {
     const doSearch = function (query) {
         setSearchValue(query)
 
-        if (query === undefined) return;
+        if (query === undefined) {
+            setEffectiveContacts(userContacts);
+        }
 
-        setEffectiveContacts(
-            userContacts.filter((contact) =>
-                contact.displayName.toLowerCase().includes(query.toLowerCase())
-            )
-        );
+        else {
+            setEffectiveContacts(
+                userContacts.filter((contact) =>
+                    contact.displayName.toLowerCase().includes(query.toLowerCase())
+                )
+            );
+        }
     };
 
 
