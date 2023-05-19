@@ -8,8 +8,8 @@ function Contact({ contact, setChosenContact }) {
         contactRef.current.style.filter = "brightness(90%)";
 
         // Remove the darkening from other contacts
-        contactRef.current.parentElement.children.forEach((element) => {
-            if (element !== contactRef.current) element.style.filter = "brightness(100%)";
+        Array.from(contactRef.current.parentElement.children).forEach((contact) => {
+            if (contact !== contactRef.current) contact.style.filter = "brightness(100%)";
         });
 
         // Update what conversation is being displayed
