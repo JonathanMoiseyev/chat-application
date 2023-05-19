@@ -1,5 +1,3 @@
-import React from "react";
-
 function OptionsDropdown({ setUser }) {
     return (
         <div className="dropdown">
@@ -23,7 +21,12 @@ function OptionsDropdown({ setUser }) {
                     </button>
                 </li>
                 <li>
-                    <a className="dropdown-item darken-on-hover" value="logout">
+                    <a
+                        className="dropdown-item darken-on-hover"
+                        value="logout"
+                        href="#/"
+                        onClick={() => setUser(null)}
+                    >
                         Logout
                     </a>
                 </li>
