@@ -14,14 +14,22 @@ function LoginCard({setUser}) {
     let [inputUsername, setInputUsername] = useState("")
     let [inputPassword, setInputPassword] = useState("")
 
+    let[inputErrorMessage, setInputErrorMessage] = useState("")
+
+
     const signInFunction = (event) => {
         event.preventDefault();
         if (usersDB[inputUsername] != undefined) {
             if (usersDB[inputUsername].password == inputPassword) {
                 setUser(usersDB[inputUsername]);
+                return
             }
         }
+
+        setInputErrorMessage("Wrong username and/or password")
     }
+
+
 
     return (
         <div className="border-0 card">
@@ -49,7 +57,12 @@ function LoginCard({setUser}) {
 
                         additionalWritingAfterLabel="Forgot Password?"
                     />
-                    
+
+
+                    {/* Error message */}
+                    <span className="error-message">{inputErrorMessage}</span>
+
+
                     {/* Remember me */}
                     <CheckboxField 
                         tytleOfCheckboxField="Remember me"
