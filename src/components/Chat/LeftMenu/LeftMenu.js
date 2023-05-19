@@ -6,10 +6,16 @@ import UserOptions from "./UserOptions/UserOptions.js";
 import usersDB from "../../../db/usersDB.js";
 
 function LeftMenu({ user, setUser, setChosenContact }) {
-    const userContacts = user.contacts.map((contact) => usersDB[contact]);
-    const [effectiveContacts, setEffectiveContacts] = useState(userContacts);
 
+    let userContacts = user.contacts.map((contact) => usersDB[contact]);
+    const [effectiveContacts, setEffectiveContacts] = useState(userContacts);
+    const [searchValue, setSearchValue] = useState(undefined);
+    
+
+    
     const doSearch = function (query) {
+        setSearchValue(query)
+
         if (query === undefined) return;
 
         setEffectiveContacts(
@@ -19,10 +25,24 @@ function LeftMenu({ user, setUser, setChosenContact }) {
         );
     };
 
+
+
+    const refreshContacts = function (contact) {
+        userContacts = user.contacts.map((contact) => usersDB[contact]);
+        console.log(searchValue)
+        doSearch(searchValue)
+    };
+
+    
+
     return (
         <div className="col-4 p-0 border-end">
             <div className="card border-0">
-                <UserOptions user={user} setUser={setUser} />
+                <UserOptions
+                    user={user}
+                    setUser={setUser}
+                    refreshContacts={refreshContacts}
+                />
                 <SearchBar doSearch={doSearch} />
                 <ContactList
                     contacts={effectiveContacts}

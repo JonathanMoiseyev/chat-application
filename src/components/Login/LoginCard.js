@@ -1,6 +1,6 @@
 import './login.css';
 
-import InputField from './InputField';
+import InputField from './../shared/InputField';
 import SubmitFormButton from './SubmitFormButton';
 import HrefLink from './HrefLink';
 import {useState} from "react";
