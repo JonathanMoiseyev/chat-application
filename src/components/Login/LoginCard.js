@@ -1,7 +1,6 @@
 import './login.css';
 
 import InputField from './InputField';
-import CheckboxField from './CheckboxField';
 import SubmitFormButton from './SubmitFormButton';
 import HrefLink from './HrefLink';
 import {useState} from "react";
@@ -61,14 +60,6 @@ function LoginCard({setUser}) {
 
                     {/* Error message */}
                     <span className="error-message">{inputErrorMessage}</span>
-
-
-                    {/* Remember me */}
-                    <CheckboxField 
-                        tytleOfCheckboxField="Remember me"
-                        idOfCheckboxField="login-remember-me"
-                    />
-                    
 
 
                     
