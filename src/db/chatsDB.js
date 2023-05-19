@@ -3,36 +3,36 @@ let chatsDB = {
         "yuval": [
             {
                 content: "Hello, how are you?",
-                by: "yuval",
+                sender: "yuval",
                 date: new Date("2020-01-01T10:00:00"),
             },
             {
                 content: "I'm fine, thanks!",
-                by: "hemi",
+                sender: "hemi",
                 date: new Date("2020-01-01T10:01:00"),
             },
         ],
         "jonathanM": [
             {
                 content: "whatsssssuppppp?",
-                by: "jonathanM",
+                sender: "jonathanM",
                 date: new Date("2020-01-01T10:00:00"),
             },
             {
                 content: "nothing much, you?",
-                by: "hemi",
+                sender: "hemi",
                 date: new Date("2020-01-01T10:01:00"),
             },
         ],
         "jonathanK": [
             {
                 content: "U up ?",
-                by: "jonathanK",
+                sender: "jonathanK",
                 date: new Date("2020-01-01T10:00:00"),
             },
             {
                 content: "Yup",
-                by: "hemi",
+                sender: "hemi",
                 date: new Date("2020-01-01T10:01:00"),
             },
         ],
@@ -41,12 +41,12 @@ let chatsDB = {
         "hemi": [
             {
                 content: "Hello, how are you?",
-                by: "yuval",
+                sender: "yuval",
                 date: new Date("2020-01-01T10:00:00"),
             },
             {
                 content: "I'm fine, thanks!",
-                by: "hemi",
+                sender: "hemi",
                 date: new Date("2020-01-01T10:01:00"),
             },
         ],
@@ -55,12 +55,12 @@ let chatsDB = {
         "hemi": [
             {
                 content: "whatsssssuppppp?",
-                by: "jonathanM",
+                sender: "jonathanM",
                 date: new Date("2020-01-01T10:00:00"),
             },
             {
                 content: "nothing much, you?",
-                by: "hemi",
+                sender: "hemi",
                 date: new Date("2020-01-01T10:01:00"),
             },
         ],
@@ -69,12 +69,12 @@ let chatsDB = {
         "hemi": [
             {
                 content: "U up ?",
-                by: "jonathanK",
+                sender: "jonathanK",
                 date: new Date("2020-01-01T10:00:00"),
             },
             {
                 content: "Yup",
-                by: "hemi",
+                sender: "hemi",
                 date: new Date("2020-01-01T10:01:00"),
             },
         ],
