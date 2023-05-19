@@ -2,7 +2,7 @@ function Message({ user, message }) {
     let alignmentStyle = "",
         messageStyle = "bg-light-gray";
 
-    if (message.sender == user.username) {
+    if (message.sender === user.username) {
         alignmentStyle = "justify-content-end";
         messageStyle = "bg-light-purple text-white";
     }
