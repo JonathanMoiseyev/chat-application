@@ -129,7 +129,6 @@ function Register() {
                                         updateFunction={updateUserUsername}
                                         input-type="text"
                                     />
-                                    d
 
                                     {/*Password input*/}
                                     <PasswordInputField
