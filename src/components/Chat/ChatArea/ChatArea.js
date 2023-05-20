@@ -3,7 +3,7 @@ import TypingArea from "./TypingArea/TypingArea";
 import MessageBoard from "./MessageBoard/MessageBoard";
 import RecipientDetails from "./RecipientDetails/RecipientDetails";
 
-function ChatArea({ user, chosenContact, forceUpdate, status }) {
+function ChatArea({ user, chosenContact, foreRerender, status }) {
     return (
         <div className="col-8 p-0">
             <div className="card border-0">
@@ -12,7 +12,7 @@ function ChatArea({ user, chosenContact, forceUpdate, status }) {
                 <TypingArea
                     user={user}
                     chosenContact={chosenContact}
-                    forceUpdate={forceUpdate}
+                    foreRerender={foreRerender}
                     status={status}
                 />
             </div>

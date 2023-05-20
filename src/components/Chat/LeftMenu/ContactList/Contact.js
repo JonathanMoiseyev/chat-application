@@ -1,7 +1,19 @@
 import { React, useRef } from "react";
+import { dateToString } from "../../../shared/dateToString.js";
+import chatsDB from "../../../../db/chatsDB";
 
-function Contact({ contact, setChosenContact }) {
+
+function Contact({ user, contact, setChosenContact }) {
     const contactRef = useRef(null);
+
+    const chatMessages = chatsDB[user.username][contact.username];
+    const lastMessage = chatMessages[chatMessages.length - 1];
+    let lastMessageDate = null, lastMessageContent = "";
+
+    if (lastMessage !== undefined) {
+        lastMessageDate = lastMessage.date;
+        lastMessageContent = lastMessage.content;
+    }
 
     const pickConversation = function () {
         // Darken the chosen contact
@@ -23,17 +35,35 @@ function Contact({ contact, setChosenContact }) {
             ref={contactRef}
         >
             <div>
-                <img src={contact.img} className="rounded-circle profile-picture" alt="avatar" />
+                <img
+                    src={contact.img}
+                    className="rounded-circle profile-picture"
+                    alt="avatar"
+                />
             </div>
             <div className="w-100 ms-4">
-                <div>{contact.displayName}</div>
-                <small className="text-muted">{}</small>
+                <div>
+                    <span
+                        className="d-inline-block text-truncate"
+                        style={{ maxWidth: 200 }}
+                    >
+                        {contact.displayName}
+                    </span>
+                </div>
+                <small
+                    className="d-inline-block text-muted text-truncate"
+                    style={{ maxWidth: 200 }}
+                >
+                    {lastMessageContent}
+                </small>
             </div>
             <div>
-                <small className="text-muted me-2">{}</small>
-                <span className="badge bg-light-purple rounded-pill float-end me-2">
+                <small className="text-muted me-2">
+                    {dateToString(lastMessageDate)}
+                </small>
+                {/* <span className="badge bg-light-purple rounded-pill float-end me-2">
                     14
-                </span>
+                </span> */}
             </div>
         </li>
     );
