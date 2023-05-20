@@ -1,10 +1,4 @@
-import React from "react";
-
-function OptionsDropdown({setUser}) {
-    const logout = function() {
-        setUser(null);
-    }
-
+function OptionsDropdown({ setUser }) {
     return (
         <div className="dropdown">
             <button
@@ -21,12 +15,18 @@ function OptionsDropdown({setUser}) {
                         className="btn dropdown-item darken-on-hover"
                         data-bs-toggle="modal"
                         data-bs-target="#new-chat"
+                        value="new-chat"
                     >
                         New chat
                     </button>
                 </li>
                 <li>
-                    <a className="dropdown-item darken-on-hover" onClick={logout()}>
+                    <a
+                        className="dropdown-item darken-on-hover"
+                        value="logout"
+                        href="#/"
+                        onClick={() => setUser(null)}
+                    >
                         Logout
                     </a>
                 </li>

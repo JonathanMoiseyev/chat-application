@@ -1,30 +1,57 @@
-import {useState} from "react";
+import { useState } from "react";
 import ContactList from "./ContactList/ContactList.js";
 import SearchBar from "./SearchBar/SearchBar.js";
 import UserOptions from "./UserOptions/UserOptions.js";
 
 import usersDB from "../../../db/usersDB.js";
 
-function LeftMenu({user, setUser, setChosenContact}) {
-    const userContacts = user.contacts.map((contact) => usersDB[contact]);
-    const [effectiveContacts, setEffectiveContacts] = useState(userContacts);
+function LeftMenu({ user, setUser, setChosenContact }) {
 
-    const doSearch = function(query) {
-        setEffectiveContacts(
-            userContacts.filter((contact) =>
-                query === undefined
-                    ? true
-                    : contact.displayName.toLowerCase().includes(query.toLowerCase())
-            )
-        );
+    let userContacts = user.contacts.map((contact) => usersDB[contact]);
+    const [effectiveContacts, setEffectiveContacts] = useState(userContacts);
+    const [searchValue, setSearchValue] = useState(undefined);
+    
+
+    
+    const doSearch = function (query) {
+        setSearchValue(query)
+
+        if (query === undefined) {
+            setEffectiveContacts(userContacts);
+        }
+
+        else {
+            setEffectiveContacts(
+                userContacts.filter((contact) =>
+                    contact.displayName.toLowerCase().includes(query.toLowerCase())
+                )
+            );
+        }
     };
+
+
+
+    const refreshContacts = function (contact) {
+        userContacts = user.contacts.map((contact) => usersDB[contact]);
+        console.log(searchValue)
+        doSearch(searchValue)
+    };
+
+    
 
     return (
         <div className="col-4 p-0 border-end">
             <div className="card border-0">
-                <UserOptions user={user} setUser={setUser} />
+                <UserOptions
+                    user={user}
+                    setUser={setUser}
+                    refreshContacts={refreshContacts}
+                />
                 <SearchBar doSearch={doSearch} />
-                <ContactList contacts={effectiveContacts} setChosenContact={setChosenContact} />
+                <ContactList
+                    contacts={effectiveContacts}
+                    setChosenContact={setChosenContact}
+                />
             </div>
         </div>
     );

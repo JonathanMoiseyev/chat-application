@@ -11,3 +11,7 @@
     background-color: #5469D4;              
     border-color: #5469D4;
 }
+
+.error-message {
+    color: red;
+}
