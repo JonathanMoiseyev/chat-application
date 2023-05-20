@@ -1,18 +1,8 @@
-.rounded-circle {
+.profile-picture {
     object-fit: cover;
     width: 49px;
     max-height: 49px;
     min-height: 49px;
-}
-
-.dropdown-item:active {
-    filter: brightness(0.85);
-    color: inherit;
-    background-color: inherit;
-}
-
-.btn:focus, .btn-close:focus {
-    box-shadow: none;
 }
 
 #chat-app {

@@ -41,6 +41,10 @@ body {
     background-color: #FBFCF8;
 }
 
+.btn:focus, .btn-close:focus {
+    box-shadow: none;
+}
+
 .form-control:focus {
     box-shadow: none;
     border-color: #5469D4;
@@ -49,4 +53,10 @@ body {
 .darken-on-hover:hover {
     filter: brightness(0.95);
     cursor: pointer;
+}
+
+.dropdown-item:active {
+    filter: brightness(0.85);
+    color: inherit;
+    background-color: inherit;
 }
