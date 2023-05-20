@@ -22,7 +22,7 @@ function ButtonToShowPassword({showOrHidePassword}) {
             type="button"
             onClick={onClickFunction}
         >
-            <i class={icon}></i>
+            <i className={icon}></i>
 
         </button>
     );
