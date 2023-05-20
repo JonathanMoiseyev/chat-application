@@ -37,7 +37,7 @@ However, the we have provided some exaple users to test the application with. Fo
 | jonathanM    | 12344   |
 | jonathanK    | 12345   |
 
-*Note*: these user's passwords are simple for testing purposes. If a new user will try to register with one of these passwords, the registration will fail.
+*Note*: these user's passwords are simple for testing purposes. If a new user will try to register with one of these passwords, the registration will fail (that is because these passwords don't meet the criteria).
 
 ## Authors
 [Jonathan Kelsi](https://github.com/JonathanKelsi)  
