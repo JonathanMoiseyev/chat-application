@@ -4,10 +4,12 @@ import ImgField from './ImgField.js';
 import InputField from './InputField.js'; 
 // import RememberMeButton from './RememberMeButton.js';
 import Link from './Link.js';
-import userDB from '../../db/usersDB.js';
 import './Register.css';
 import '../shared/PasswordInputField/PasswordInputField.js';
 import PasswordInputField from '../shared/PasswordInputField/PasswordInputField.js';
+
+import chatsDB from '../../db/chatsDB.js';
+import userDB from '../../db/usersDB.js';
 
 /**
  * Regitser function returns the register page.
@@ -24,7 +26,7 @@ function Register() {
     username: '',
     password: '',
     confirmPassword: '',
-    image: '', 
+    img: '', 
     displayName: '',
   });
 
@@ -68,7 +70,7 @@ function Register() {
       error = 'Confirm password is not match';
     } else if (!user.displayName) {
       error = 'Display name is required';
-    } else if (!user.image) {
+    } else if (!user.img) {
       error = 'Picture is required';
     } else if (userDB[user.username]) {
       error = 'Username is already taken';
@@ -86,6 +88,8 @@ function Register() {
       ...user,
       contacts : [],
     };
+
+    chatsDB[user.username] = {};
 
     navigate('/');
   }
@@ -143,10 +147,10 @@ function Register() {
                     />
 
                     {/*Picture*/}
-                    <ImgField name="image" id="register-picture"
+                    <ImgField name="img" id="register-picture"
                         text = "picture" value={user.picture} 
                         handleChange={(value) => {
-                        handleChange('image', value);
+                        handleChange('img', value);
                         }} 
                     />
 
