@@ -1,4 +1,3 @@
-import {useRef} from "react";
 import AddUserModal from "./AddUserModal";
 import OptionsDropdown from "./OptionsDropdown";
 
@@ -15,7 +14,7 @@ function UserOptions({user, setUser, refreshContacts }) {
                     <div>
                         <img
                             src={user.img}
-                            className="rounded-circle"
+                            className="rounded-circle profile-picture"
                             alt="avatar"
                         />
                     </div>

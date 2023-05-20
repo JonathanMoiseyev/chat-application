@@ -23,7 +23,7 @@ function Contact({ contact, setChosenContact }) {
             ref={contactRef}
         >
             <div>
-                <img src={contact.img} className="rounded-circle" alt="avatar" />
+                <img src={contact.img} className="rounded-circle profile-picture" alt="avatar" />
             </div>
             <div className="w-100 ms-4">
                 <div>{contact.displayName}</div>
