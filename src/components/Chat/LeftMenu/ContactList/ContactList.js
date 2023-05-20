@@ -1,9 +1,14 @@
 import React from "react";
 import Contact from "./Contact.js";
 
-function ContactList({ contacts, setChosenContact }) {
+function ContactList({ user, contacts, setChosenContact }) {
     const contactComponents = contacts.map((contact, key) => (
-        <Contact contact={contact} setChosenContact={setChosenContact} key={key} />
+        <Contact
+            user={user}
+            contact={contact}
+            setChosenContact={setChosenContact}
+            key={key}
+        />
     ));
 
     return (

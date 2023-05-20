@@ -4,36 +4,29 @@ import InputField from "./../../../shared/InputField";
 import chatsDB from "../../../../db/chatsDB.js";
 import usersDB from "../../../../db/usersDB.js";
 
-function AddUserModal({username, refreshContacts }) {
-    let [inputUsername, setInputUsername] = useState("")
-    let [errorMessage, setErrorMessage] = useState("")
+function AddUserModal({ username, refreshContacts }) {
+    let [inputUsername, setInputUsername] = useState("");
+    let [errorMessage, setErrorMessage] = useState("");
 
     const addNewContact = (username) => {
-        if (usersDB[inputUsername] == undefined) {
-            setErrorMessage("User does not exist!")
+        if (usersDB[inputUsername] === undefined) {
+            setErrorMessage("User does not exist!");
+        } else if (chatsDB[username][inputUsername] !== undefined) {
+            setErrorMessage("You already have this contact!");
+        } else {
+            chatsDB[username][inputUsername] = [];
+            chatsDB[inputUsername][username] = [];
+            usersDB[username].contacts.push(inputUsername);
+            usersDB[inputUsername].contacts.push(username);
+            refreshContacts();
         }
-        else if (chatsDB[username][inputUsername] != undefined) {
-            setErrorMessage("You already have this contact!")
-        }
-        else {
-            chatsDB[username][inputUsername] = []
-            chatsDB[inputUsername][username] = []
-            usersDB[username].contacts.push(inputUsername)
-            usersDB[inputUsername].contacts.push(username)
-
-            refreshContacts()
-        }
-    }
-
+    };
 
     const onFormSubmition = (event) => {
         event.preventDefault();
         addNewContact(username);
-    }
+    };
 
-
-
-    
     return (
         <div className="modal fade" id="new-chat">
             <div className="modal-dialog">
@@ -59,7 +52,6 @@ function AddUserModal({username, refreshContacts }) {
                             />
                         </form>
                     </div>
-
 
                     {/* Error message */}
                     <span>{errorMessage}</span>

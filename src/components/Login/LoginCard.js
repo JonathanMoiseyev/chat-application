@@ -2,10 +2,11 @@ import './login.css';
 
 import InputField from './../shared/InputField';
 import SubmitFormButton from './SubmitFormButton';
-import HrefLink from './HrefLink';
 import {useState} from "react";
 import usersDB from "../../db/usersDB";
 
+import PasswordInputField from '../shared/PasswordInputField/PasswordInputField';
+import Link from '../shared/Link.js';
 
 
 
@@ -18,8 +19,8 @@ function LoginCard({setUser}) {
 
     const signInFunction = (event) => {
         event.preventDefault();
-        if (usersDB[inputUsername] != undefined) {
-            if (usersDB[inputUsername].password == inputPassword) {
+        if (usersDB[inputUsername] !== undefined) {
+            if (usersDB[inputUsername].password === inputPassword) {
                 setUser(usersDB[inputUsername]);
                 return
             }
@@ -48,13 +49,10 @@ function LoginCard({setUser}) {
                     />
 
                     {/* Password input */}
-                    <InputField 
+                    <PasswordInputField
                         labelOfInputField="Password"
                         idOfInputField="login-passwd"
                         updateFunction={setInputPassword}
-                        inputType="password"
-
-                        additionalWritingAfterLabel="Forgot Password?"
                     />
 
 
@@ -71,11 +69,13 @@ function LoginCard({setUser}) {
                         />
                         
                         {/* redirection to sign up */}
-                        <HrefLink
-                            textBeforeLink="Don't have an account?"
-                            textInLink="Sign up"
-                            whereToLink="/register"
-                        />
+                        <div className="mx-auto">
+                            <Link 
+                                initialText="Don't have an account?&nbsp;"
+                                linkText="Sign up"
+                                link="/register"
+                            />
+                        </div>
                     </div>
                 </form>
             </div>
