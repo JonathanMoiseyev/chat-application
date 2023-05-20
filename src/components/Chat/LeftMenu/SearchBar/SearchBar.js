@@ -1,7 +1,7 @@
 import React from "react";
 import { useRef } from "react";
 
-function SearchBar({doSearch}) {
+function SearchBar({ doSearch }) {
     const searchBox = useRef(0);
 
     return (

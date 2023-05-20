@@ -1,10 +1,10 @@
 import { useState } from "react";
-import "./Chat.css";
 import LeftMenu from "./LeftMenu/LeftMenu";
 import ChatArea from "./ChatArea/ChatArea";
+import "./Chat.css";
 
 function Chat({ user, setUser }) {
-    const [status, forceUpdate] = useState(false);
+    const [status, foreRerender] = useState(false);
     const [chosenContact, setChosenContact] = useState(null);
 
     return (
@@ -18,7 +18,7 @@ function Chat({ user, setUser }) {
                 <ChatArea
                     user={user}
                     chosenContact={chosenContact}
-                    forceUpdate={forceUpdate}
+                    foreRerender={foreRerender}
                     status={status}
                 />
             </div>

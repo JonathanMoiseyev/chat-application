@@ -1,7 +1,7 @@
 import React from "react";
 import chatsDB from "../../../../db/chatsDB";
 
-function TypingArea({user, chosenContact, forceUpdate, status}) {
+function TypingArea({user, chosenContact, foreRerender, status}) {
     if (chosenContact == null) return (<></>);
 
     const writeMessage = (event) => {
@@ -9,7 +9,7 @@ function TypingArea({user, chosenContact, forceUpdate, status}) {
             const message = {
                 content: event.target.value,
                 sender: user.username,
-                date: (new Date()).getDate()
+                date: new Date()
             }
 
             event.target.value = "";
@@ -17,7 +17,7 @@ function TypingArea({user, chosenContact, forceUpdate, status}) {
             chatsDB[user.username][chosenContact].push(message);
             chatsDB[chosenContact][user.username].push(message);
 
-            forceUpdate(!status); 
+            foreRerender(!status); 
         }
     }
 
