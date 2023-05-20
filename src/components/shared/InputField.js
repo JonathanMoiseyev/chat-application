@@ -1,6 +1,6 @@
 import {useRef} from "react";
 
-function InputField({labelOfInputField, idOfInputField, updateFunction, inputType, additionalWritingAfterLabel}) {
+function InputField({labelOfInputField, idOfInputField, updateFunction, inputType}) {
     const inputReference = useRef(null);
 
     return (
@@ -8,10 +8,7 @@ function InputField({labelOfInputField, idOfInputField, updateFunction, inputTyp
         <label htmlFor={idOfInputField} className="form-label fw-600">
             {labelOfInputField}
         </label>
-        <a className="float-end text-decoration-none darken-on-hover light-purple">
-            {additionalWritingAfterLabel}
-        </a>
-        <input 
+        <input
             type={inputType}
             className="form-control"
             id={idOfInputField}
