@@ -6,6 +6,8 @@ import InputField from './InputField.js';
 import Link from './Link.js';
 import userDB from '../../db/usersDB.js';
 import './Register.css';
+import '../shared/PasswordInputField/PasswordInputField.js';
+import PasswordInputField from '../shared/PasswordInputField/PasswordInputField.js';
 
 /**
  * Regitser function returns the register page.
@@ -91,6 +93,16 @@ function Register() {
     navigate('/login');
   }
 
+
+  const updatueUserConfirmPassword = (value) => {
+    user.confirmPassword = value;
+  }
+
+  const updatueUserPassword = (value) => {
+    user.password = value;
+  }
+
+
   return (
     <div className="p-5">
       <main className="container register-container w-30 p-5 mt-5 shadow bg-white">
@@ -101,63 +113,61 @@ function Register() {
                 {/*Title*/}
                 <div className="h3 mb-5">Create your account</div>
 
-                {/*Signup form*/}
-                <form>
-                  {/*Username input*/}
-                  <InputField text="username" name="username" type="text"
-                    id="register-username" value={user.username}
-                    handleChange={({ target }) => {
-                      handleChange(target.name, target.value);
-                    }}
-                  />
+                  {/*Signup form*/}
+                  <form>
+                    {/*Username input*/}
+                    <InputField text="username" name="username" type="text"
+                        id="register-username" value={user.username}
+                        handleChange={({ target }) => {
+                        handleChange(target.name, target.value);
+                        }}
+                    />
 
-                  {/*Password input*/}
-                  <InputField text="password" name="password" type="password"
-                    id="register-passwd" value={user.password}
-                    handleChange={({ target }) => {
-                      handleChange(target.name, target.value);
-                    }}
-                  />
+                    {/*Password input*/}
+                    <PasswordInputField 
+                        labelOfInputField="password"
+                        idOfInputField="register-passwd"
+                        updateFunction={updatueUserPassword}
+                    />
 
-                  {/*Confirm password input*/}
-                  <InputField text="confirm password" name="confirmPassword" type="password"
-                    id="register-confirm-passwd" value={user.confirmPassword}
-                    handleChange={({ target }) => {
-                      handleChange(target.name, target.value);
-                    }}
-                  />
+                    {/*Confirm password input*/}
+                    <PasswordInputField 
+                        labelOfInputField="confirm password"
+                        idOfInputField="register-confirm-passwd"
+                        updateFunction={updatueUserConfirmPassword}
+                    />
 
-                  {/*Display name*/}
-                  <InputField text="display name" name="displayName" type="text"
-                    id="register-display-name" value={user.displayName}
-                    handleChange={({ target }) => {
-                      handleChange(target.name, target.value);
-                    }}
-                  />
+                    {/*Display name*/}
+                    <InputField text="display name" name="displayName" type="text"
+                        id="register-display-name" value={user.displayName}
+                        handleChange={({ target }) => {
+                        handleChange(target.name, target.value);
+                        }}
+                    />
 
-                  {/*Picture*/}
-                  <ImgField name="picture" id="register-picture"
-                    text = "picture" value={user.picture}
-                    handleChange={({ target }) => {
-                      handleChange(target.name, target.value);
-                    }} 
-                  />
+                    {/*Picture*/}
+                    <ImgField name="picture" id="register-picture"
+                        text = "picture" value={user.picture}
+                        handleChange={({ target }) => {
+                        handleChange(target.name, target.value);
+                        }} 
+                    />
 
-                  {/*Remember me*/}
-                  {/* <RememberMeButton id="register-remember-me" /> */}
+                    {/*Remember me*/}
+                    {/* <RememberMeButton id="register-remember-me" /> */}
 
-                  {/*Submit and redirection to sign in*/}
-                  <div className="d-flex flex-column">
-                    <p className="error-message bold mx-auto mb-3">{error}</p>
+                    {/*Submit and redirection to sign in*/}
+                    <div className="d-flex flex-column">
+                        <p className="error-message bold mx-auto mb-3">{error}</p>
 
-                    <button type="submit" onClick={validateAndSubmit} className="btn bg-light-purple darken-on-hover w-100 text-white fw-600 py-2 mb-4">
-                      Register
-                    </button>
+                        <button type="submit" onClick={validateAndSubmit} className="btn bg-light-purple darken-on-hover w-100 text-white fw-600 py-2 mb-4">
+                        Register
+                        </button>
 
-                    <div className="mx-auto">
-                      <Link initialText="Already have an account?&nbsp;" linkText="Sign in" link="/login" />
+                        <div className="mx-auto">
+                        <Link initialText="Already have an account?&nbsp;" linkText="Sign in" link="/login" />
+                        </div>
                     </div>
-                  </div>
                 </form>
               </div>
             </div>
