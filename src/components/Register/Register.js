@@ -24,7 +24,7 @@ function Register() {
     username: '',
     password: '',
     confirmPassword: '',
-    picture: '',
+    image: '', 
     displayName: '',
   });
 
@@ -37,15 +37,10 @@ function Register() {
    * @param {*} value 
    */
   const handleChange = (name, value) => {
-    if (name === 'img') {
-      console.log(value);
-    } else {
-      setUser({
-        ...user,
-        [name]: value.trim(),
-      });
-    }
-
+    setUser({
+      ...user,
+      [name]: value,
+    });
   }
 
   /**
@@ -65,14 +60,16 @@ function Register() {
       error = 'Password must contain at least one number';
     } else if (!/[a-zA-Z]/.test(user.password)) {
       error = 'Password must contain at least one letter';
+    } else if (user.password.length < 8) {
+      error = 'Password must be at least 8 characters';
     } else if (!user.confirmPassword) {
       error = 'Confirm password is required';
     } else if (user.password !== user.confirmPassword) {
       error = 'Confirm password is not match';
     } else if (!user.displayName) {
       error = 'Display name is required';
-    // } else if (!user.picture) {
-    //   error = 'Picture is required';
+    } else if (!user.image) {
+      error = 'Picture is required';
     } else if (userDB[user.username]) {
       error = 'Username is already taken';
     } else {
@@ -87,10 +84,10 @@ function Register() {
 
     userDB[user.username] = {
       ...user,
+      contacts : [],
     };
 
-    console.log(userDB);
-    navigate('/login');
+    navigate('/');
   }
 
 
@@ -146,10 +143,10 @@ function Register() {
                     />
 
                     {/*Picture*/}
-                    <ImgField name="picture" id="register-picture"
-                        text = "picture" value={user.picture}
-                        handleChange={({ target }) => {
-                        handleChange(target.name, target.value);
+                    <ImgField name="image" id="register-picture"
+                        text = "picture" value={user.picture} 
+                        handleChange={(value) => {
+                        handleChange('image', value);
                         }} 
                     />
 
@@ -165,7 +162,7 @@ function Register() {
                         </button>
 
                         <div className="mx-auto">
-                        <Link initialText="Already have an account?&nbsp;" linkText="Sign in" link="/login" />
+                        <Link initialText="Already have an account?&nbsp;" linkText="Sign in" link="/" />
                         </div>
                     </div>
                 </form>

@@ -1,23 +1,27 @@
 import React from 'react';
 
 function ImgField({ name, text, id, value, handleChange}) {
-    const [image, setImage] = React.useState(null)
+    const [imageBlob, setImageBlob] = React.useState('');
 
     const onImageChange = (event) => {
-        if (event.target.files && event.target.files[0]) {
-            setImage(URL.createObjectURL(event.target.files[0]));
+        event.preventDefault();
+        const fr = new FileReader();
+        const img = event.target.files[0];
+        fr.onload = () => {
+            setImageBlob(fr.result);
+            handleChange(fr.result);
         }
 
-        handleChange(event);
+        fr.readAsDataURL(img);
     }
 
     const placeImage = () => {
-        if (!image) {
+        if (!imageBlob) {
             return '';
         }
         return (
             <div className='d-flex justify-content-center'>
-                <img src={image} className="rounded-circle register-avatar" alt='avatar' /><img />
+                <img src={imageBlob} className="rounded-circle register-avatar" alt='avatar' /><img />
             </div>
         );
     }
