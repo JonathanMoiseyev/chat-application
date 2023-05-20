@@ -1,12 +1,16 @@
 import React from 'react';
-
+import { useNavigate } from 'react-router-dom';
 function Link({ initialText, linkText, link }) {
+    const navigate = useNavigate();
     return (
         <>
             <span>{initialText}</span>
-            <a className="text-decoration-none darken-on-hover light-purple fw-600" href={link}>
+            <span 
+                className="text-decoration-none darken-on-hover light-purple fw-600"
+                onClick={() => navigate(link)}
+            >
                 {linkText}
-            </a>
+            </span>
         </>
     );
 }
