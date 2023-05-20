@@ -1,4 +1,4 @@
-# Untitled
+# Advanced Programming 2 - work 1b
 
 This repository provides an online chat application client built on React. 
 
