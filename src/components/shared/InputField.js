@@ -1,4 +1,3 @@
-import './login.css';
 import {useRef} from "react";
 
 function InputField({labelOfInputField, idOfInputField, updateFunction, inputType, additionalWritingAfterLabel}) {

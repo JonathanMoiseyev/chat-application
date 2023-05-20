@@ -2,10 +2,13 @@ import {useRef} from "react";
 import AddUserModal from "./AddUserModal";
 import OptionsDropdown from "./OptionsDropdown";
 
-function UserOptions({user, setUser}) {
+function UserOptions({user, setUser, refreshContacts }) {
     return (
         <>
-            <AddUserModal />
+            <AddUserModal
+                username={user.username}
+                refreshContacts={refreshContacts}
+            />
             <div className="card-header d-flex align-items-center bg-light-gray rounded-0">
                 {/* User pfp and name */}
                 <>
