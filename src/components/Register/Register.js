@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import ImgField from './ImgField.js';
 import InputField from './InputField.js'; 
 // import RememberMeButton from './RememberMeButton.js';
-import Link from './Link.js';
+import Link from '../shared/Link.js';
 import './Register.css';
 import '../shared/PasswordInputField/PasswordInputField.js';
 import PasswordInputField from '../shared/PasswordInputField/PasswordInputField.js';
