@@ -1,4 +1,4 @@
-/* .form-check-input:focus {
+.form-check-input:focus {
     background-color: #5469D4 !important;
 }
 
@@ -7,7 +7,7 @@
     border-color: #5469D4 !important;
 }
 
-.container {
+.register-container {
     min-width: 520px !important;
     max-width: 650px !important;
 }
@@ -16,4 +16,9 @@
     color: red;
     font-size: 1rem;
     font-weight: 700;
-} */
+}
+
+.register-avatar {
+    width: 80px !important;
+    height: 80px !important;
+}
