@@ -6,6 +6,8 @@ import HrefLink from './HrefLink';
 import {useState} from "react";
 import usersDB from "../../db/usersDB";
 
+import PasswordInputField from '../shared/PasswordInputField/PasswordInputField';
+
 
 
 
@@ -48,13 +50,10 @@ function LoginCard({setUser}) {
                     />
 
                     {/* Password input */}
-                    <InputField 
+                    <PasswordInputField
                         labelOfInputField="Password"
                         idOfInputField="login-passwd"
                         updateFunction={setInputPassword}
-                        inputType="password"
-
-                        additionalWritingAfterLabel="Forgot Password?"
                     />
 
 
