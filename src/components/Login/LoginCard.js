@@ -19,8 +19,8 @@ function LoginCard({setUser}) {
 
     const signInFunction = (event) => {
         event.preventDefault();
-        if (usersDB[inputUsername] != undefined) {
-            if (usersDB[inputUsername].password == inputPassword) {
+        if (usersDB[inputUsername] !== undefined) {
+            if (usersDB[inputUsername].password === inputPassword) {
                 setUser(usersDB[inputUsername]);
                 return
             }

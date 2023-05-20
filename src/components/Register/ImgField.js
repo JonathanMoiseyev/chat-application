@@ -21,7 +21,7 @@ function ImgField({ name, text, id, value, handleChange}) {
         }
         return (
             <div className='d-flex justify-content-center'>
-                <img src={imageBlob} className="rounded-circle register-avatar" alt='avatar' /><img />
+                <img alt="avatar" src={imageBlob} className="rounded-circle register-avatar" />
             </div>
         );
     }
