@@ -5,10 +5,10 @@ import Link from '../shared/Link.js';
 import './Register.css';
 import '../shared/PasswordInputField/PasswordInputField.js';
 import PasswordInputField from '../shared/PasswordInputField/PasswordInputField.js';
+import InputField from '../shared/InputField.js';
 
 import chatsDB from '../../db/chatsDB.js';
 import userDB from '../../db/usersDB.js';
-import InputField from '../shared/InputField.js';
 
 /**
  * Regitser function returns the register page.
@@ -93,21 +93,21 @@ function Register() {
         navigate('/');
     }
 
-    const updateUserUsername = (value) => {
-        user.username = value;
-    }
+    // const updateUserUsername = (value) => {
+    //     user.username = value;
+    // }
 
-    const updatueUserConfirmPassword = (value) => {
-        user.confirmPassword = value;
-    }
+    // const updatueUserConfirmPassword = (value) => {
+    //     user.confirmPassword = value;
+    // }
 
-    const updatueUserPassword = (value) => {
-        user.password = value;
-    }
+    // const updatueUserPassword = (value) => {
+    //     user.password = value;
+    // }
     
-    const updateUserDisplayName = (value) => {
-        user.displayName = value;
-    }
+    // const updateUserDisplayName = (value) => {
+    //     user.displayName = value;
+    // }
 
 
     return (
@@ -126,7 +126,8 @@ function Register() {
                                     <InputField 
                                         labelOfInputField="username"
                                         idOfInputField="register-username"
-                                        updateFunction={updateUserUsername}
+                                        // updateFunction={updateUserUsername}
+                                        updateFunction={(value) => { handleChange('username', value); }}
                                         input-type="text"
                                     />
 
@@ -134,30 +135,31 @@ function Register() {
                                     <PasswordInputField
                                         labelOfInputField="password"
                                         idOfInputField="register-passwd"
-                                        updateFunction={updatueUserPassword}
+                                        // updateFunction={updatueUserPassword}
+                                        updateFunction={(value) => { handleChange('password', value); }}
                                     />
 
                                     {/*Confirm password input*/}
                                     <PasswordInputField
                                         labelOfInputField="confirm password"
                                         idOfInputField="register-confirm-passwd"
-                                        updateFunction={updatueUserConfirmPassword}
+                                        // updateFunction={updatueUserConfirmPassword}
+                                        updateFunction={(value) => { handleChange('confirmPassword', value); }}
                                     />
 
                                     {/*Display name*/}
                                     <InputField 
                                         labelOfInputField="display name"
                                         idOfInputField="register-display-name"
-                                        updateFunction={updateUserDisplayName}
+                                        // updateFunction={updateUserDisplayName}
+                                        updateFunction={(value) => { handleChange('displayName', value); }}
                                         input-type="text"
                                     />
 
                                     {/*Picture*/}
                                     <ImgField name="img" id="register-picture"
                                         text="picture" value={user.picture}
-                                        handleChange={(value) => {
-                                            handleChange('img', value);
-                                        }}
+                                        handleChange={(value) => { handleChange('img', value); }}
                                     />
 
 
