@@ -5,15 +5,12 @@ import "./login.css";
 import InputField from "./../shared/InputField";
 import SubmitFormButton from "./SubmitFormButton";
 import { useState } from "react";
-// import usersDB from "../../db/usersDB";
 
 import PasswordInputField from "../shared/PasswordInputField/PasswordInputField";
 import Link from "../shared/Link.js";
 
 function LoginCard({ setToken }) {
-    let [inputUsername, setInputUsername] = useState("");
-    let [inputPassword, setInputPassword] = useState("");
-
+    let [input, setInput] = useState({ username: "", password: "" });
     let [inputErrorMessage, setInputErrorMessage] = useState("");
 
     const signInFunction = async (event) => {
@@ -24,10 +21,7 @@ function LoginCard({ setToken }) {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                username: inputUsername,
-                password: inputPassword,
-            }),
+            body: JSON.stringify(input),
         });
 
         if (res["status"] === 200) {
@@ -35,10 +29,24 @@ function LoginCard({ setToken }) {
             let encodedResult = await reader.read();
             let result = new TextDecoder("utf-8").decode(encodedResult.value);
             setToken(result);
-            console.log(result);
         } else if (res["status"] === 401) {
             setInputErrorMessage("Wrong username and/or password");
         }
+    };
+
+    const handleChange = (name, value) => {
+        setInput({
+            ...input,
+            [name]: value,
+        });
+    };
+
+    const setInputUsername = (value) => {
+        handleChange("username", value);
+    };
+
+    const setInputPassword = (value) => {
+        handleChange("password", value);
     };
 
     return (
