@@ -7,8 +7,8 @@ import '../shared/PasswordInputField/PasswordInputField.js';
 import PasswordInputField from '../shared/PasswordInputField/PasswordInputField.js';
 import InputField from '../shared/InputField.js';
 
-import chatsDB from '../../db/chatsDB.js';
-import userDB from '../../db/usersDB.js';
+// import chatsDB from '../../db/chatsDB.js';
+// import userDB from '../../db/usersDB.js';
 
 /**
  * Regitser function returns the register page.
@@ -25,7 +25,7 @@ function Register() {
         username: '',
         password: '',
         confirmPassword: '',
-        img: '',
+        profilePic: '',
         displayName: '',
     });
 
@@ -49,48 +49,52 @@ function Register() {
      * its saves the user in the usersDB and navigates to the login page. 
      * @param {*} event 
      */
-    const validateAndSubmit = (event) => {
+    const validateAndSubmit = (event, setError) => {
         event.preventDefault();
         let error = '';
 
         if (!user.username) {
-            error = 'Username is required';
+            error= 'Username is required';
         } else if (!user.password) {
-            error = 'Password is required';
+            error= 'Password is required';
         } else if (!/\d/.test(user.password)) {
-            error = 'Password must contain at least one number';
+            error= 'Password must contain at least one number';
         } else if (!/[a-zA-Z]/.test(user.password)) {
-            error = 'Password must contain at least one letter';
+            error= 'Password must contain at least one letter';
         } else if (user.password.length < 8) {
-            error = 'Password must be at least 8 characters';
+            error= 'Password must be at least 8 characters';
         } else if (!user.confirmPassword) {
-            error = 'Confirm password is required';
+            error= 'Confirm password is required';
         } else if (user.password !== user.confirmPassword) {
-            error = 'Confirm password is not match';
+            error= 'Confirm password is not match';
         } else if (!user.displayName) {
-            error = 'Display name is required';
-        } else if (!user.img) {
-            error = 'Picture is required';
-        } else if (userDB[user.username]) {
-            error = 'Username is already taken';
+            error= 'Display name is required';
+        } else if (!user.profilePic) {
+            error= 'Picture is required';
         } else {
-            handleSubmit();
+            handleSubmit(setError);
         }
 
         setError(error);
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async (setError) => {
         delete user.confirmPassword;
 
-        userDB[user.username] = {
-            ...user,
-            contacts: [],
-        };
+        const response = await fetch('http://localhost:5000/api/Users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user),
+        });
 
-        chatsDB[user.username] = {};
-
-        navigate('/');
+        if (response['status'] === 409) {
+            setError('Username already exists');
+        } else {
+            setError('');
+            navigate('/');
+        }
     }
 
     // const updateUserUsername = (value) => {
@@ -157,9 +161,9 @@ function Register() {
                                     />
 
                                     {/*Picture*/}
-                                    <ImgField name="img" id="register-picture"
+                                    <ImgField name="profilePic" id="register-picture"
                                         text="picture" value={user.picture}
-                                        handleChange={(value) => { handleChange('img', value); }}
+                                        handleChange={(value) => { handleChange('profilePic', value); }}
                                     />
 
 
@@ -167,7 +171,7 @@ function Register() {
                                     <div className="d-flex flex-column">
                                         <p className="error-message bold mx-auto mb-3">{error}</p>
 
-                                        <button type="submit" onClick={validateAndSubmit} className="btn bg-light-purple darken-on-hover w-100 text-white fw-600 py-2 mb-4">
+                                        <button type="submit" onClick={(event) => { validateAndSubmit(event, setError); }} className="btn bg-light-purple darken-on-hover w-100 text-white fw-600 py-2 mb-4">
                                             Register
                                         </button>
 
