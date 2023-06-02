@@ -56,7 +56,17 @@ async function postContact(token, username) {
         body: JSON.stringify({ username }),
     });
 
-    return res.ok ? JSON.parse(await res.text()) : "User not found";
+    if (!res.ok) {
+        return {
+            content: await res.text(),
+            ok: res.ok,
+        };
+    }
+
+    return {
+        content: JSON.parse(await res.text()),
+        ok: res.ok,
+    };
 }
 
 async function fetchMessages(token, id) {
