@@ -89,7 +89,7 @@ function Register() {
         });
 
         if (response["status"] === 409) {
-            setError("Username already exists");
+            setError("User already exists");
         } else {
             setError("");
             navigate("/");

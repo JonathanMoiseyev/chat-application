@@ -18,7 +18,7 @@ function LoginCard({ setUserByToken }) {
         event.preventDefault();
         let token = await fetchToken(input);
         if (token === null) {
-            setInputErrorMessage("Wrong username or password!");
+            setInputErrorMessage("Wrong username or password");
         } else {
             setUserByToken(token, input.username);
         }
@@ -62,10 +62,10 @@ function LoginCard({ setUserByToken }) {
                         updateFunction={setInputPassword}
                     />
 
-                    {/* Error message */}
-                    <span className="error-message">{inputErrorMessage}</span>
-
                     <div className="d-flex flex-column">
+                        {/* Error message */}
+                        <span className="error-message bold mx-auto mb-3">{inputErrorMessage}</span>
+
                         {/* Submit button */}
                         <SubmitFormButton writingOnButton="Continue" signInFunction={signInFunction} />
 
