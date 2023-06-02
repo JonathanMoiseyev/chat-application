@@ -1,11 +1,11 @@
+/** @format */
+
+import { defaultUser } from "../../../shared/userApi";
+
 function OptionsDropdown({ setUser }) {
     return (
         <div className="dropdown">
-            <button
-                className="btn rounded-circle darken-on-hover"
-                id="menu"
-                data-bs-toggle="dropdown"
-            >
+            <button className="btn rounded-circle darken-on-hover" id="menu" data-bs-toggle="dropdown">
                 <i className="bi bi-three-dots-vertical" />
             </button>
             <ul className="dropdown-menu dropdown-menu-end p-0">
@@ -25,7 +25,7 @@ function OptionsDropdown({ setUser }) {
                         className="dropdown-item darken-on-hover"
                         value="logout"
                         href="#/"
-                        onClick={() => setUser(null)}
+                        onClick={() => setUser(defaultUser())}
                     >
                         Logout
                     </a>

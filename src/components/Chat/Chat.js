@@ -1,7 +1,10 @@
+/** @format */
+
 import { useState } from "react";
 import LeftMenu from "./LeftMenu/LeftMenu";
 import ChatArea from "./ChatArea/ChatArea";
 import "./Chat.css";
+// import { getDefaultContact } from "../shared/userApi";
 
 function Chat({ user, setUser }) {
     const [status, foreRerender] = useState(false);
@@ -14,13 +17,10 @@ function Chat({ user, setUser }) {
                     user={user}
                     setUser={setUser}
                     setChosenContact={setChosenContact}
-                />
-                <ChatArea
-                    user={user}
-                    chosenContact={chosenContact}
-                    foreRerender={foreRerender}
                     status={status}
+                    foreRerender={foreRerender}
                 />
+                <ChatArea user={user} chosenContact={chosenContact} foreRerender={foreRerender} status={status} />
             </div>
         </main>
     );

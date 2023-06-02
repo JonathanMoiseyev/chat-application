@@ -1,12 +1,16 @@
+/** @format */
+
 import React from "react";
 import Contact from "./Contact.js";
 
-function ContactList({ user, contacts, setChosenContact }) {
+function ContactList({ user, contacts, setChosenContact, status, foreRerender }) {
     const contactComponents = contacts.map((contact, key) => (
         <Contact
             user={user}
             contact={contact}
             setChosenContact={setChosenContact}
+            status={status}
+            foreRerender={foreRerender}
             key={key}
         />
     ));

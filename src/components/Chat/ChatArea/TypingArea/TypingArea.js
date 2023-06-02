@@ -1,25 +1,30 @@
-import React from "react";
-import chatsDB from "../../../../db/chatsDB";
+/** @format */
 
-function TypingArea({user, chosenContact, foreRerender, status}) {
-    if (chosenContact == null) return (<></>);
+import React from "react";
+// import chatsDB from "../../../../db/chatsDB";
+import { postMessage } from "../../../shared/api";
+import { addMessage } from "../../../shared/userApi";
+
+function TypingArea({ user, chosenContact, chat, setChat }) {
+    if (chosenContact == null) return <></>;
 
     const writeMessage = (event) => {
         if (event.key === "Enter" && event.target.value.length > 0) {
-            const message = {
-                content: event.target.value,
-                sender: user.username,
-                date: new Date()
-            }
-
+            let message = event.target.value;
             event.target.value = "";
 
-            chatsDB[user.username][chosenContact].push(message);
-            chatsDB[chosenContact][user.username].push(message);
+            postMessage(user.token, chosenContact.id, message).then((newMessage) => {
+                if (newMessage === null) {
+                    alert("Error sending message");
+                    return;
+                }
 
-            foreRerender(!status); 
+                let newChat = JSON.parse(JSON.stringify(chat));
+                addMessage(newChat, newMessage);
+                setChat(newChat);
+            });
         }
-    }
+    };
 
     return (
         <div className="card-footer input-group bg-light-gray rounded-0">
