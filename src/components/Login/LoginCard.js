@@ -8,29 +8,19 @@ import { useState } from "react";
 
 import PasswordInputField from "../shared/PasswordInputField/PasswordInputField";
 import Link from "../shared/Link.js";
+import { fetchToken } from "../shared/api.js";
 
-function LoginCard({ setToken }) {
+function LoginCard({ setUserByToken }) {
     let [input, setInput] = useState({ username: "", password: "" });
     let [inputErrorMessage, setInputErrorMessage] = useState("");
 
     const signInFunction = async (event) => {
         event.preventDefault();
-
-        let res = await fetch("http://localhost:5000/api/Tokens", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(input),
-        });
-
-        if (res["status"] === 200) {
-            const reader = res.body.getReader();
-            let encodedResult = await reader.read();
-            let result = new TextDecoder("utf-8").decode(encodedResult.value);
-            setToken(result);
-        } else if (res["status"] === 401) {
-            setInputErrorMessage("Wrong username and/or password");
+        let token = await fetchToken(input);
+        if (token === null) {
+            setInputErrorMessage("Wrong username or password!");
+        } else {
+            setUserByToken(token, input.username);
         }
     };
 
