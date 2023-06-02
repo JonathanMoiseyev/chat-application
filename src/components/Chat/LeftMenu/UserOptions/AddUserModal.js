@@ -10,14 +10,18 @@ function AddUserModal({ user, refreshContacts }) {
     let [inputUsername, setInputUsername] = useState("");
     let [errorMessage, setErrorMessage] = useState("");
 
-    const addNewContact = async (user, username) => {
+    const addNewContact = async (user) => {
+        if (user.contacts.some((contact) => contact.user.username === inputUsername)) {
+            setErrorMessage("Contact already exists");
+            return;
+        }
+
         let res = await postContact(user.token, inputUsername);
-        if (res === "User not found") {
-            setErrorMessage(res);
+        if (!res.ok) {
+            setErrorMessage(res.content);
         } else {
-            let contact = createContact(res.user, res.id);
+            let contact = createContact(res.content.user, res.content.id);
             addContact(user, contact);
-            // addContact(user, createContact(await fetchUser(user.token, inputUsername)));
             setErrorMessage("");
             refreshContacts();
         }
@@ -31,7 +35,7 @@ function AddUserModal({ user, refreshContacts }) {
     return (
         <div className="modal fade" id="new-chat">
             <div className="modal-dialog">
-                <div className="modal-content p-3">
+                <div className="modal-content p-3 d-flex flex-column">
                     {/* Title and X button */}
                     <div className="modal-header border-0">
                         <h1 className="modal-title fs-5">Add new contact</h1>
@@ -50,7 +54,7 @@ function AddUserModal({ user, refreshContacts }) {
                     </div>
 
                     {/* Error message */}
-                    <span>{errorMessage}</span>
+                    <span className="error-message bold mx-auto mb-3">{errorMessage}</span>
                 </div>
             </div>
         </div>
