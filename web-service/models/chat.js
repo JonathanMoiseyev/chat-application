@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const User = require("./user");
 
-const Int32 = require("mongoose-int32").loadType(mongoose);
-
 const Schema = mongoose.Schema;
 
 const Chat = new Schema({
