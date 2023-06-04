@@ -6,7 +6,7 @@ const secretKey = "Shhhhh...";
 const createToken = async (username, password) => {
     const user = await User.findOne({ username });
 
-    if (user.length === 0) {
+    if (user === null) {
         throw new Error('User not found');
     }
 
