@@ -16,7 +16,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/Tokens", routerToken);
-app.user("/api/Users", routerUser);
+app.use("/api/Users", routerUser);
 
 
 app.listen(8080);

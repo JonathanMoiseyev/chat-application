@@ -16,14 +16,12 @@ const deleteChat = async (req, res) => {
     await chatsService.deleteChat(id);
 }
 
-
 const addChatMessage = async (req, res) => {
     const id = req.params.id;
     const token = req.params.token;
     const { str } = req.body;
     await chatsService.addChatMessage(id, str, token);
 }
-
 
 const getChatMessage = async (req, res) => {
     const id = req.params.id;
