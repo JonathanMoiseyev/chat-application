@@ -1,7 +1,8 @@
-const tokenService = require('../services/token');
+const tokenController = require('../controllers/token');
 
-const createToken = async (req, res) => {
-    const { username, password } = req.body;
-    const token = await tokenService.createToken(username, password);
-    res.send({ token });
-}
+const express = require('express');
+const router = express.Router();
+
+router.route('/').post(tokenController.createToken);
+
+module.exports = router;

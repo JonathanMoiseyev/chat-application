@@ -1,9 +1,13 @@
 import express from "express";
 import bodyParser from "body-parser";
+import { routerToken } from "./routes/token.js";
 
-const server = express();
+const app = express();
 
-server.use(express.static("public"));
-server.use(bodyParser());
+app.use(express.static("public"));
+app.use(bodyParser());
 
-server.listen(8080);
+app.use("/Tokens", routerToken);
+
+
+app.listen(8080);
