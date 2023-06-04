@@ -1,19 +1,15 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const User = new Schema({
+const UserPass = new Schema({
     username: {
         type: String,
         nullable: true
     },
-    displayName: {
-        type: String,
-        nullable: true
-    },
-    profilePic: {
+    password: {
         type: String,
         nullable: true
     }
 });
 
-module.exports = mongoose.model('User', User);
+module.exports = mongoose.model('UserPass', UserPass);
