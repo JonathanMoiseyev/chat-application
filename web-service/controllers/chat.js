@@ -1,4 +1,4 @@
-const chatsService = require('../services/chats');
+const chatsService = require('../services/chat');
 
 const getChats = async (req, res) => {
     const chats = await chatsService.getChats();
@@ -19,6 +19,15 @@ const deleteChat = async (req, res) => {
 
 const addChatMessage = async (req, res) => {
     const id = req.params.id;
-    const { chat } = req.body;
-    await chatsService.addChatMessage(chat);
+    const token = req.params.token;
+    const { str } = req.body;
+    await chatsService.addChatMessage(id, str, token);
+}
+
+
+const getChatMessage = async (req, res) => {
+    const id = req.params.id;
+    
+    const output = await chatsService.getChatMessage(id);
+    return output;
 }
