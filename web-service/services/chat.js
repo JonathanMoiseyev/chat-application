@@ -24,15 +24,16 @@ const createChat = async (username, newContactUsername) => {
     const user = await User.findOne({ username });
 
     // Check if chat already exists
-    const chat = await Chat.findOne({users : [user, contact]});
-
-    if (chat !== null) {
+    if (
+        (await Chat.findOne({ users: [contact, user] })) ||
+        (await Chat.findOne({ users: [user, contact] }))
+    ) {
         throw new Error("Chat already exists");
     }
 
     // Create chat
-
-}
+    Chat.save(await Chat.create({ users: [contcat, user], messages: [] }));
+};
 
 const getChat = async (id) => {
     const chat = await Chat.findOneById(id);
@@ -65,12 +66,12 @@ const getChatMessage = async (id, message) => {
 };
 
 const addChatMessage = async (id, message) => {
-    const chat = await Chat.find({ id });
+    const chat = await Chat.findOneById({ id });
 
     const msg = await Message.save({
         created: Date.now().toString,
         sender: getCurrentUser(),
-        content: messageStr,
+        content: message,
     });
 
     chat.messages.push(msg);
