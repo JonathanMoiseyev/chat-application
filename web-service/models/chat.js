@@ -6,10 +6,6 @@ const Int32 = require("mongoose-int32").loadType(mongoose);
 const Schema = mongoose.Schema;
 
 const Chat = new Schema({
-    id: {
-        type: Int32
-    },
-
     users: {
         type: [User],
         nullable: true

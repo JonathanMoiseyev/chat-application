@@ -6,10 +6,6 @@ const Int32 = require("mongoose-int32").loadType(mongoose);
 const Schema = mongoose.Schema;
 
 const Message = new Schema({
-    id: {
-        type: Int32
-    },
-
     created: {  
         type: String
     },
