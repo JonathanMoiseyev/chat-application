@@ -2,9 +2,9 @@ const User = require('../models/user');
 const jwt = require("jsonwebtoken");
 
 const createToken = async (username, password) => {
-    const user = await User.find({ username : username });
+    const user = await User.find({ username });
 
-    if (user == null) {
+    if (user === null) {
         throw new Error('User not found');
     }
 
@@ -12,5 +12,7 @@ const createToken = async (username, password) => {
         throw new Error('Password is incorrect');
     }
 
-    return jwt.sign({username : username}, "Shhhhh...")
+    return jwt.sign({ username }, "Shhhhh...")
 }
+
+module.exports = { createToken };

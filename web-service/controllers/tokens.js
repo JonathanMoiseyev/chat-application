@@ -1,4 +1,4 @@
-const tokenService = require('../services/token');
+const tokenService = require('../services/tokens');
 
 const createToken = async (req, res) => {
     const { username, password } = req.body;
