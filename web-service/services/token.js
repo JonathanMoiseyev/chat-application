@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const secretKey = "Shhhhh...";
 
 const createToken = async (username, password) => {
-    const user = await User.find({ username });
+    const user = await User.findOne({ username });
 
     if (user.length === 0) {
         throw new Error('User not found');

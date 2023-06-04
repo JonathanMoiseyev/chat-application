@@ -1,3 +1,4 @@
+const user = require('../models/user');
 const tokenService = require('../services/token');
 
 const createToken = async (req, res) => {
@@ -5,9 +6,9 @@ const createToken = async (req, res) => {
 
     try {
         const token = await tokenService.createToken(username, password);
-        res.send({ token });
+        return res.status(200).send({ token });
     } catch (error) {
-        res.status(401).send({ error: "Invalid username or password" });
+        return res.status(404).send({ error: "Invalid username or password" });
     } 
 }
 

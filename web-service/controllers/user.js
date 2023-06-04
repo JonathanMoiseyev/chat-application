@@ -1,4 +1,5 @@
 const userServices = require("../services/user");
+const { tokenServices } = require("../services/token");
 
 const createUser = async (req, res) => {
     const { username, password, displayName, profilePic } = req.body;
@@ -10,20 +11,26 @@ const createUser = async (req, res) => {
             displayName,
             profilePic
         );
-        res.status(201).send({ message: "User created" });
+        return res.status(200).send({ message: "User created" });
     } catch (error) {
-        res.status(401).send({ error: "Invalid username or password" });
+        return res.status(409).send({ error: "User already exists" });
     }
 }
 
 const getUser = async (req, res) => {
-    const { username } = req.params;
+    const token = req.params.token;
 
     try {
-        const user = await userServices.getUser(username);
-        res.status(200).send(user);
+        const username = tokenServices.verifyToken(token);
+
+        try {
+            const user = await userServices.getUser(username);
+            return res.status(200).send(user);
+        } catch (error) {
+            return res.status(404).send({ error: "User not found" });
+        }
     } catch (error) {
-        res.status(404).send({ error: "User not found" });
+        return res.status(401).send({ error: "Invalid token" });
     }
 }
 

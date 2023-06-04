@@ -1,5 +1,5 @@
 import { routerToken } from "./routes/token.js";
-import { routerUser } from "./routes/users.js";
+import { routerUser } from "./routes/user.js";
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -17,6 +17,5 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/Tokens", routerToken);
 app.use("/api/Users", routerUser);
-
 
 app.listen(8080);
