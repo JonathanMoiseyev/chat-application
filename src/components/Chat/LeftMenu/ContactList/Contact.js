@@ -1,17 +1,18 @@
+/** @format */
+
 import { React, useRef } from "react";
-import { dateToString } from "../../../shared/dateToString.js";
-import chatsDB from "../../../../db/chatsDB";
+import { getReformattedDate } from "../../../shared/userApi.js";
 
-
-function Contact({ user, contact, setChosenContact }) {
+function Contact({ user, contact, setChosenContact, status, foreRerender }) {
     const contactRef = useRef(null);
 
-    const chatMessages = chatsDB[user.username][contact.username];
-    const lastMessage = chatMessages[chatMessages.length - 1];
-    let lastMessageDate = null, lastMessageContent = "";
+    // TODO: update last message
+    const lastMessage = contact.lastMessage;
+    let lastMessageDate = null,
+        lastMessageContent = "";
 
-    if (lastMessage !== undefined) {
-        lastMessageDate = lastMessage.date;
+    if (lastMessage !== null) {
+        lastMessageDate = lastMessage.created;
         lastMessageContent = lastMessage.content;
     }
 
@@ -25,7 +26,8 @@ function Contact({ user, contact, setChosenContact }) {
         });
 
         // Update what conversation is being displayed
-        setChosenContact(contact.username);
+        setChosenContact(contact);
+        foreRerender(!status);
     };
 
     return (
@@ -35,32 +37,20 @@ function Contact({ user, contact, setChosenContact }) {
             ref={contactRef}
         >
             <div>
-                <img
-                    src={contact.img}
-                    className="rounded-circle profile-picture"
-                    alt="avatar"
-                />
+                <img src={contact.user.profilePic} className="rounded-circle profile-picture" alt="avatar" />
             </div>
             <div className="w-100 ms-4">
                 <div>
-                    <span
-                        className="d-inline-block text-truncate"
-                        style={{ maxWidth: 200 }}
-                    >
-                        {contact.displayName}
+                    <span className="d-inline-block text-truncate" style={{ maxWidth: 200 }}>
+                        {contact.user.displayName}
                     </span>
                 </div>
-                <small
-                    className="d-inline-block text-muted text-truncate"
-                    style={{ maxWidth: 200 }}
-                >
+                <small className="d-inline-block text-muted text-truncate" style={{ maxWidth: 200 }}>
                     {lastMessageContent}
                 </small>
             </div>
             <div>
-                <small className="text-muted me-2">
-                    {dateToString(lastMessageDate)}
-                </small>
+                <small className="text-muted me-2">{getReformattedDate(lastMessageDate)}</small>
                 {/* <span className="badge bg-light-purple rounded-pill float-end me-2">
                     14
                 </span> */}

@@ -1,10 +1,13 @@
-import { dateToString } from "../../../shared/dateToString.js";
+/** @format */
+
+// import { dateToString } from "../../../shared/dateToString.js";
+import { getReformattedDate } from "../../../shared/userApi";
 
 function Message({ user, message }) {
     let alignmentStyle = "",
         messageStyle = "bg-light-gray";
 
-    if (message.sender === user.username) {
+    if (message.sender.username === user.username) {
         alignmentStyle = "justify-content-end";
         messageStyle = "bg-light-purple text-white";
     }
@@ -17,9 +20,7 @@ function Message({ user, message }) {
                 </div>
             </li>
             <li className={`d-flex ${alignmentStyle}`}>
-                <small className="mx-4 text-muted">
-                    {dateToString(message.date)}
-                </small>
+                <small className="mx-4 text-muted">{getReformattedDate(message.created)}</small>
             </li>
         </>
     );

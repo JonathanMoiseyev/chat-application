@@ -1,47 +1,54 @@
-import './login.css';
+/** @format */
 
-import InputField from './../shared/InputField';
-import SubmitFormButton from './SubmitFormButton';
-import {useState} from "react";
-import usersDB from "../../db/usersDB";
+import "./login.css";
 
-import PasswordInputField from '../shared/PasswordInputField/PasswordInputField';
-import Link from '../shared/Link.js';
+import InputField from "./../shared/InputField";
+import SubmitFormButton from "./SubmitFormButton";
+import { useState } from "react";
 
+import PasswordInputField from "../shared/PasswordInputField/PasswordInputField";
+import Link from "../shared/Link.js";
+import { fetchToken } from "../shared/api.js";
 
+function LoginCard({ setUserByToken }) {
+    let [input, setInput] = useState({ username: "", password: "" });
+    let [inputErrorMessage, setInputErrorMessage] = useState("");
 
-function LoginCard({setUser}) {
-    let [inputUsername, setInputUsername] = useState("")
-    let [inputPassword, setInputPassword] = useState("")
-
-    let[inputErrorMessage, setInputErrorMessage] = useState("")
-
-
-    const signInFunction = (event) => {
+    const signInFunction = async (event) => {
         event.preventDefault();
-        if (usersDB[inputUsername] !== undefined) {
-            if (usersDB[inputUsername].password === inputPassword) {
-                setUser(usersDB[inputUsername]);
-                return
-            }
+        let token = await fetchToken(input);
+        if (token === null) {
+            setInputErrorMessage("Wrong username or password");
+        } else {
+            setUserByToken(token, input.username);
         }
+    };
 
-        setInputErrorMessage("Wrong username and/or password")
-    }
+    const handleChange = (name, value) => {
+        setInput({
+            ...input,
+            [name]: value,
+        });
+    };
 
+    const setInputUsername = (value) => {
+        handleChange("username", value);
+    };
 
+    const setInputPassword = (value) => {
+        handleChange("password", value);
+    };
 
     return (
         <div className="border-0 card">
             <div className="card-body">
-
                 {/* Title */}
                 <div className="h3 mb-5">Sign in to your account</div>
-                
+
                 {/* Login form */}
                 <form>
                     {/* Username input */}
-                    <InputField 
+                    <InputField
                         labelOfInputField="Username"
                         idOfInputField="login-username"
                         updateFunction={setInputUsername}
@@ -55,26 +62,16 @@ function LoginCard({setUser}) {
                         updateFunction={setInputPassword}
                     />
 
-
-                    {/* Error message */}
-                    <span className="error-message">{inputErrorMessage}</span>
-
-
-                    
                     <div className="d-flex flex-column">
+                        {/* Error message */}
+                        <span className="error-message bold mx-auto mb-3">{inputErrorMessage}</span>
+
                         {/* Submit button */}
-                        <SubmitFormButton
-                            writingOnButton="Continue"
-                            signInFunction={signInFunction}
-                        />
-                        
+                        <SubmitFormButton writingOnButton="Continue" signInFunction={signInFunction} />
+
                         {/* redirection to sign up */}
                         <div className="mx-auto">
-                            <Link 
-                                initialText="Don't have an account?&nbsp;"
-                                linkText="Sign up"
-                                link="/register"
-                            />
+                            <Link initialText="Don't have an account?&nbsp;" linkText="Sign up" link="/register" />
                         </div>
                     </div>
                 </form>

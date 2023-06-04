@@ -1,5 +1,7 @@
+/** @format */
+
 import { React, useEffect, useRef } from "react";
-import usersDB from "../../../../db/usersDB";
+// import usersDB from "../../../../db/usersDB";
 
 function RecipientDetails({ chosenContact }) {
     const imgWrapperRef = useRef(0),
@@ -7,8 +9,8 @@ function RecipientDetails({ chosenContact }) {
 
     useEffect(() => {
         if (chosenContact != null) {
-            const chosenContactDetails = usersDB[chosenContact];
-            imgWrapperRef.current.innerHTML = `<img src="${chosenContactDetails.img}" 
+            let chosenContactDetails = chosenContact.user;
+            imgWrapperRef.current.innerHTML = `<img src="${chosenContactDetails.profilePic}" 
                                                     class="rounded-circle profile-picture" 
                                                     alt="avatar"/>`;
             displayNameRef.current.innerHTML = chosenContactDetails.displayName;
