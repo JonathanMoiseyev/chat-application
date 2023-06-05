@@ -15,8 +15,6 @@ const createChat = async (req, res) => {
     const newContactUsername = req.body.username;
     const username = req.username;
 
-    console.log(username, newContactUsername)
-
     try {
         const newContactUser = await chatsService.createChat(username, newContactUsername);
         return res.status(200).send(newContactUser);
