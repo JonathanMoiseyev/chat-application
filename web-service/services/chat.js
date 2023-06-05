@@ -31,6 +31,7 @@ const createChat = async (username, newContactUsername) => {
         throw new Error("Chat already exists");
     }
 
+    const user = await User.findOne({ username: username });
     const newChat = new Chat({ users: [user, contact], messages: [] });
     await newChat.save();
 
@@ -77,7 +78,7 @@ const addChatMessage = async (id, message) => {
     await chat.save();
 };
 
-const getChatMessage = async (id, message) => {
+const getChatMessages = async (id) => {
     const chat = await Chat.findById(id);
 
     if (chat === null) {
@@ -93,5 +94,5 @@ module.exports = {
     getChat,
     deleteChat,
     addChatMessage,
-    getChatMessage
+    getChatMessage: getChatMessages
 };

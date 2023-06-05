@@ -33,19 +33,34 @@ const getChat = async (req, res) => {
 
 const deleteChat = async (req, res) => {
     const id = req.body;
-    await chatsService.deleteChat(id);
+    
+    try {
+        await chatsService.deleteChat(id);
+        return res.send({ message: "Chat deleted" });
+    } catch (error) {
+        return res.status(400).send({ error: error.message });
+    }
 }
 
 const addChatMessage = async (req, res) => {
     const id = req.params.id;
-    const token = req.params.token;
-    const { str } = req.body;
-    await chatsService.addChatMessage(id, str, token);
+    const { message } = req.body;
+
+    try {
+        await chatsService.addChatMessage(id, message);
+        return res.send({ message });
+    } catch (error) {
+        return res.status(400).send({ error: error.message });
+    }
 }
 
 const getChatMessage = async (req, res) => {
     const id = req.params.id;
     
-    const output = await chatsService.getChatMessage(id);
-    return output;
+    try {
+        const messages = await chatsService.getChatMessages(id);
+        return res.send({ messages });
+    } catch (error) {
+        return res.status(400).send({ error: error.message });
+    }
 }
