@@ -3,7 +3,7 @@ const chatsService = require('../services/chat');
 const getChats = async (req, res) => {
     const username = req.body.username;
     const chats = await chatsService.getChats(username);
-    res.send({ chats });
+    return res.send({ chats });
 }
 
 const getChat = async (req, res) => {
