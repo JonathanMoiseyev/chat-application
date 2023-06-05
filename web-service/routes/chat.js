@@ -4,13 +4,13 @@ const tokenController = require("../controllers/token");
 const express = require("express");
 const router = express.Router();
 
-router.get("/Chats", tokenController.verifyToken, chatsController.getChats);
-router.post("/Chats", tokenController.verifyToken, chatsController.createChat);
+router.get("/", tokenController.verifyToken, chatsController.getChats);
+router.post("/", tokenController.verifyToken, chatsController.createChat);
 
-router.get("/Chats/:id", tokenController.verifyToken, chatsController.getChat);
-router.delete("/Chats/:id", tokenController.verifyToken, chatsController.deleteChat);
+router.get("/:id", tokenController.verifyToken, chatsController.getChat);
+router.delete("/:id", tokenController.verifyToken, chatsController.deleteChat);
 
-router.post("/Chats/:id/Messages", tokenController.verifyToken, chatsController.addChatMessage);
-router.get("/Chats/:id/Messages", tokenController.verifyToken, chatsController.getChatMessage);
+router.post("/:id/Messages", tokenController.verifyToken, chatsController.addChatMessage);
+router.get("/:id/Messages", tokenController.verifyToken, chatsController.getChatMessage);
 
 module.exports = router;

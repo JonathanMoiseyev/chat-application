@@ -3,13 +3,7 @@ const User = require("../models/user");
 const Message = require("../models/message");
 
 const getChats = async (username) => {
-    const chats = await Chat.find({ users : {$elemMatch : {username : username}}});
-    
-    if (chats.length == 0) {
-        throw new Error("Chats not found");
-    }
-
-    return chats;
+    return await Chat.find({ users : {$elemMatch : {username : username}}});
 };
 
 const createChat = async (username, newContactUsername) => {

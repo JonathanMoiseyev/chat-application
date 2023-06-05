@@ -22,7 +22,7 @@ const getUser = async (req, res) => {
 
     try {
         const user = await userServices.getUser(username);
-        return res.status(200).send({ user });
+        return res.status(200).send(user);
     } catch (error) {
         return res.status(404).send({ error: "User not found" });
     }
