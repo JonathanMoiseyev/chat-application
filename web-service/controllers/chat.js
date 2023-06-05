@@ -1,7 +1,8 @@
 const chatsService = require('../services/chat');
 
 const getChats = async (req, res) => {
-    const username = req.body.username;
+    const username = req.username;
+
     try {
         const chats = await chatsService.getChats(username);
         return res.send(chats);
@@ -11,7 +12,11 @@ const getChats = async (req, res) => {
 }
 
 const createChat = async (req, res) => {
-    const { newContactUsername, username } = req.body;
+    const newContactUsername = req.body.username;
+    const username = req.username;
+
+    console.log(username, newContactUsername)
+
     try {
         const newContactUser = await chatsService.createChat(username, newContactUsername);
         return res.status(200).send(newContactUser);
@@ -22,13 +27,13 @@ const createChat = async (req, res) => {
 
 const getChat = async (req, res) => {
     const id = req.params.id;
+
     try {
         const chat = await chatsService.getChat(id);
         return res.send(chat);
     } catch (error) {
         return res.status(404).send(error.message); // check if its 404..........................
     }
-
 }
 
 const deleteChat = async (req, res) => {

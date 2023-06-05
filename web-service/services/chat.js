@@ -3,10 +3,30 @@ const User = require("../models/user");
 const Message = require("../models/message");
 
 const getChats = async (username) => {
-    return await Chat.find({ users : {$elemMatch : {username : username}}});
+    const chats = await Chat.find({ users: { $elemMatch: { username: username } } });
+
+    const res = [];
+
+    for (const chat of chats) {
+        const contact = chat.users.find((user) => user.username !== username);
+        const lastMessage =
+            chat.messages.length == 0 ? null : chat.messages[chat.messages.length - 1];
+
+        res.push({
+            id: chat._id,
+            user: contact,
+            lastMessage: lastMessage,
+        });
+    }
+
+    return res;
 };
 
 const createChat = async (username, newContactUsername) => {
+    if (username === newContactUsername) {
+        throw new Error("You can't chat with yourself");
+    }
+
     const contact = await User.findOne({ username: newContactUsername });
 
     if (contact === null) {
@@ -15,7 +35,7 @@ const createChat = async (username, newContactUsername) => {
 
     const chat = await Chat.findOne({
         $and: [
-            { users : { $size : 2 }},
+            { users: { $size: 2 } },
             { users: { $elemMatch: { username: username } } },
             { users: { $elemMatch: { username: newContactUsername } } },
         ],
@@ -88,5 +108,5 @@ module.exports = {
     getChat,
     deleteChat,
     addChatMessage,
-    getChatMessage: getChatMessages
+    getChatMessage: getChatMessages,
 };
