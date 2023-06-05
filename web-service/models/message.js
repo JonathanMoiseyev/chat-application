@@ -3,7 +3,8 @@ const User = require("./user").schema;
 
 const Message = new mongoose.Schema;({
     created: {  
-        type: String
+        type: Date,
+        default: Date.now
     },
 
     sender: {
