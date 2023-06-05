@@ -31,6 +31,7 @@ const createChat = async (username, newContactUsername) => {
         throw new Error("Chat already exists");
     }
 
+    const user = await User.findOne({ username: username });
     const newChat = new Chat({ users: [user, contact], messages: [] });
     await newChat.save();
 };
