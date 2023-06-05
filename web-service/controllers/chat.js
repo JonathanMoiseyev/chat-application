@@ -22,8 +22,13 @@ const createChat = async (req, res) => {
 
 const getChat = async (req, res) => {
     const id = req.params.id;
-    const chat = await chatsService.getChat(id);
-    res.send({ chat });
+    try {
+        const chat = await chatsService.getChat(id);
+        return res.send({ chat });
+    } catch (error) {
+        return res.status(404).send({ error: error.message }); // check if its 404..........................
+    }
+
 }
 
 const deleteChat = async (req, res) => {
