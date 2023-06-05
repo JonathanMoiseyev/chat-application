@@ -49,7 +49,14 @@ const createChat = async (username, newContactUsername) => {
     const newChat = new Chat({ users: [user, contact], messages: [] });
     await newChat.save();
 
-    return contact;
+    return {
+        id: newChat._id,
+        user: {
+            username: contact.username,
+            displayName: contact.displayName,
+            profilePic: contact.profilePic,
+        },
+    };
 };
 
 const getChat = async (id) => {
