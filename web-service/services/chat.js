@@ -55,6 +55,10 @@ const deleteChat = async (id) => {
 
 const addChatMessage = async (id, message) => {
     const chat = await Chat.findById(id);
+    
+    if (chat === null) {
+        throw new Error("Chat not found");
+    }
 
     const msg = await Message.save({
         created: Date.now().toString,
