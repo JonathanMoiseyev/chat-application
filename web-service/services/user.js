@@ -1,7 +1,7 @@
 const User = require('../models/user');
 
 const createUser = async (username, password, displayName, profilePic) => { 
-    const user = User.findOne({ username });
+    const user = await User.findOne({ username });
 
     if (user !== null) {
         throw new Error('User already exists');
@@ -16,8 +16,8 @@ const createUser = async (username, password, displayName, profilePic) => {
 }
 
 const getUser = async (username) => {
-    const user = User.findOne({ username });
-
+    const user = await User.findOne({ username });
+    
     if (user.length === 0) {
         throw new Error('User not found');
     }
