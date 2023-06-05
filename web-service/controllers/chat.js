@@ -13,7 +13,13 @@ const getChat = async (req, res) => {
 
 const deleteChat = async (req, res) => {
     const id = req.body;
-    await chatsService.deleteChat(id);
+    
+    try {
+        await chatsService.deleteChat(id);
+        return res.send({ message: "Chat deleted" });
+    } catch (error) {
+        return res.status(400).send({ error: error.message });
+    }
 }
 
 const addChatMessage = async (req, res) => {
