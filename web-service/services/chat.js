@@ -3,10 +3,8 @@ const User = require("../models/user");
 const Message = require("../models/Message");
 
 const getChats = async (username) => {
-    const chats = await Chat.find({
-        users: { $elemMatch: { username: username } },
-    });
-
+    const chats = await Chat.find({ users : {$elemMatch : {username : username}}});
+    
     if (chats.length == 0) {
         throw new Error("Chats not found");
     }
@@ -21,18 +19,20 @@ const createChat = async (username, newContactUsername) => {
         throw new Error("User not found");
     }
 
-    const user = await User.findOne({ username });
+    const chat = await Chat.findOne({
+        $and: [
+            { users : { $size : 2 }},
+            { users: { $elemMatch: { username: username } } },
+            { users: { $elemMatch: { username: newContactUsername } } },
+        ],
+    });
 
-    // Check if chat already exists
-    if (
-        (await Chat.findOne({ users: [contact, user] })) ||
-        (await Chat.findOne({ users: [user, contact] }))
-    ) {
+    if (chat !== null) {
         throw new Error("Chat already exists");
     }
 
-    // Create chat
-    Chat.save(await Chat.create({ users: [contcat, user], messages: [] }));
+    const newChat = new Chat({ users: [user, contact], messages: [] });
+    await newChat.save();
 };
 
 const getChat = async (id) => {
@@ -62,13 +62,17 @@ const addChatMessage = async (id, message) => {
         throw new Error("Chat not found");
     }
 
-    const msg = await Message.save({
+    const msg = new Message({
         created: Date.now().toString,
         sender: getCurrentUser(),
         content: message,
     });
 
+    msg.save();
+
     chat.messages.push(msg);
+
+    await chat.save();
 };
 
 const getChatMessage = async (id, message) => {
