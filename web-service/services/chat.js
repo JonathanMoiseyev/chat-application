@@ -33,6 +33,8 @@ const createChat = async (username, newContactUsername) => {
 
     const newChat = new Chat({ users: [user, contact], messages: [] });
     await newChat.save();
+
+    return contact;
 };
 
 const getChat = async (id) => {
