@@ -1,4 +1,4 @@
-const chatsController = require("../controllers/token");
+const chatsController = require("../controllers/chat");
 const tokenController = require("../controllers/token");
 
 const express = require("express");
