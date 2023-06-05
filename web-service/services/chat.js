@@ -3,8 +3,10 @@ const User = require("../models/user");
 const Message = require("../models/Message");
 
 const getChats = async (username) => {
-    const chats = await Chat.find({ users : {$elemMatch : {username : username}}});
-    
+    const chats = await Chat.find({
+        users: { $elemMatch: { username: username } },
+    });
+
     if (chats.length == 0) {
         throw new Error("Chats not found");
     }
@@ -55,7 +57,7 @@ const deleteChat = async (id) => {
 
 const addChatMessage = async (id, message) => {
     const chat = await Chat.findById(id);
-    
+
     if (chat === null) {
         throw new Error("Chat not found");
     }
@@ -77,4 +79,13 @@ const getChatMessage = async (id, message) => {
     }
 
     return chat.messages;
+};
+
+module.exports = {
+    getChats,
+    createChat,
+    getChat,
+    deleteChat,
+    addChatMessage,
+    getChatMessage
 };
