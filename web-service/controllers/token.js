@@ -5,7 +5,7 @@ const createToken = async (req, res) => {
 
     try {
         const token = await tokenService.createToken(username, password);
-        return res.status(200).send({ token });
+        return res.status(200).send(token);
     } catch (error) {
         return res.status(404).send({ error: "Invalid username or password" });
     } 
@@ -23,7 +23,7 @@ const verifyToken = async (req, res, next) => {
     }
 
     try {
-        req.body.username = tokenService.verifyToken(token);
+        req.body.username = tokenService.verifyToken(token).username;
         next();
     } catch (error) {
         return res.status(401).send({ error: "Unauthorized" });
