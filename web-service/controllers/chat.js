@@ -26,6 +26,10 @@ const addChatMessage = async (req, res) => {
 const getChatMessage = async (req, res) => {
     const id = req.params.id;
     
-    const output = await chatsService.getChatMessage(id);
-    return output;
+    try {
+        const messages = await chatsService.getChatMessages(id);
+        res.send({ messages });
+    } catch (error) {
+        res.status(400).send({ error: error.message });
+    }
 }
