@@ -27,4 +27,4 @@ const verifyToken = async (req, res, next) => {
     }
 }
 
-module.exports = { createToken };
+module.exports = { createToken, verifyToken };

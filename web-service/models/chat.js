@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
-const User = require("./user");
-const Message = require("./message");
-const Schema = mongoose.Schema;
+const User = require("./user").schema;
+const Message = require("./message").schema;
 
-const Chat = new Schema({
+const Chat = new mongoose.Schema({
     users: {
         type: [User],
         nullable: true

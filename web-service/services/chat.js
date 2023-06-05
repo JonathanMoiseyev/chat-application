@@ -1,6 +1,6 @@
 const Chat = require("../models/chat");
 const User = require("../models/user");
-const Message = require("../models/Message");
+const Message = require("../models/message");
 
 const getChats = async (username) => {
     const chats = await Chat.find({ users : {$elemMatch : {username : username}}});

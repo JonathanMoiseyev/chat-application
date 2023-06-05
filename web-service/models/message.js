@@ -1,11 +1,7 @@
 const mongoose = require("mongoose");
-const User = require("./user");
+const User = require("./user").schema;
 
-const Int32 = require("mongoose-int32").loadType(mongoose);
-
-const Schema = mongoose.Schema;
-
-const Message = new Schema({
+const Message = new mongoose.Schema;({
     created: {  
         type: String
     },
