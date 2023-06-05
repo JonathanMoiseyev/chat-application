@@ -20,7 +20,7 @@ const verifyToken = async (req, res, next) => {
     }
 
     try {
-        req.body.username = await tokenService.verifyToken(token);
+        req.body.username = tokenService.verifyToken(token);
         next();
     } catch (error) {
         return res.status(401).send({ error: "Unauthorized" });
