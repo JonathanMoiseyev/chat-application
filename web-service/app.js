@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const mongoose = require("mongoose");
 
 const routerToken = require("./routes/token.js");
@@ -14,6 +15,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/HemiDB", {
 var app = express();
 
 app.use(express.static("public"));
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/Tokens", routerToken);
