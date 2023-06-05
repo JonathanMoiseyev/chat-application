@@ -1,7 +1,7 @@
 /** @format */
 
 async function fetchToken({ username, password }) {
-    let res = await fetch("http://localhost:5000/api/Tokens", {
+    let res = await fetch("http://127.0.0.1:5000/api/Tokens", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -18,7 +18,7 @@ async function fetchToken({ username, password }) {
 }
 
 async function fetchUser(token, username) {
-    const res = await fetch("http://localhost:5000/api/Users/" + username, {
+    const res = await fetch("http://127.0.0.1:5000/api/Users/" + username, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`,
@@ -31,7 +31,7 @@ async function fetchUser(token, username) {
 }
 
 async function fetchContacts(token) {
-    const res = await fetch("http://localhost:5000/api/Chats", {
+    const res = await fetch("http://127.0.0.1:5000/api/Chats", {
         method: "GET",
         headers: {
             accept: "text/plain",
@@ -46,7 +46,7 @@ async function fetchContacts(token) {
 }
 
 async function postContact(token, username) {
-    const res = await fetch("http://localhost:5000/api/Chats", {
+    const res = await fetch("http://127.0.0.1:5000/api/Chats", {
         method: "POST",
         headers: {
             accept: "*/*",
@@ -70,7 +70,7 @@ async function postContact(token, username) {
 }
 
 async function fetchMessages(token, id) {
-    const res = await fetch("http://localhost:5000/api/Chats/" + id, {
+    const res = await fetch("http://127.0.0.1:5000/api/Chats/" + id, {
         method: "GET",
         headers: {
             accept: "text/plain",
@@ -83,7 +83,7 @@ async function fetchMessages(token, id) {
 }
 
 async function postMessage(token, id, message) {
-    const res = await fetch(`http://localhost:5000/api/Chats/${id}/Messages`, {
+    const res = await fetch(`http://127.0.0.1:5000/api/Chats/${id}/Messages`, {
         method: "POST",
         headers: {
             accept: "text/plain",
