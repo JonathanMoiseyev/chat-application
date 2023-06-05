@@ -1,8 +1,6 @@
 const chatsService = require('../services/chat');
 
 const getChats = async (req, res) => {
-    console.log("shalom")
-
     const username = req.body.username;
     try {
         const chats = await chatsService.getChats(username);
