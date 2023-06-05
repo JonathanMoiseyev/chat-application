@@ -1,5 +1,4 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
@@ -16,7 +15,6 @@ var app = express();
 
 app.use(express.static("public"));
 app.use(cors());
-// app.use(bodyParser.json());
 app.use(express.json());
 
 app.use("/api/Tokens", routerToken);
