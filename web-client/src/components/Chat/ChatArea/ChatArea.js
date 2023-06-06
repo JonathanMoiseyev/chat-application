@@ -6,7 +6,7 @@ import TypingArea from "./TypingArea/TypingArea";
 import MessageBoard from "./MessageBoard/MessageBoard";
 import RecipientDetails from "./RecipientDetails/RecipientDetails";
 
-function ChatArea({ user, chosenContact, status }) {
+function ChatArea({ user, chosenContact, status, socket }) {
     const [chat, setChat] = useState([]);
 
     return (
@@ -14,7 +14,7 @@ function ChatArea({ user, chosenContact, status }) {
             <div className="card border-0">
                 <RecipientDetails chosenContact={chosenContact} />
                 <MessageBoard user={user} chosenContact={chosenContact} chat={chat} setChat={setChat} status={status} />
-                <TypingArea user={user} chosenContact={chosenContact} setChat={setChat} chat={chat} />
+                <TypingArea user={user} chosenContact={chosenContact} setChat={setChat} chat={chat} socket={socket} />
             </div>
         </div>
     );

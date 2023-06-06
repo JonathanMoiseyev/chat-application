@@ -5,7 +5,7 @@ import React from "react";
 import { postMessage } from "../../../shared/api";
 import { addMessage } from "../../../shared/userApi";
 
-function TypingArea({ user, chosenContact, chat, setChat }) {
+function TypingArea({ user, chosenContact, chat, setChat, socket }) {
     if (chosenContact == null) return <></>;
 
     const writeMessage = (event) => {
@@ -13,7 +13,7 @@ function TypingArea({ user, chosenContact, chat, setChat }) {
             let message = event.target.value;
             event.target.value = "";
 
-            postMessage(user.token, chosenContact.id, message).then((newMessage) => {
+            postMessage(user.token, chosenContact.id, message, socket, chosenContact.username ).then((newMessage) => {
                 if (newMessage === null) {
                     alert("Error sending message");
                     return;

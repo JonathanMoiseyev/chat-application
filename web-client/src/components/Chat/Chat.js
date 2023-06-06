@@ -1,9 +1,11 @@
 /** @format */
 
 import { useState } from "react";
+import io from "socket.io-client"
 import LeftMenu from "./LeftMenu/LeftMenu";
 import ChatArea from "./ChatArea/ChatArea";
 import "./Chat.css";
+
 // import { getDefaultContact } from "../shared/userApi";
 
 function Chat({ user, setUser }) {
@@ -30,7 +32,13 @@ function Chat({ user, setUser }) {
                     status={status}
                     foreRerender={foreRerender}
                 />
-                <ChatArea user={user} chosenContact={chosenContact} foreRerender={foreRerender} status={status} />
+                <ChatArea 
+                    user={user}
+                    chosenContact={chosenContact}
+                    foreRerender={foreRerender}
+                    status={status}
+                    socket={socket}
+                />
             </div>
         </main>
     );

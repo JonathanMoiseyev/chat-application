@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
+
+
 const routerToken = require("./routes/token.js");
 const routerUser = require("./routes/user.js");
 const routerChat = require("./routes/chat.js");
@@ -9,12 +11,6 @@ const routerChat = require("./routes/chat.js");
 mongoose.connect("mongodb://127.0.0.1:27017/HemiDB", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-});
-
-
-var socket = io();
-socket.on('msg', function(msg) {
-    socket.emit(msg.reciverUserName, msg.msg);
 });
 
 
@@ -27,5 +23,20 @@ app.use(express.json());
 app.use("/api/Tokens", routerToken);
 app.use("/api/Users", routerUser);
 app.use("/api/Chats", routerChat);
+
+
+
+
+const http = require("http");
+const httpServer = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(httpServer);
+
+io.on('msg', function(msg) {
+    io.emit(msg.reciverUserName, msg.msg);
+});
+
+
+
 
 app.listen(5000);

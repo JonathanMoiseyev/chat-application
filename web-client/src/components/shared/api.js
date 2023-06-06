@@ -82,7 +82,7 @@ async function fetchMessages(token, id) {
     return JSON.parse(await res.text());
 }
 
-async function postMessage(token, id, message) {
+async function postMessage(token, id, message, socket, reciverUserName) {
     const res = await fetch(`http://127.0.0.1:5000/api/Chats/${id}/Messages`, {
         method: "POST",
         headers: {
@@ -92,6 +92,9 @@ async function postMessage(token, id, message) {
         },
         body: JSON.stringify({ msg: message }),
     });
+
+
+    socket.emit("msg", { reciverUserName: reciverUserName, msg: message });
 
     if (!res.ok) return null;
     return JSON.parse(await res.text());
