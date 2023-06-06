@@ -1,7 +1,7 @@
 /** @format */
 
 import { useState } from "react";
-import io from "socket.io-client"
+import { io } from "socket.io-client"
 import LeftMenu from "./LeftMenu/LeftMenu";
 import ChatArea from "./ChatArea/ChatArea";
 import "./Chat.css";
@@ -12,15 +12,21 @@ function Chat({ user, setUser }) {
     const [status, foreRerender] = useState(false);
     const [chosenContact, setChosenContact] = useState(null);
     
-    var socket = io();
+
+
+    const socket = io("ws://localhost:5555", { transports: ["websocket"] });
+
     socket.on(user.username, function(msg) {
+        console.log("reciving", msg);
         user.contacts.forEach((contact) => {
-            if (contact.username === msg.sender.username) {
+            if (contact.user.username === msg.sender.username) {
                 contact.lastMessage = msg.content;
                 foreRerender(!status);
             }
         });
     });
+
+    
     
     return (
         <main className="container shadow mt-4" id="chat-app">

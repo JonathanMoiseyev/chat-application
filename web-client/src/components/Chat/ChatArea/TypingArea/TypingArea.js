@@ -12,8 +12,7 @@ function TypingArea({ user, chosenContact, chat, setChat, socket }) {
         if (event.key === "Enter" && event.target.value.length > 0) {
             let message = event.target.value;
             event.target.value = "";
-
-            postMessage(user.token, chosenContact.id, message, socket, chosenContact.username ).then((newMessage) => {
+            postMessage(user.token, chosenContact.id, message, socket, user, chosenContact.user.username).then((newMessage) => {
                 if (newMessage === null) {
                     alert("Error sending message");
                     return;
