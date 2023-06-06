@@ -11,6 +11,13 @@ mongoose.connect("mongodb://127.0.0.1:27017/HemiDB", {
     useUnifiedTopology: true,
 });
 
+
+var socket = io();
+socket.on('msg', function(msg) {
+    socket.emit(msg.reciverUserName, msg.msg);
+});
+
+
 var app = express();
 
 app.use(express.static("public"));
