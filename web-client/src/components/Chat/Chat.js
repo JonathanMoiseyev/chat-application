@@ -11,7 +11,7 @@ function Chat({ user, setUser }) {
     const [chosenContact, setChosenContact] = useState(null);
     
     var socket = io();
-    socket.on('msg', function(msg) {
+    socket.on(user.username, function(msg) {
         user.contacts.forEach((contact) => {
             if (contact.username === msg.sender.username) {
                 contact.lastMessage = msg.content;
