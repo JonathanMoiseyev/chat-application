@@ -9,7 +9,17 @@ import "./Chat.css";
 function Chat({ user, setUser }) {
     const [status, foreRerender] = useState(false);
     const [chosenContact, setChosenContact] = useState(null);
-
+    
+    var socket = io();
+    socket.on('msg', function(msg) {
+        user.contacts.forEach((contact) => {
+            if (contact.username === msg.sender.username) {
+                contact.lastMessage = msg.content;
+                foreRerender(!status);
+            }
+        });
+    });
+    
     return (
         <main className="container shadow mt-4" id="chat-app">
             <div className="row">
