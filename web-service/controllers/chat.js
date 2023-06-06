@@ -46,12 +46,13 @@ const deleteChat = async (req, res) => {
 }
 
 const addChatMessage = async (req, res) => {
-    const id = req.params.id;
-    const { message } = req.body;
+    const chatId = req.params.id;
+    const { msg } = req.body;
+    const username = req.username;
 
     try {
-        await chatsService.addChatMessage(id, message);
-        return res.send(message);
+        const messageJson = await chatsService.addChatMessage(chatId, username, msg);
+        return res.send(messageJson);
     } catch (error) {
         return res.status(400).send(error.message);
     }

@@ -79,24 +79,23 @@ const deleteChat = async (id) => {
     return chat;
 };
 
-const addChatMessage = async (id, message) => {
-    const chat = await Chat.findById(id);
+const addChatMessage = async (chatId, username, message) => {
+    const chat = await Chat.findById(chatId);
 
     if (chat === null) {
         throw new Error("Chat not found");
     }
 
     const msg = new Message({
-        created: Date.now().toString,
-        sender: getCurrentUser(),
+        sender: chat.users.find((user) => user.username === username),
         content: message,
     });
 
-    msg.save();
-
+    await msg.save();
     chat.messages.push(msg);
-
     await chat.save();
+
+    return msg;
 };
 
 const getChatMessages = async (id) => {
