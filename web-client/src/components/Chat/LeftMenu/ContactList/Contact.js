@@ -3,7 +3,7 @@
 import { React, useRef } from "react";
 import { getReformattedDate } from "../../../shared/userApi.js";
 
-function Contact({ user, contact, setChosenContact, status, foreRerender }) {
+function Contact({ user, contact, setChosenContact, status, forceRerender }) {
     const contactRef = useRef(null);
 
     // TODO: update last message
@@ -27,7 +27,7 @@ function Contact({ user, contact, setChosenContact, status, foreRerender }) {
 
         // Update what conversation is being displayed
         setChosenContact(contact);
-        foreRerender(!status);
+        forceRerender(!status);
     };
 
     return (

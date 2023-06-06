@@ -93,12 +93,15 @@ async function postMessage(token, id, message, socket, sender, reciverUserName) 
         body: JSON.stringify({ msg: message }),
     });
 
+    let msg = null
+    if (res.ok) {
+        msg = JSON.parse(await res.text());
+    }
 
-    socket.emit("msg", { sender: sender, msg: message, reciverUserName: reciverUserName });
-    console.log("sending msg", { sender: sender, msg: message });
+    socket.emit("msg", { sender: sender, msg: msg, reciverUserName: reciverUserName });
 
-    if (!res.ok) return null;
-    return JSON.parse(await res.text());
+    console.log("שלחתי", msg)
+    return msg;
 }
 
 export { fetchToken, fetchUser, fetchContacts, postContact, fetchMessages, postMessage };
