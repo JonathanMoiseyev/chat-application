@@ -2,14 +2,19 @@
 
 # dependencies
 /node_modules
+/web-client/node_modules
+/web-service/node_modules
 /.pnp
 .pnp.js
 
 # testing
 /coverage
+/.vscode
+.gitignore
 
 # production
 /build
+/final
 
 # misc
 .DS_Store
