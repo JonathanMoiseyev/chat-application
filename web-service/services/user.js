@@ -1,6 +1,5 @@
-const UserNoPass = require('../models/userNoPass');
 const User = require('../models/user');
-const Chat = require('../models/chat');
+const UserPass = require('../models/userPass');
 
 const createUser = async (username, password, displayName, profilePic) => { 
     const user = await User.findOne({ username });
@@ -11,20 +10,18 @@ const createUser = async (username, password, displayName, profilePic) => {
 
     await User.create({
         username,
-        password,
         displayName,
         profilePic,
     });
 
-    await UserNoPass.create({
+    await UserPass.create({
         username,
-        displayName,
-        profilePic,
+        password,
     });
 }
 
 const getUser = async (username) => {
-    const user = await UserNoPass.findOne({ username });
+    const user = await User.findOne({ username });
     
     if (user.length === 0) {
         throw new Error('User not found');

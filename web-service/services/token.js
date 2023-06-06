@@ -1,10 +1,10 @@
-const User = require('../models/user');
+const UserPass = require('../models/userPass');
 const jwt = require("jsonwebtoken");
 
 const secretKey = "Shhhhh...";
 
 const createToken = async (username, password) => {
-    const user = await User.findOne({ username });
+    const user = await UserPass.findOne({ username });
 
     if (user === null) {
         throw new Error('User not found');

@@ -1,5 +1,5 @@
 const Chat = require("../models/chat");
-const UserNoPass = require("../models/userNoPass");
+const User = require("../models/user");
 const Message = require("../models/message");
 
 const getChats = async (username) => {
@@ -27,7 +27,7 @@ const createChat = async (username, newContactUsername) => {
         throw new Error("You can't chat with yourself");
     }
 
-    const contact = await UserNoPass.findOne({ username: newContactUsername });
+    const contact = await User.findOne({ username: newContactUsername });
 
     if (contact === null) {
         throw new Error("User not found");
@@ -45,7 +45,7 @@ const createChat = async (username, newContactUsername) => {
         throw new Error("Chat already exists");
     }
 
-    const user = await UserNoPass.findOne({ username: username });
+    const user = await User.findOne({ username: username });
     const newChat = new Chat({ users: [user, contact], messages: [] });
     await newChat.save();
 

@@ -6,11 +6,6 @@ const User = new mongoose.Schema({
         nullable: true,
     },
 
-    password: {
-        type: String,
-        nullable: true,
-    },
-
     displayName: {
         type: String,
         nullable: true,
