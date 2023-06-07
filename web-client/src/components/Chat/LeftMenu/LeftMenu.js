@@ -7,9 +7,10 @@ import UserOptions from "./UserOptions/UserOptions.js";
 
 import "../Chat.css";
 
-import { getContacts } from "../../shared/userApi.js";
+import { getContacts, createContact, addContact } from "../../shared/userApi.js";
 
-function LeftMenu({ user, setUser, setChosenContact, status, forceRerender }) {
+function LeftMenu({ user, setUser, setChosenContact, status, forceRerender, socket }) {
+
     let userContacts = getContacts(user);
     const [effectiveContacts, setEffectiveContacts] = useState(JSON.parse(JSON.stringify(userContacts)));
     const [searchValue, setSearchValue] = useState(undefined);
@@ -27,10 +28,26 @@ function LeftMenu({ user, setUser, setChosenContact, status, forceRerender }) {
     };
 
     const refreshContacts = () => {
+        //userContacts = getContacts(user);
         doSearch(searchValue);
     };
 
 
+    socket.on(JSON.stringify({ type: "new contact", receiverUserName: user.username }), (webMessage) => {
+        
+        // checking if the contact already exists
+        if (user.contacts.some((contact) => contact.user.username === webMessage.sender.username)) {
+            return;
+        }
+        
+        let contact = createContact(webMessage.sender, webMessage.chatId);
+        addContact(user, contact);
+        refreshContacts();
+        
+    });
+
+
+    
 
     const doSearchUseCallBack = useCallback((query) => {
         setSearchValue(query);
@@ -43,6 +60,7 @@ function LeftMenu({ user, setUser, setChosenContact, status, forceRerender }) {
             );
         }
     }, [userContacts]);
+
     const refreshContactsUseCallBack = useCallback(() => {
         doSearchUseCallBack(searchValue);
     }, [doSearchUseCallBack, searchValue]);
@@ -51,10 +69,12 @@ function LeftMenu({ user, setUser, setChosenContact, status, forceRerender }) {
         refreshContactsUseCallBack();
     }, [status, refreshContactsUseCallBack]);
 
+    
+
     return (
         <div className="col-4 p-0 border-end">
             <div className="card border-0">
-                <UserOptions user={user} setUser={setUser} refreshContacts={refreshContacts} />
+                <UserOptions user={user} setUser={setUser} refreshContacts={refreshContacts} socket={socket} />
                 <SearchBar doSearch={doSearch} />
                 <ContactList
                     user={user}

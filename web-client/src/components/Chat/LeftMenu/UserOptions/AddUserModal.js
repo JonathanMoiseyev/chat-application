@@ -6,7 +6,7 @@ import InputField from "./../../../shared/InputField";
 import { postContact } from "../../../shared/api";
 import { createContact, addContact } from "../../../shared/userApi";
 
-function AddUserModal({ user, refreshContacts }) {
+function AddUserModal({ user, refreshContacts, socket }) {
     let [inputUsername, setInputUsername] = useState("");
     let [errorMessage, setErrorMessage] = useState("");
 
@@ -21,6 +21,19 @@ function AddUserModal({ user, refreshContacts }) {
             setErrorMessage(res.content);
         } else {
             let contact = createContact(res.content.user, res.content.id);
+            socket.emit(
+                "new contact",
+                { 
+                    sender: {
+                        displayName: user.displayName,
+                        username: user.username,
+                        profilePic: user.profilePic,
+                    }, 
+                    chatId: res.content.id,
+                    receiverUserName: res.content.user.username 
+                }
+            );
+
             addContact(user, contact);
             setErrorMessage("");
             refreshContacts();
@@ -39,7 +52,12 @@ function AddUserModal({ user, refreshContacts }) {
                     {/* Title and X button */}
                     <div className="modal-header border-0">
                         <h1 className="modal-title fs-5">Add new contact</h1>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+                        <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        />
                     </div>
                     {/* Input */}
                     <div className="modal-body">
@@ -54,7 +72,9 @@ function AddUserModal({ user, refreshContacts }) {
                     </div>
 
                     {/* Error message */}
-                    <span className="error-message bold mx-auto mb-3">{errorMessage}</span>
+                    <span className="error-message bold mx-auto mb-3">
+                        {errorMessage}
+                    </span>
                 </div>
             </div>
         </div>

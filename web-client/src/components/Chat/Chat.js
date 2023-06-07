@@ -36,6 +36,7 @@ function Chat({ user, setUser }) {
                     setChosenContact={setChosenContact}
                     status={status}
                     forceRerender={forceRerender}
+                    socket={socket}
                 />
                 <ChatArea 
                     user={user}
