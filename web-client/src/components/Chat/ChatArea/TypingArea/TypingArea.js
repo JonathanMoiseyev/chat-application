@@ -1,7 +1,6 @@
 /** @format */
 
 import React from "react";
-// import chatsDB from "../../../../db/chatsDB";
 import { postMessage } from "../../../shared/api";
 import { addMessage } from "../../../shared/userApi";
 

@@ -98,6 +98,11 @@ graph LR;
 
 In order to get real time updates, the server uses web sockets to notify the client when a new message is sent in a chat. The client then updates the chat's messages.
 
+### Notes
+
+- When a user (_user a_) adds another contact (_user b_), _user b_ **appears** in _user a's_ contact list. Yet, _user a_ **does not appear** in _user b`s_ contact list, until _user a_ sends _user b_ a message. This is our **intended** functionality as whatsapp behaves similarly. 
+
+
 ## Authors
 [Jonathan Kelsi](https://github.com/JonathanKelsi)  
 [Jonathan Moiseyev](https://github.com/JonathanMoiseyev)  

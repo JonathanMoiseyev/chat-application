@@ -1,6 +1,5 @@
 /** @format */
 
-// import { dateToString } from "../../../shared/dateToString.js";
 import { getReformattedDate } from "../../../shared/userApi";
 
 function Message({ user, message }) {

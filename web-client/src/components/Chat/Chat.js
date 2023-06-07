@@ -6,8 +6,6 @@ import LeftMenu from "./LeftMenu/LeftMenu";
 import ChatArea from "./ChatArea/ChatArea";
 import "./Chat.css";
 
-// import { getDefaultContact } from "../shared/userApi";
-
 function Chat({ user, setUser }) {
     const [status, forceRerender] = useState(false);
     const [chosenContact, setChosenContact] = useState(null);
@@ -36,6 +34,7 @@ function Chat({ user, setUser }) {
                     setChosenContact={setChosenContact}
                     status={status}
                     forceRerender={forceRerender}
+                    socket={socket}
                 />
                 <ChatArea 
                     user={user}
