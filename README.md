@@ -17,7 +17,7 @@ This project requires the following dependencies:
 
 Clone the repository: 
 ```bash
-git clone https://github.com/JonathanMoiseyev/ap2-a2
+git clone [https://github.com/JonathanMoiseyev/ap2-a2](https://github.com/yuvalgrofman/ap2-a3)
 ```
 
 Download the necessary dependencies for both the client and the server, by running 
