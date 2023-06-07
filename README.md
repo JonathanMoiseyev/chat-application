@@ -30,6 +30,12 @@ in both the client and the server directories.
 
 ### Executing The Program
 
+To run the server, navigate to the server directory, and run the following command:
+
+```bash
+node app.js
+```
+
 To run the server, run the following command in the server directory:
 
 ```bash
@@ -37,12 +43,6 @@ npm start
 ```
 then open [http://localhost:3000](http://localhost:3000) 
 to view it in your browser.
-
-To run the server, navigate to the server directory, and run the following command:
-
-```bash
-node app.js
-```
 
 ## Design
 
