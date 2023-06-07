@@ -23,7 +23,7 @@ function MessageBoard({ user, chosenContact, chat, setChat, status }) {
     useEffect(() => {
         if (chosenContact != null) {
             if (chat == null) return;
-            let messageComponents = chat.map((message, key) => <Message user={user} message={message} />);
+            let messageComponents = chat.map((message, key) => <Message user={user} message={message} key={key} />);
             setMessages(messageComponents);
         }
     }, [chat]);

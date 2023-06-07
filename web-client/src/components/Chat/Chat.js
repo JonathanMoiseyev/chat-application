@@ -1,15 +1,32 @@
 /** @format */
 
 import { useState } from "react";
+import { io } from "socket.io-client"
 import LeftMenu from "./LeftMenu/LeftMenu";
 import ChatArea from "./ChatArea/ChatArea";
 import "./Chat.css";
+
 // import { getDefaultContact } from "../shared/userApi";
 
 function Chat({ user, setUser }) {
-    const [status, foreRerender] = useState(false);
+    const [status, forceRerender] = useState(false);
     const [chosenContact, setChosenContact] = useState(null);
+    
 
+
+    const socket = io("ws://localhost:5555", { transports: ["websocket"] });
+
+    socket.on(user.username, function(msg) {
+        user.contacts.forEach((contact) => {
+            if (contact.user.username === msg.sender.username) {
+                contact.lastMessage = msg.msg;
+                forceRerender(!status);
+            }
+        });
+    });
+
+    
+    
     return (
         <main className="container shadow mt-4" id="chat-app">
             <div className="row">
@@ -18,9 +35,16 @@ function Chat({ user, setUser }) {
                     setUser={setUser}
                     setChosenContact={setChosenContact}
                     status={status}
-                    foreRerender={foreRerender}
+                    forceRerender={forceRerender}
                 />
-                <ChatArea user={user} chosenContact={chosenContact} foreRerender={foreRerender} status={status} />
+                <ChatArea 
+                    user={user}
+                    setUser={setUser}
+                    chosenContact={chosenContact}
+                    forceRerender={forceRerender}
+                    status={status}
+                    socket={socket}
+                />
             </div>
         </main>
     );

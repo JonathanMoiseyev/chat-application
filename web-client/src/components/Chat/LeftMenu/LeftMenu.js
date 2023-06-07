@@ -1,6 +1,6 @@
 /** @format */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ContactList from "./ContactList/ContactList.js";
 import SearchBar from "./SearchBar/SearchBar.js";
 import UserOptions from "./UserOptions/UserOptions.js";
@@ -9,7 +9,7 @@ import "../Chat.css";
 
 import { getContacts } from "../../shared/userApi.js";
 
-function LeftMenu({ user, setUser, setChosenContact, status, foreRerender }) {
+function LeftMenu({ user, setUser, setChosenContact, status, forceRerender }) {
     let userContacts = getContacts(user);
     const [effectiveContacts, setEffectiveContacts] = useState(JSON.parse(JSON.stringify(userContacts)));
     const [searchValue, setSearchValue] = useState(undefined);
@@ -19,8 +19,6 @@ function LeftMenu({ user, setUser, setChosenContact, status, foreRerender }) {
 
         if (query === undefined) {
             setEffectiveContacts(JSON.parse(JSON.stringify(userContacts)));
-            console.log(userContacts);
-            console.log(effectiveContacts);
         } else {
             setEffectiveContacts(
                 userContacts.filter((contact) => contact.user.displayName.toLowerCase().includes(query.toLowerCase()))
@@ -32,6 +30,10 @@ function LeftMenu({ user, setUser, setChosenContact, status, foreRerender }) {
         doSearch(searchValue);
     };
 
+    useEffect(() => {
+        refreshContacts();
+    }, [status]);
+
     return (
         <div className="col-4 p-0 border-end">
             <div className="card border-0">
@@ -42,7 +44,7 @@ function LeftMenu({ user, setUser, setChosenContact, status, foreRerender }) {
                     contacts={effectiveContacts}
                     setChosenContact={setChosenContact}
                     status={status}
-                    foreRerender={foreRerender}
+                    forceRerender={forceRerender}
                 />
             </div>
         </div>
