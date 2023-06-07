@@ -100,7 +100,6 @@ async function postMessage(token, id, message, socket, sender, reciverUserName) 
 
     socket.emit("msg", { sender: sender, msg: msg, reciverUserName: reciverUserName });
 
-    console.log("שלחתי", msg)
     return msg;
 }
 

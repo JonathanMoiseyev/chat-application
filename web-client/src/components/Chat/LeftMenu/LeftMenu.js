@@ -1,6 +1,6 @@
 /** @format */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import ContactList from "./ContactList/ContactList.js";
 import SearchBar from "./SearchBar/SearchBar.js";
 import UserOptions from "./UserOptions/UserOptions.js";
@@ -30,9 +30,26 @@ function LeftMenu({ user, setUser, setChosenContact, status, forceRerender }) {
         doSearch(searchValue);
     };
 
+
+
+    const doSearchUseCallBack = useCallback((query) => {
+        setSearchValue(query);
+
+        if (query === undefined) {
+            setEffectiveContacts(JSON.parse(JSON.stringify(userContacts)));
+        } else {
+            setEffectiveContacts(
+                userContacts.filter((contact) => contact.user.displayName.toLowerCase().includes(query.toLowerCase()))
+            );
+        }
+    }, [userContacts]);
+    const refreshContactsUseCallBack = useCallback(() => {
+        doSearchUseCallBack(searchValue);
+    }, [doSearchUseCallBack, searchValue]);
+
     useEffect(() => {
-        refreshContacts();
-    }, [status]);
+        refreshContactsUseCallBack();
+    }, [status, refreshContactsUseCallBack]);
 
     return (
         <div className="col-4 p-0 border-end">
