@@ -36,11 +36,12 @@ To run the server, navigate to the server directory, and run the following comma
 node app.js
 ```
 
-To run the server, run the following command in the server directory:
+To run the client, run the following command in the client directory:
 
 ```bash
 npm start
 ```
+
 then open [http://localhost:3000](http://localhost:3000) 
 to view it in your browser.
 
