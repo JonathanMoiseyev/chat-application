@@ -28,7 +28,6 @@ function LeftMenu({ user, setUser, setChosenContact, status, forceRerender, sock
     };
 
     const refreshContacts = () => {
-        //userContacts = getContacts(user);
         doSearch(searchValue);
     };
 
