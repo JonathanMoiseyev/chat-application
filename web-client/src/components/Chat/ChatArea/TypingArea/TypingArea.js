@@ -5,52 +5,38 @@ import React from "react";
 import { postMessage } from "../../../shared/api";
 import { addMessage } from "../../../shared/userApi";
 
-function TypingArea({
-    user,
-    chosenContact,
-    chat,
-    setChat,
-    socket,
-    status,
-    forceRerender,
-    setUser
-}) {
+function TypingArea({ user, chosenContact, chat, setChat, socket, status, forceRerender, setUser }) {
     if (chosenContact == null) return <></>;
 
     const writeMessage = async (event) => {
         if (event.key === "Enter" && event.target.value.length > 0) {
             let message = event.target.value;
             event.target.value = "";
-            await postMessage(
-                user.token,
-                chosenContact.id,
-                message,
-                socket,
-                user,
-                chosenContact.user.username
-            ).then((newMessage) => {
-                if (newMessage === null) {
-                    alert("Error sending message");
-                    return;
-                }
-
-                let newChat = JSON.parse(JSON.stringify(chat));
-                addMessage(newChat, newMessage);
-                setChat(newChat);
-
-                console.log("הגיע", newMessage)
-                
-                let tempUser = user;
-                tempUser.contacts.forEach((contact) => {
-                    if (contact.user.username === newMessage.sender.username) {
-                        contact.lastMessage = newMessage;
-                        forceRerender(!status);
+            await postMessage(user.token, chosenContact.id, message, socket, user, chosenContact.user.username).then(
+                (newMessage) => {
+                    if (newMessage === null) {
+                        alert("Error sending message");
+                        return;
                     }
-                });
-                setUser(tempUser);
 
-                forceRerender(!status);
-            });
+                    let newChat = JSON.parse(JSON.stringify(chat));
+                    addMessage(newChat, newMessage);
+                    setChat(newChat);
+
+                    console.log("הגיע", newMessage);
+
+                    let tempUser = JSON.parse(JSON.stringify(user));
+                    tempUser.contacts.forEach((contact) => {
+                        if (contact.user.username === chosenContact.user.username) {
+                            contact.lastMessage = newMessage;
+                            forceRerender(!status);
+                        }
+                    });
+                    setUser(tempUser);
+
+                    forceRerender(!status);
+                }
+            );
         }
     };
 
