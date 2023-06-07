@@ -23,7 +23,6 @@ function TypingArea({ user, chosenContact, chat, setChat, socket, status, forceR
                     addMessage(newChat, newMessage);
                     setChat(newChat);
 
-                    console.log("הגיע", newMessage);
 
                     let tempUser = JSON.parse(JSON.stringify(user));
                     tempUser.contacts.forEach((contact) => {
