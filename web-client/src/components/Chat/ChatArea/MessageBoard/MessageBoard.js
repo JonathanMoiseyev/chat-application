@@ -18,7 +18,7 @@ function MessageBoard({ user, chosenContact, chat, setChat, status }) {
                 setChat(newChat.messages);
             });
         }
-    }, [status]);
+    }, [status, user, chosenContact, chat, setChat]);
 
     useEffect(() => {
         if (chosenContact != null) {
@@ -26,7 +26,7 @@ function MessageBoard({ user, chosenContact, chat, setChat, status }) {
             let messageComponents = chat.map((message, key) => <Message user={user} message={message} key={key} />);
             setMessages(messageComponents);
         }
-    }, [chat]);
+    }, [chat, chosenContact, user]);
 
     return (
         <div className="card-body p-0">
