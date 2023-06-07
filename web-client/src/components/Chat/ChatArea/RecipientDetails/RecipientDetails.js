@@ -1,7 +1,6 @@
 /** @format */
 
 import { React, useEffect, useRef } from "react";
-// import usersDB from "../../../../db/usersDB";
 
 function RecipientDetails({ chosenContact }) {
     const imgWrapperRef = useRef(0),
