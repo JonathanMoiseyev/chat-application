@@ -33,8 +33,6 @@ in both the client and the server directories.
 To run the server, run the following command in the server directory:
 
 ```bash
-
-```bash
 npm start
 ```
 then open [http://localhost:3000](http://localhost:3000) 
