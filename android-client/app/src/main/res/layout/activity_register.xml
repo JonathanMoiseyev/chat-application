@@ -30,7 +30,8 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:hint="@string/prompt_username"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:inputType="text"/>
 
         <EditText
             android:id="@+id/password_edittext"
@@ -51,7 +52,8 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:hint="@string/prompt_confirm_password"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:inputType="textPassword" />
 
         <EditText
             android:id="@+id/display_name_edittext"
@@ -61,17 +63,28 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:hint="@string/prompt_display_name"
-            android:inputType="textPassword"
+            android:inputType="text"
             android:minHeight="48dp" />
 
+        <Button
+            android:id="@+id/select_image_btn_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/display_name_edittext"
+            android:layout_marginTop="16dp"
+            android:background="@color/light_purple"
+            android:text="select image"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/display_name_edittext"
+            android:layout_below="@id/select_image_btn_register"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="22dp"
             android:background="@color/light_purple"
             android:text="@string/sign_in_button_text"
             android:textColor="@android:color/white" />
