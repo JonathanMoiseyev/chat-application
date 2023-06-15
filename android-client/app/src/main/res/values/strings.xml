@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">AndroidClient</string>
+    <string name="registerPageTitle">Create Your Account</string>
+    <string name="sign_in_header_text">Create Your Account</string>
+    <string name="prompt_username">username</string>
+    <string name="prompt_password">password</string>
+    <string name="sign_in_button_text">create account</string>
+    <string name="already_have_an_account">already have an account? </string>
+    <string name="login_link_text">login</string>
+    <string name="prompt_confirm_password">confirm password</string>
+    <string name="prompt_display_name">display name</string>
 </resources>
