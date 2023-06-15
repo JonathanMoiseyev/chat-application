@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">AndroidClient</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="dont_have_an_account">Don\'t have an account? </string>
+    <string name="sign_up_link_text">Sign Up</string>
+    <string name="sign_in_header_text">Sign in to your account</string>
+    <string name="sign_in_button_text">Continue</string>
+
 </resources>
