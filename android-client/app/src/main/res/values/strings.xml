@@ -5,8 +5,9 @@
     <string name="prompt_username">username</string>
     <string name="prompt_password">password</string>
     <string name="sign_in_button_text">create account</string>
-    <string name="already_have_an_account">already have an account? </string>
+    <string name="already_have_an_account">already have an account?</string>
     <string name="login_link_text">login</string>
     <string name="prompt_confirm_password">confirm password</string>
     <string name="prompt_display_name">display name</string>
+    <string name="apiURL">http://127.0.0.1:5000/api</string>
 </resources>

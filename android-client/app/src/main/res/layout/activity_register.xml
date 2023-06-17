@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -12,7 +13,7 @@
         android:layout_marginBottom="16dp">
 
         <TextView
-            android:id="@+id/title_text"
+            android:id="@+id/title_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -23,10 +24,10 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/username_edittext"
+            android:id="@+id/username_et_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title_text"
+            android:layout_below="@id/title_register"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:hint="@string/prompt_username"
@@ -34,10 +35,10 @@
             android:inputType="text"/>
 
         <EditText
-            android:id="@+id/password_edittext"
+            android:id="@+id/password_et_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/username_edittext"
+            android:layout_below="@id/username_et_register"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:hint="@string/prompt_password"
@@ -45,10 +46,10 @@
             android:minHeight="48dp" />
 
         <EditText
-            android:id="@+id/confirm_password_edittext"
+            android:id="@+id/confirm_password_et_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/password_edittext"
+            android:layout_below="@id/password_et_register"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:hint="@string/prompt_confirm_password"
@@ -56,12 +57,13 @@
             android:inputType="textPassword" />
 
         <EditText
-            android:id="@+id/display_name_edittext"
+            android:id="@+id/display_name_et_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/confirm_password_edittext"
+            android:layout_below="@id/confirm_password_et_register"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
+            android:layout_centerInParent="true"
             android:hint="@string/prompt_display_name"
             android:inputType="text"
             android:minHeight="48dp" />
@@ -72,20 +74,48 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/display_name_edittext"
+            android:layout_below="@id/display_name_et_register"
             android:layout_marginTop="16dp"
-            android:background="@color/light_purple"
+            android:background="@drawable/rounded_button"
             android:text="select image"
             android:textColor="@android:color/white" />
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/image_container_card_view_register"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@id/select_image_btn_register"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="6dp"
+            android:padding="8dp"
+            app:cardCornerRadius="250dp"
+            app:cardBackgroundColor="@color/light_purple"
+            android:visibility="gone">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="147dp"
+                android:layout_height="147dp"
+                app:cardCornerRadius="250dp"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/selected_image_iv_register"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"/>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.cardview.widget.CardView>
+
         <Button
-            android:id="@+id/login_button"
+            android:id="@+id/submit_button_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/select_image_btn_register"
+            android:layout_below="@id/image_container_card_view_register"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="22dp"
-            android:background="@color/light_purple"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_button"
             android:text="@string/sign_in_button_text"
             android:textColor="@android:color/white" />
 
@@ -94,22 +124,22 @@
             android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/login_button"
+            android:layout_below="@id/submit_button_register"
             android:layout_centerHorizontal="true">
 
             <TextView
-                android:id="@+id/signup_text"
+                android:id="@+id/signup_text_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/already_have_an_account"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/signup_link"
+                android:id="@+id/signup_link_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:layout_toEndOf="@id/signup_text"
+                android:layout_marginLeft="3dp"
+                android:layout_toEndOf="@id/signup_text_register"
                 android:text="@string/login_link_text"
                 android:textColor="@color/light_purple"
                 android:textSize="16sp"
