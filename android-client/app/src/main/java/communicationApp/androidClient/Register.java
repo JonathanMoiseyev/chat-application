@@ -102,7 +102,7 @@ public class Register extends AppCompatActivity {
         if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || displayName.isEmpty()) {
             return "Please fill in all fields";
         } else if (!isPasswordValid(password)) {
-            return "Password must contain at least one lowercase letter, one uppercase letter, and one number.";
+            return "Password must contain at least one lowercase letter, and one number.";
         } else if (!password.equals(confirmPassword)) {
             return "Passwords do not match.";
         } else if (selectedImageUri == null) {
