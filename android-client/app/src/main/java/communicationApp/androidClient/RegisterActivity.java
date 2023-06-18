@@ -2,10 +2,14 @@ package communicationApp.androidClient;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -18,6 +22,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,8 +39,11 @@ import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
+    private static final int STORAGE_PERMISSION_CODE = 2;
+
     private EditText editTextUsername, editTextPassword, editTextConfirmPassword, editTextDisplayName;
-    private Button buttonChooseImage, buttonSubmit;
+    private Button buttonSubmit;
+    private FloatingActionButton buttonChooseImage;
     private CardView cardViewImageContainer;
     private ImageView imageViewSelectedImage;
     private Uri selectedImageUri;
@@ -55,7 +64,9 @@ public class RegisterActivity extends AppCompatActivity {
         cardViewImageContainer = findViewById(R.id.image_container_card_view_register);
         imageViewSelectedImage = findViewById(R.id.selected_image_iv_register);
 
-        buttonChooseImage.setOnClickListener(v -> openImageChooser());
+        buttonChooseImage.setOnClickListener(v -> showImageChooser());
+
+        imageViewSelectedImage.setOnClickListener(v -> showImageChooser());
 
         buttonSubmit.setOnClickListener(v -> {
             String errorMessage = validateSubmission();
@@ -68,8 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
-
-    private void openImageChooser() {
+    private void showImageChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -85,6 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
                 selectedBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
                 imageViewSelectedImage.setImageBitmap(selectedBitmap);
                 cardViewImageContainer.setVisibility(View.VISIBLE);
+                buttonChooseImage.setVisibility(View.GONE);
             } catch (IOException e) {
                 e.printStackTrace();
             }
