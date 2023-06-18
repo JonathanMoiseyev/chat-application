@@ -44,14 +44,9 @@ public class Register extends AppCompatActivity {
         cardViewImageContainer = findViewById(R.id.image_container_card_view_register);
         imageViewSelectedImage = findViewById(R.id.selected_image_iv_register);
 
-        Button imageBtn = findViewById(R.id.select_image_btn_register);
-        imageBtn.setOnClickListener(v -> {
-            openImageChooser();
-        });
+        buttonChooseImage.setOnClickListener(v -> openImageChooser());
 
-        Button submitBtn = findViewById(R.id.submit_button_register);
-        submitBtn.setOnClickListener(v -> {
-
+        buttonSubmit.setOnClickListener(v -> {
             String errorMessage = validateSubmission();
 
             if (!errorMessage.equals("")) {
