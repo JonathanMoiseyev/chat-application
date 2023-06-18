@@ -1,20 +1,25 @@
 R_DEF: Internal format may change without notice
 local
 color black
+color light_purple
 color white
+drawable circle_button
 drawable ic_add
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable rounded_button
 id btnAddContact
 id btnGoToAddContact
 id etPassword
 id etUsername
+id linearLayout
 id lvContactList
 layout activity_add_contact
 layout activity_contact_list
 layout activity_main
 mipmap ic_launcher
 mipmap ic_launcher_round
+string add_new_contact
 string app_name
 string btnAddContact
 string etPassword

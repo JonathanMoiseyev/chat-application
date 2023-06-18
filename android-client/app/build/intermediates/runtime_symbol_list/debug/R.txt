@@ -1272,6 +1272,7 @@ int color foreground_material_dark 0x7f05005b
 int color foreground_material_light 0x7f05005c
 int color highlighted_text_material_dark 0x7f05005d
 int color highlighted_text_material_light 0x7f05005e
+int color light_purple 0x7f05024e
 int color m3_appbar_overlay_color 0x7f05005f
 int color m3_assist_chip_icon_tint_color 0x7f050060
 int color m3_assist_chip_stroke_color 0x7f050061
@@ -2439,6 +2440,7 @@ int drawable btn_radio_off_mtrl 0x7f07005c
 int drawable btn_radio_off_to_on_mtrl_animation 0x7f07005d
 int drawable btn_radio_on_mtrl 0x7f07005e
 int drawable btn_radio_on_to_off_mtrl_animation 0x7f07005f
+int drawable circle_button 0x7f07009e
 int drawable design_fab_background 0x7f070060
 int drawable design_ic_visibility 0x7f070061
 int drawable design_ic_visibility_off 0x7f070062
@@ -2497,6 +2499,7 @@ int drawable notification_template_icon_bg 0x7f070096
 int drawable notification_template_icon_low_bg 0x7f070097
 int drawable notification_tile_bg 0x7f070098
 int drawable notify_panel_notification_icon_bg 0x7f070099
+int drawable rounded_button 0x7f07009f
 int drawable test_custom_background 0x7f07009a
 int drawable test_level_drawable 0x7f07009b
 int drawable tooltip_frame_dark 0x7f07009c
@@ -2736,6 +2739,7 @@ int id legacy 0x7f0800e6
 int id line1 0x7f0800e7
 int id line3 0x7f0800e8
 int id linear 0x7f0800e9
+int id linearLayout 0x7f0801de
 int id listMode 0x7f0800ea
 int id list_item 0x7f0800eb
 int id lvContactList 0x7f0800ec
@@ -3184,6 +3188,7 @@ int string abc_searchview_description_voice 0x7f0e0017
 int string abc_shareactionprovider_share_with 0x7f0e0018
 int string abc_shareactionprovider_share_with_application 0x7f0e0019
 int string abc_toolbar_collapse_description 0x7f0e001a
+int string add_new_contact 0x7f0e0087
 int string androidx_startup 0x7f0e001b
 int string app_name 0x7f0e001c
 int string appbar_scrolling_view_behavior 0x7f0e001d

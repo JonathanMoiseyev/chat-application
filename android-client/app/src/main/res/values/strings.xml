@@ -3,4 +3,5 @@
     <string name="btnAddContact">Add Contact</string>
     <string name="etPassword">Password</string>
     <string name="etUsername">Username</string>
+    <string name="add_new_contact">Add New Contact</string>
 </resources>
