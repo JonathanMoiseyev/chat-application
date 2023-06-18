@@ -24,7 +24,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/username_edittext"
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/title_text"
@@ -34,10 +34,10 @@
             android:minHeight="48dp" />
 
         <EditText
-            android:id="@+id/password_edittext"
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/username_edittext"
+            android:layout_below="@id/username"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:hint="@string/prompt_password"
@@ -46,10 +46,10 @@
 
 
         <Button
-            android:id="@+id/login_button"
+            android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/password_edittext"
+            android:layout_below="@id/password"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:background="@color/light_purple"
@@ -61,7 +61,7 @@
             android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/login_button"
+            android:layout_below="@id/login"
             android:layout_centerHorizontal="true">
 
             <TextView
