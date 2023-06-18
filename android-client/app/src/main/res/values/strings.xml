@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">AndroidClient</string>
+    <string name="btnAddContact">Add Contact</string>
+    <string name="etPassword">Password</string>
+    <string name="etUsername">Username</string>
+    <string name="add_new_contact">Add New Contact</string>
     <string name="registerPageTitle">Create Your Account</string>
     <string name="sign_in_header_text">Create Your Account</string>
     <string name="prompt_username">username</string>
