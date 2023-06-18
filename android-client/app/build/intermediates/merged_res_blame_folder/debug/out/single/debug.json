@@ -1,0 +1,102 @@
+[
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/layout_activity_add_contact.xml.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/layout/activity_add_contact.xml"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/drawable-anydpi_ic_add.xml.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/drawable-anydpi/ic_add.xml"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/drawable-hdpi_ic_add.png.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/drawable-hdpi/ic_add.png"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-pngs-27:/drawable-anydpi-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/layout_activity_contact_list.xml.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/layout/activity_contact_list.xml"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/drawable-mdpi_ic_add.png.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/drawable-mdpi/ic_add.png"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/xml_backup_rules.xml.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/layout_activity_main.xml.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "communicationApp.androidClient.app-merged_res-31:/layout_activity_contact_list.xml.flat",
+        "source": "communicationApp.androidClient.app-main-33:/layout/activity_contact_list.xml"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/drawable_ic_launcher_background.xml.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/drawable-xxhdpi_ic_add.png.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/drawable-xxhdpi/ic_add.png"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/drawable-xhdpi_ic_add.png.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/drawable-xhdpi/ic_add.png"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-merged_res-31:/xml_data_extraction_rules.xml.flat",
+        "source": "/home/jonathan/.gradle/daemon/8.0/communicationApp.androidClient.app-main-33:/xml/data_extraction_rules.xml"
+    }
+]

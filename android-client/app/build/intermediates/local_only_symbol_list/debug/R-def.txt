@@ -1,0 +1,25 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color white
+drawable ic_add
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+id btnAddContact
+id btnGoToAddContact
+id etPassword
+id etUsername
+id lvContactList
+layout activity_add_contact
+layout activity_contact_list
+layout activity_main
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+string btnAddContact
+string etPassword
+string etUsername
+style Base.Theme.AndroidClient
+style Theme.AndroidClient
+xml backup_rules
+xml data_extraction_rules
