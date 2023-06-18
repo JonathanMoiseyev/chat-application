@@ -1,26 +1,37 @@
 package communicationApp.androidClient;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Register extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     private EditText editTextUsername, editTextPassword, editTextConfirmPassword, editTextDisplayName;
     private Button buttonChooseImage, buttonSubmit;
@@ -114,30 +125,82 @@ public class Register extends AppCompatActivity {
         return matcher.matches();
     }
 
+    private String bitmapToBase64(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
+
     private void sendRegistrationData() {
-        // Perform API request to send registration data
-        // Use the selectedImageUri to upload the image file to the API
+        String username = editTextUsername.getText().toString();
+        String password = editTextPassword.getText().toString();
+        String displayName = editTextDisplayName.getText().toString();
 
-        try {
-            URL url = new URL(R.string.apiURL + ""); // Replace with your API endpoint
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
+        RegistrationTask registrationTask = new RegistrationTask();
+        registrationTask.execute(username, password, displayName, selectedBitmap);
+    }
 
-            // Add your API request logic here
+    private class RegistrationTask extends AsyncTask<Object, Void, String> {
 
-            connection.connect();
-            int responseCode = connection.getResponseCode();
+        @Override
+        protected String doInBackground(Object... params) {
+            String username = (String) params[0];
+            String password = (String) params[1];
+            String displayName = (String) params[2];
+            Bitmap image = (Bitmap) params[3];
 
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                // Registration successful
-                Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
-                finish(); // Close the activity or navigate to the next screen
-            } else {
-                // Registration failed
-                Toast.makeText(this, "Registration failed", Toast.LENGTH_SHORT).show();
+            HttpURLConnection urlConnection = null;
+            try {
+                URL url = new URL(getString(R.string.apiURL) + "/Users");
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.setRequestProperty("Accept", "text/plain");
+                urlConnection.setDoOutput(true);
+
+                JSONObject requestData = new JSONObject();
+                requestData.put("username", username);
+                requestData.put("password", password);
+                requestData.put("displayName", displayName);
+                requestData.put("profilePic", bitmapToBase64(image));
+
+                DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream());
+                wr.writeBytes(requestData.toString());
+                wr.flush();
+                wr.close();
+
+                int responseCode = urlConnection.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStream inputStream = urlConnection.getInputStream();
+                    // Read the response here if needed
+                    return "Registration successful";
+                } else if (responseCode == HttpURLConnection.HTTP_CONFLICT) {
+                    return "User already exists";
+                } else {
+                    Log.e(TAG, "Error response code: " + responseCode);
+                }
+            } catch (IOException | JSONException e) {
+                Log.e(TAG, "Error sending registration data", e);
+            } finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
             }
-        } catch (Exception e) {
-            Toast.makeText(this, "Registration failed", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (result != null) {
+                Toast.makeText(RegisterActivity.this, result, Toast.LENGTH_SHORT).show();
+                // Handle successful registration here, e.g., start the next activity
+                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(RegisterActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
