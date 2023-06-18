@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "communicationApp.androidClient.app-mergeDebugResources-29:/values-h550dp-port-v13/values-h550dp-port-v13.xml",
+            "outputFile": "communicationApp.androidClient.app-mergeDebugResources-33:/values-h550dp-port-v13/values-h550dp-port-v13.xml",
             "map": [
                 {
                     "source": "/home/jonathan/.gradle/caches/transforms-3/a965dbd46dad388efad08cc8f6d01086/transformed/material-1.5.0/res/values-h550dp-port-v13/values-h550dp-port-v13.xml",

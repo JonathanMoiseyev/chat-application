@@ -1751,6 +1751,7 @@ color primary_text_default_material_light
 color primary_text_disabled_material_dark
 color primary_text_disabled_material_light
 color radiobutton_themeable_attribute_color
+color red
 color ripple_material_dark
 color ripple_material_light
 color secondary_text_default_material_dark
@@ -2633,6 +2634,7 @@ id closest
 id collapseActionView
 id compress
 id confirm_button
+id confirm_password_et_register
 id constraint
 id container
 id content
@@ -2666,6 +2668,7 @@ id disableIntraAutoTransition
 id disablePostScroll
 id disableScroll
 id disjoint
+id display_name_et_register
 id dragAnticlockwise
 id dragClockwise
 id dragDown
@@ -2723,6 +2726,7 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
+id image_container_card_view_register
 id immediateStop
 id included
 id info
@@ -2830,6 +2834,7 @@ id parent
 id parentPanel
 id parentRelative
 id parent_matrix
+id password_et_register
 id password_toggle
 id path
 id pathRelative
@@ -2871,7 +2876,9 @@ id search_plate
 id search_src_text
 id search_voice_btn
 id select_dialog_listview
+id select_image_btn_register
 id selected
+id selected_image_iv_register
 id selection_type
 id sharedValueSet
 id sharedValueUnset
@@ -2879,6 +2886,8 @@ id shortcut
 id showCustom
 id showHome
 id showTitle
+id signup_link_register
+id signup_text_register
 id sin
 id skipCollapsed
 id skipped
@@ -2910,6 +2919,7 @@ id stop
 id stretch
 id submenuarrow
 id submit_area
+id submit_button_register
 id supportScrollUp
 id tabMode
 id tag_accessibility_actions
@@ -2948,6 +2958,7 @@ id textinput_suffix_text
 id time
 id title
 id titleDividerNoCustom
+id title_register
 id title_template
 id toggle
 id top
@@ -2966,6 +2977,7 @@ id uniform
 id unlabeled
 id up
 id useLogo
+id username_et_register
 id vertical_only
 id view_offset_helper
 id view_transition
@@ -3072,6 +3084,7 @@ layout abc_tooltip
 layout activity_add_contact
 layout activity_contact_list
 layout activity_main
+layout activity_register
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -3190,7 +3203,9 @@ string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string add_new_contact
+string already_have_an_account
 string androidx_startup
+string apiURL
 string app_name
 string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
@@ -3210,6 +3225,7 @@ string fab_transformation_sheet_behavior
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string item_view_role_description
+string login_link_text
 string m3_ref_typeface_brand_display_regular
 string m3_ref_typeface_brand_medium
 string m3_ref_typeface_brand_regular
@@ -3296,7 +3312,14 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string prompt_confirm_password
+string prompt_display_name
+string prompt_password
+string prompt_username
+string registerPageTitle
 string search_menu_title
+string sign_in_button_text
+string sign_in_header_text
 string status_bar_notification_info_overflow
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light

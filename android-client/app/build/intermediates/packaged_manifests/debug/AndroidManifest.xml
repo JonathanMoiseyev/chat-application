@@ -8,6 +8,8 @@
         android:minSdkVersion="22"
         android:targetSdkVersion="33" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <permission
         android:name="communicationApp.androidClient.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />
@@ -25,12 +27,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="true"
-        android:theme="@style/Theme.AndroidClient" >
+        android:theme="@style/Theme.AndroidClient"
+        android:usesCleartextTraffic="true" >
         <activity
             android:name="communicationApp.androidClient.AddContactActivity"
             android:exported="false" />
         <activity
             android:name="communicationApp.androidClient.ContactListActivity"
+            android:exported="false" />
+        <activity
+            android:name="communicationApp.androidClient.RegisterActivity"
             android:exported="false" />
         <activity
             android:name="communicationApp.androidClient.MainActivity"

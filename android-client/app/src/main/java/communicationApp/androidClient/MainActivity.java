@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent i = new Intent(this, ContactListActivity.class);
-        startActivity(i);
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 }
