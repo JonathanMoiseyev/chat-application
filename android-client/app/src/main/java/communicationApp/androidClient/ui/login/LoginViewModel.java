@@ -6,11 +6,6 @@ import androidx.lifecycle.ViewModel;
 
 import android.util.Patterns;
 
-import java.io.BufferedOutputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 import communicationApp.androidClient.data.LoginRepository;
 import communicationApp.androidClient.data.Result;
 import communicationApp.androidClient.data.model.LoggedInUser;
