@@ -51,5 +51,6 @@ public class MainActivity extends AppCompatActivity {
             intent = new Intent(this, LoginActivity.class);
             startActivityForResult(intent, Activities.LOGIN.ordinal());
         }
+
     }
 }
