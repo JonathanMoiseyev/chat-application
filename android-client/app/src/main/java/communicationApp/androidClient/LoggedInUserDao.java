@@ -14,7 +14,7 @@ public interface LoggedInUserDao {
     List<LoggedInUser> index();
 
     @Query("SELECT * FROM LoggedInUser WHERE id = :id")
-    User get(int id);
+    LoggedInUser get(int id);
 
     @Insert
     void insert(LoggedInUser... loggedInUsers);
