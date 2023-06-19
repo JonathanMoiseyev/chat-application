@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import android.util.Patterns;
-
 import communicationApp.androidClient.data.LoginRepository;
 import communicationApp.androidClient.data.Result;
 import communicationApp.androidClient.data.model.LoggedInUser;
@@ -35,7 +33,7 @@ public class LoginViewModel extends ViewModel {
 
         if (result instanceof Result.Success) {
             LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
+            loginResult.setValue(new LoginResult(data));
         } else {
             loginResult.setValue(new LoginResult(R.string.login_failed));
         }
@@ -53,20 +51,14 @@ public class LoginViewModel extends ViewModel {
         }
     }
 
-    // A placeholder username validation check
+    // username validation check
     private boolean isUserNameValid(String username) {
-        if (username == null) {
-            return false;
-        }
-        if (username.contains("@")) {
-            return Patterns.EMAIL_ADDRESS.matcher(username).matches();
-        } else {
-            return !username.trim().isEmpty();
-        }
+        return username != null && username.trim().length() > 0;
     }
 
-    // A placeholder password validation check
+    // a password validation check
+    static final int MIN_PASSWORD_LENGTH = 8;
     private boolean isPasswordValid(String password) {
-        return password != null && password.trim().length() > 5;
+        return password != null && password.trim().length() >= MIN_PASSWORD_LENGTH;
     }
 }

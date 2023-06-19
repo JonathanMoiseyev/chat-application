@@ -76,6 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
+
                 android:layout_toEndOf="@id/signup_text"
                 android:text="@string/sign_up_link_text"
                 android:textColor="@color/light_purple"
