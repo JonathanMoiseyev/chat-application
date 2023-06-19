@@ -11,8 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,26 +20,27 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import communicationApp.androidClient.login.LoginDataSource;
+
 public class AddContactActivity extends AppCompatActivity {
     private AppDB db;
     private ChatDao chatDao;
-    private LoggedInUserDao loggedInUser;
+    private CurrentUserDao currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
 
-        db = Room.databaseBuilder(getApplicationContext(), AppDB.class, "HemiDB")
-                .allowMainThreadQueries()
-                .build();
+        db = LoginDataSource.db;
+
 
         chatDao = db.chatDao();
-        loggedInUser = db.loggedInUserDao();
+        currentUser = db.currentUserDao();
 
         Button btnAddContact = findViewById(R.id.btnAddContact);
         btnAddContact.setOnClickListener(v -> {
-            // Get username and password from EditTexts
+         // Get username and password from EditTexts
             EditText etUsername = findViewById(R.id.etUsername);
             String username = etUsername.getText().toString();
 
@@ -55,7 +54,7 @@ public class AddContactActivity extends AppCompatActivity {
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setRequestProperty("Content-Type", "application/json");
                 urlConnection.setRequestProperty("Accept", "text/plain");
-                urlConnection.setRequestProperty("Authorization", "Bearer " + loggedInUser.get(0).getToken());
+                urlConnection.setRequestProperty("Authorization", "Bearer " + currentUser.get(0).getToken());
                 urlConnection.setDoOutput(true);
 
                 JSONObject requestData = new JSONObject();

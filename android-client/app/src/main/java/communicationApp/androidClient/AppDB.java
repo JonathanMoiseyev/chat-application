@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase;
 import communicationApp.androidClient.settings.Settings;
 import communicationApp.androidClient.settings.SettingsDao;
 
-@Database(entities = {LoggedInUser.class, Chat.class, Settings.class}, version = 1)
+@Database(entities = {LoggedInUser.class, Chat.class, Settings.class}, version = 6)
 public abstract class AppDB extends RoomDatabase {
     public abstract ChatDao chatDao();
     public abstract LoggedInUserDao loggedInUserDao();

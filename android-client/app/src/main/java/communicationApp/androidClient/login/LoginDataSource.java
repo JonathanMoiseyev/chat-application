@@ -1,8 +1,13 @@
 package communicationApp.androidClient.login;
 
 
+import androidx.room.Room;
+
 import org.json.JSONObject;
 
+import communicationApp.androidClient.AppDB;
+import communicationApp.androidClient.CurrentUser;
+import communicationApp.androidClient.CurrentUserDao;
 import communicationApp.androidClient.data.model.LoggedInUser;
 
 import java.io.DataInputStream;
@@ -17,11 +22,13 @@ import java.net.URL;
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
 public class LoginDataSource {
-
     static private String apiURL;
 
-    LoginDataSource(String apiURL) {
+    static public AppDB db;
+
+    LoginDataSource(String apiURL, AppDB db) {
         LoginDataSource.apiURL = apiURL;
+        this.db = db;
     }
 
     private static class LoginNetworkRunnable implements Runnable {
@@ -92,6 +99,16 @@ public class LoginDataSource {
                     LoggedInUser user = new LoggedInUser(username, displayName, profilePic, token);
                     result = new Result.Success<LoggedInUser>(user);
 
+                    // Save the logged in user to the local database
+                    CurrentUserDao currentUserDao = db.currentUserDao();
+
+                    if (currentUserDao.index().size() == 0) {
+                        CurrentUser currentUser = new CurrentUser(0, token, username, displayName, profilePic);
+                        currentUserDao.insert(currentUser);
+                    }
+
+                    Object s = currentUserDao.index();
+                    System.out.println(s);
 
                 } else {
                     throw new Exception() {
@@ -104,7 +121,7 @@ public class LoginDataSource {
 
 
             } catch(Exception exception) {
-                result = new Result.Error(exception);
+                    result = new Result.Error(exception);
 
 
             } finally {
