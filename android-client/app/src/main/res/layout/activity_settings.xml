@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/title_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp"
+            android:text="Settings"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text_server_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_settings"
+            android:layout_marginTop="16dp"
+            android:text="Server URL"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edit_server_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_server_url"
+            android:layout_marginHorizontal="20dp"
+
+            android:layout_marginTop="8dp"
+            android:layout_centerInParent="true"
+            android:hint="@string/enter_server_url"
+            android:minHeight="48dp"
+            android:inputType="text" />
+
+
+
+
+
+        <TextView
+            android:id="@+id/text_dark_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_server_url"
+            android:layout_marginTop="32dp"
+            android:text="Dark Mode"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_dark_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_dark_mode"
+            android:layout_marginTop="8dp"
+            android:padding="16dp"
+            android:shadowColor="@color/light_purple"/>
+
+
+        <Button
+            android:id="@+id/apply_and_exit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/switch_dark_mode"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="@string/apply_settings_button_text" />
+    </RelativeLayout>
+
+</LinearLayout>
