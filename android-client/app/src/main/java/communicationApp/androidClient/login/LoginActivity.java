@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        loginViewModel = new LoginViewModel(LoginRepository.getInstance(new LoginDataSource()));
+        loginViewModel = new LoginViewModel(LoginRepository.getInstance(new LoginDataSource(getString(R.string.apiURL))));
 
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
