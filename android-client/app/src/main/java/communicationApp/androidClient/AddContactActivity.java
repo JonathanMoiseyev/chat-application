@@ -108,9 +108,6 @@ public class AddContactActivity extends AppCompatActivity {
                     urlConnection.disconnect();
                 }
             }
-
-
-            // TODO: Talk2Server and stuff and save locally
         });
     }
 }
