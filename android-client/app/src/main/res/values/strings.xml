@@ -26,4 +26,6 @@
     <string name="prompt_display_name">Display name</string>
     <string name="apiURL">http://10.0.2.2:12345/api</string>
     <string name="user_does_not_exist">User does not exist</string>
+    <string name="enter_server_url">Enter Server URL</string>
+    <string name="apply_settings_button_text">Apply and Exit</string>
 </resources>

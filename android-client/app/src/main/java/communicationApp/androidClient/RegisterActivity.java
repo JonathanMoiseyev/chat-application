@@ -37,7 +37,8 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import communicationApp.androidClient.ui.login.LoginActivity;
+import communicationApp.androidClient.login.LoginActivity;
+
 
 public class RegisterActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
