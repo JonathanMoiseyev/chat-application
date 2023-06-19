@@ -23,6 +23,7 @@ import android.widget.Toast;
 import communicationApp.androidClient.R;
 import communicationApp.androidClient.data.LoginDataSource;
 import communicationApp.androidClient.data.LoginRepository;
+import communicationApp.androidClient.data.model.LoggedInUser;
 import communicationApp.androidClient.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
@@ -125,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void updateUiWithUser(LoggedInUserView model) {
+    private void updateUiWithUser(LoggedInUser model) {
         String welcome = "welcome " + model.getDisplayName();
 
         // initiate successful logged in experience
