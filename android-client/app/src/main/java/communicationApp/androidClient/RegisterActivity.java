@@ -2,10 +2,14 @@ package communicationApp.androidClient;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -19,6 +23,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,10 +37,15 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import communicationApp.androidClient.ui.login.LoginActivity;
+
 public class RegisterActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
+    private static final int STORAGE_PERMISSION_CODE = 2;
+
     private EditText editTextUsername, editTextPassword, editTextConfirmPassword, editTextDisplayName;
-    private Button buttonChooseImage, buttonSubmit;
+    private Button buttonSubmit;
+    private FloatingActionButton buttonChooseImage;
     private CardView cardViewImageContainer;
     private ImageView imageViewSelectedImage;
     private Uri selectedImageUri;
@@ -55,7 +66,9 @@ public class RegisterActivity extends AppCompatActivity {
         cardViewImageContainer = findViewById(R.id.image_container_card_view_register);
         imageViewSelectedImage = findViewById(R.id.selected_image_iv_register);
 
-        buttonChooseImage.setOnClickListener(v -> openImageChooser());
+        buttonChooseImage.setOnClickListener(v -> showImageChooser());
+
+        imageViewSelectedImage.setOnClickListener(v -> showImageChooser());
 
         buttonSubmit.setOnClickListener(v -> {
             String errorMessage = validateSubmission();
@@ -68,8 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
-
-    private void openImageChooser() {
+    private void showImageChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -85,6 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
                 selectedBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
                 imageViewSelectedImage.setImageBitmap(selectedBitmap);
                 cardViewImageContainer.setVisibility(View.VISIBLE);
+                buttonChooseImage.setVisibility(View.GONE);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -194,10 +207,13 @@ public class RegisterActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             if (result != null) {
                 Toast.makeText(RegisterActivity.this, result, Toast.LENGTH_SHORT).show();
-                // Handle successful registration here, e.g., start the next activity
-                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+
+                if (result.equals("Registration successful")) {
+                    // Handle successful registration here, e.g., start the next activity
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             } else {
                 Toast.makeText(RegisterActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
             }
