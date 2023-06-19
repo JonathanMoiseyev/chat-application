@@ -25,6 +25,8 @@ import android.widget.Toast;
 import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
 import communicationApp.androidClient.RegisterActivity;
+import communicationApp.androidClient.data.LoginDataSource;
+import communicationApp.androidClient.data.LoginRepository;
 import communicationApp.androidClient.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
@@ -39,8 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
-                .get(LoginViewModel.class);
+        loginViewModel = new LoginViewModel(LoginRepository.getInstance(new LoginDataSource()));
 
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
