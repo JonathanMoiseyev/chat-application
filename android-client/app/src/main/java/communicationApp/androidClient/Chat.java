@@ -18,12 +18,6 @@ public class Chat {
         this.lastMessage = lastMessage;
     }
 
-    public Chat(int id, User contact) {
-        this.id = id;
-        this.contact = contact;
-        this.lastMessage = "";
-    }
-
     public int getId() {
         return id;
     }

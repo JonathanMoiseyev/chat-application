@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -49,7 +50,7 @@ public class AddContactActivity extends AppCompatActivity {
 
             try {
                 // Create request
-                URL url = new URL(getString(R.string.apiURL) + "/Users");
+                URL url = new URL(getString(R.string.apiURL) + "/Chats");
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setRequestProperty("Content-Type", "application/json");
@@ -92,14 +93,13 @@ public class AddContactActivity extends AppCompatActivity {
 
                     // Save contact to local database
                     User contact = new User(contactId, contactUsername, contactDisplayName, contactProfilePic);
-                    Chat chat = new Chat(id, contact);
+                    Chat chat = new Chat(id, contact, "");
                     chatDao.insert(chat);
 
                     // Close activity
                     finish();
-                } else if (responseCode == HttpURLConnection.HTTP_CONFLICT) {
                 } else {
-                    Log.e(TAG, "Error response code: " + responseCode);
+                    Toast.makeText(getApplicationContext(), R.string.user_does_not_exist, Toast.LENGTH_LONG).show();
                 }
             } catch (IOException | JSONException e) {
                 Log.e(TAG, "Error sending registration data", e);
