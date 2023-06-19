@@ -10,10 +10,10 @@ import java.util.List;
 
 @Dao
 public interface ChatDao {
-    @Query("SELECT * FROM chat")
+    @Query("SELECT * FROM Chat")
     List<Chat> index();
 
-    @Query("SELECT * FROM user WHERE id = :id")
+    @Query("SELECT * FROM Chat WHERE id = :id")
     Chat get(int id);
 
     @Insert
