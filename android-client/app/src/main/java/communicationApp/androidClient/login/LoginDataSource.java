@@ -1,4 +1,4 @@
-package communicationApp.androidClient.data;
+package communicationApp.androidClient.login;
 
 
 import org.json.JSONObject;
@@ -17,6 +17,12 @@ import java.net.URL;
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
 public class LoginDataSource {
+
+    static private String apiURL;
+
+    LoginDataSource(String apiURL) {
+        LoginDataSource.apiURL = apiURL;
+    }
 
     private static class LoginNetworkRunnable implements Runnable {
         private Result<LoggedInUser> result;
@@ -41,7 +47,7 @@ public class LoginDataSource {
                 // handle loggedInUser authentication:
 
 
-                URL url = new URL("http://10.0.2.2:5000/api/Tokens");
+                URL url = new URL(apiURL + "/Tokens");
                 clientForToken = (HttpURLConnection) url.openConnection();
                 clientForToken.setRequestMethod("POST");
 
@@ -69,10 +75,7 @@ public class LoginDataSource {
 
 
 
-
-
-
-                url = new URL("http://10.0.2.2:5000/api/Users/" + username);
+                url = new URL(apiURL + "/Users/" + username);
                 clientForUserDetails = (HttpURLConnection) url.openConnection();
                 clientForUserDetails.setRequestMethod("GET");
                 clientForUserDetails.setRequestProperty("accept", "text/plain");
@@ -124,7 +127,6 @@ public class LoginDataSource {
 
 
     public Result<LoggedInUser> login(String username, String password) {
-
         LoginNetworkRunnable runnable = new LoginNetworkRunnable(username, password);
         Thread networkThread = new Thread(runnable);
 
@@ -142,25 +144,6 @@ public class LoginDataSource {
 
         // returning the result
         return result;
-
-
-
-
-
-
-//
-//            LoggedInUser fakeUser =
-//                    new LoggedInUser(
-//                            java.util.UUID.randomUUID().toString(),
-//                            username,
-//                            displayName,
-//                            profiePic,
-//                            token
-//                            );
-//            return new Result.Success<>(fakeUser);
-//        } catch (Exception e) {
-//            return new Result.Error(new IOException("Error logging in", e));
-//        }
     }
 
     public void logout() {

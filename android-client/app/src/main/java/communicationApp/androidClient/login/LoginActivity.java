@@ -1,4 +1,4 @@
-package communicationApp.androidClient.ui.login;
+package communicationApp.androidClient.login;
 
 import android.app.Activity;
 
@@ -21,8 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import communicationApp.androidClient.R;
-import communicationApp.androidClient.data.LoginDataSource;
-import communicationApp.androidClient.data.LoginRepository;
 import communicationApp.androidClient.data.model.LoggedInUser;
 import communicationApp.androidClient.databinding.ActivityLoginBinding;
 
@@ -38,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        loginViewModel = new LoginViewModel(LoginRepository.getInstance(new LoginDataSource()));
+        loginViewModel = new LoginViewModel(LoginRepository.getInstance(new LoginDataSource(getString(R.string.apiURL))));
 
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;

@@ -1,11 +1,9 @@
-package communicationApp.androidClient.ui.login;
+package communicationApp.androidClient.login;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import communicationApp.androidClient.data.LoginRepository;
-import communicationApp.androidClient.data.Result;
 import communicationApp.androidClient.data.model.LoggedInUser;
 import communicationApp.androidClient.R;
 
