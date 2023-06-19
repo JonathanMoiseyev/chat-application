@@ -24,6 +24,6 @@
     <string name="login_link_text">login</string>
     <string name="prompt_confirm_password">Confirm password</string>
     <string name="prompt_display_name">Display name</string>
-    <string name="apiURL">http://10.0.2.2:12345/api</string>
+    <string name="apiURL">http://10.0.2.2:5000/api</string>
     <string name="user_does_not_exist">User does not exist</string>
 </resources>
