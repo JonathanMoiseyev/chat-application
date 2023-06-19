@@ -35,19 +35,12 @@
             android:hint="@string/etUsername"
             tools:ignore="MissingConstraints" />
 
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/etPassword"
-            tools:ignore="MissingConstraints" />
-
         <Button
             android:id="@+id/btnAddContact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="30dp"
+            android:layout_marginTop="70dp"
             android:background="@drawable/rounded_button"
             android:text="@string/btnAddContact"
             tools:ignore="MissingConstraints" />
