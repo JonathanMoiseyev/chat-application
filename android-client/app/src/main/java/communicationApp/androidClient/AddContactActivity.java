@@ -28,10 +28,7 @@ public class AddContactActivity extends AppCompatActivity {
         btnAddContact.setOnClickListener(v -> {
             // Get username and password from EditTexts
             EditText etUsername = findViewById(R.id.etUsername);
-            EditText etPassword = findViewById(R.id.etPassword);
-
             String username = etUsername.getText().toString();
-            String password = etPassword.getText().toString();
 
             // TODO: Talk2Server and stuff and save locally
         });
