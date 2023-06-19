@@ -48,6 +48,7 @@ public class AddContactActivity extends AppCompatActivity {
             HttpURLConnection urlConnection = null;
 
             try {
+                // Create request
                 URL url = new URL(getString(R.string.apiURL) + "/Users");
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("POST");
@@ -59,6 +60,7 @@ public class AddContactActivity extends AppCompatActivity {
                 JSONObject requestData = new JSONObject();
                 requestData.put("username", username);
 
+                // Send request
                 DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream());
                 wr.writeBytes(requestData.toString());
                 wr.flush();
@@ -69,9 +71,32 @@ public class AddContactActivity extends AppCompatActivity {
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     InputStream inputStream = urlConnection.getInputStream();
 
-                    // Write response to local database
+                    // Get response object
+                    StringBuilder response = new StringBuilder();
+                    int data;
 
+                    while ((data = inputStream.read()) != -1) {
+                        response.append((char) data);
+                    }
 
+                    JSONObject responseData = new JSONObject(response.toString());
+
+                    // Extract the data from the response, and save it to a local variable
+                    int id = responseData.getInt("id");
+                    JSONObject user = responseData.getJSONObject("user");
+
+                    int contactId = -1;
+                    String contactUsername = user.getString("username");
+                    String contactDisplayName = user.getString("displayName");
+                    String contactProfilePic = user.getString("profilePic");
+
+                    // Save contact to local database
+                    User contact = new User(contactId, contactUsername, contactDisplayName, contactProfilePic);
+                    Chat chat = new Chat(id, contact);
+                    chatDao.insert(chat);
+
+                    // Close activity
+                    finish();
                 } else if (responseCode == HttpURLConnection.HTTP_CONFLICT) {
                 } else {
                     Log.e(TAG, "Error response code: " + responseCode);
