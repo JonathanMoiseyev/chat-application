@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,6 +21,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import communicationApp.androidClient.AppDB;
 import communicationApp.androidClient.R;
 import communicationApp.androidClient.data.model.LoggedInUser;
 import communicationApp.androidClient.databinding.ActivityLoginBinding;
@@ -36,7 +38,15 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        loginViewModel = new LoginViewModel(LoginRepository.getInstance(new LoginDataSource(getString(R.string.apiURL))));
+        loginViewModel = new LoginViewModel(LoginRepository.getInstance(
+                                new LoginDataSource(getString(R.string.apiURL),
+                                Room.databaseBuilder(getApplicationContext(), AppDB.class, "HemiDB")
+                                    .fallbackToDestructiveMigration()
+                                    .allowMainThreadQueries()
+                                    .build()
+                                )
+                            )
+                        );
 
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;

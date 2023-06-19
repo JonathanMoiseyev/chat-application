@@ -6,7 +6,7 @@ import androidx.room.TypeConverters;
 
 @Entity
 public class Chat {
-   @PrimaryKey
+   @PrimaryKey(autoGenerate = true)
    private int id;
    @TypeConverters(UserConverter.class)
    private User contact;
