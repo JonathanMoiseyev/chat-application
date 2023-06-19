@@ -55,7 +55,7 @@ public class LoginViewModel extends ViewModel {
 
     // username validation check
     private boolean isUserNameValid(String username) {
-        return username != null;
+        return username != null && username.trim().length() > 0;
     }
 
     // a password validation check
