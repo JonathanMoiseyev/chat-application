@@ -37,6 +37,8 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import communicationApp.androidClient.ui.login.LoginActivity;
+
 public class RegisterActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int STORAGE_PERMISSION_CODE = 2;
@@ -205,10 +207,13 @@ public class RegisterActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             if (result != null) {
                 Toast.makeText(RegisterActivity.this, result, Toast.LENGTH_SHORT).show();
-                // Handle successful registration here, e.g., start the next activity
-                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+
+                if (result.equals("Registration successful")) {
+                    // Handle successful registration here, e.g., start the next activity
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             } else {
                 Toast.makeText(RegisterActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
             }
