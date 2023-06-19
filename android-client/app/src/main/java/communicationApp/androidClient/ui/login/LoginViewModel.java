@@ -53,20 +53,14 @@ public class LoginViewModel extends ViewModel {
         }
     }
 
-    // A placeholder username validation check
+    // username validation check
     private boolean isUserNameValid(String username) {
-        if (username == null) {
-            return false;
-        }
-        if (username.contains("@")) {
-            return Patterns.EMAIL_ADDRESS.matcher(username).matches();
-        } else {
-            return !username.trim().isEmpty();
-        }
+        return username != null;
     }
 
-    // A placeholder password validation check
+    // a password validation check
+    static final int MIN_PASSWORD_LENGTH = 8;
     private boolean isPasswordValid(String password) {
-        return password != null && password.trim().length() > 5;
+        return password != null && password.trim().length() >= MIN_PASSWORD_LENGTH;
     }
 }
