@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import communicationApp.androidClient.ui.login.LoginActivity;
+import communicationApp.androidClient.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
     private enum Activities {

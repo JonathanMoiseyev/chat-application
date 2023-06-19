@@ -1,4 +1,4 @@
-package communicationApp.androidClient.ui.login;
+package communicationApp.androidClient.login;
 
 import android.app.Activity;
 
@@ -21,8 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import communicationApp.androidClient.R;
-import communicationApp.androidClient.data.LoginDataSource;
-import communicationApp.androidClient.data.LoginRepository;
 import communicationApp.androidClient.data.model.LoggedInUser;
 import communicationApp.androidClient.databinding.ActivityLoginBinding;
 

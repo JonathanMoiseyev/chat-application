@@ -1,4 +1,4 @@
-package communicationApp.androidClient.data;
+package communicationApp.androidClient.login;
 
 
 import org.json.JSONObject;

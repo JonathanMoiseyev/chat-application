@@ -1,4 +1,4 @@
-package communicationApp.androidClient.ui.login;
+package communicationApp.androidClient.login;
 
 import androidx.annotation.Nullable;
 
