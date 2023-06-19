@@ -3,9 +3,7 @@ package communicationApp.androidClient.ui.login;
 import android.app.Activity;
 
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -22,9 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
-import communicationApp.androidClient.RegisterActivity;
 import communicationApp.androidClient.data.LoginDataSource;
 import communicationApp.androidClient.data.LoginRepository;
 import communicationApp.androidClient.databinding.ActivityLoginBinding;

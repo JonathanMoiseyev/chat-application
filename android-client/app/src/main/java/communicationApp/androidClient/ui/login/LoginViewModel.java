@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import android.util.Patterns;
-
 import communicationApp.androidClient.data.LoginRepository;
 import communicationApp.androidClient.data.Result;
 import communicationApp.androidClient.data.model.LoggedInUser;
