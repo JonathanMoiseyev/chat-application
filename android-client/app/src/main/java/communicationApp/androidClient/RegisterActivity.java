@@ -72,8 +72,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         signInLink.setOnClickListener(v -> {
             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(intent);
             finish();
-//            startActivity(intent);
         });
 
         buttonChooseImage.setOnClickListener(v -> showImageChooser());
@@ -221,7 +221,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (result.equals("Registration successful")) {
                     // Handle successful registration here, e.g., start the next activity
                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-//                    startActivity(intent);
+                    startActivity(intent);
                     finish();
                 }
             } else {
