@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
 import communicationApp.androidClient.RegisterActivity;
 import communicationApp.androidClient.Theme;
@@ -68,6 +69,16 @@ public class SettingsActivity extends AppCompatActivity {
         String ipAddress = ipEditText.getText().toString();
         String selectedTheme = themeSpinner.getSelectedItem().toString();
 
+        // Save the preferences on the local database
+        Settings settings = new Settings();
+        settings.setId(0);
+        settings.setTheme(theme);
+        settings.setServerUrl(ipAddress);
+
+        SettingsDao settingsDao = MainActivity.db.settingsDao();
+        settingsDao.insert(settings);
+
+
         // Perform actions based on user input
         // Here, you can save the IP address and selected theme to shared preferences or perform other operations
 
@@ -78,6 +89,7 @@ public class SettingsActivity extends AppCompatActivity {
         Toast.makeText(this, "Changes applied", Toast.LENGTH_SHORT).show();
         finish(); // Close the settings activity and return to the previous activity
         startActivity(intent);
+
 
     }
 

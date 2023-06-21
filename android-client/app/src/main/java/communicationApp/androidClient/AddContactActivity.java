@@ -32,7 +32,7 @@ public class AddContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
 
-        db = LoginDataSource.db;
+        db = MainActivity.db;
 
 
         chatDao = db.chatDao();
