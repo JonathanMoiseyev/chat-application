@@ -98,10 +98,12 @@ public class LoginDataSource {
                     // Save the logged in user to the local database
                     CurrentUserDao currentUserDao = MainActivity.db.currentUserDao();
 
-                    if (currentUserDao.index().size() == 0) {
-                        CurrentUser currentUser = new CurrentUser(0, token, username, displayName, profilePic);
-                        currentUserDao.insert(currentUser);
+                    if (currentUserDao.index().size() > 0) {
+                        currentUserDao.delete(currentUserDao.index().get(0));
                     }
+
+                    CurrentUser currentUser = new CurrentUser(0, token, username, displayName, profilePic);
+                    currentUserDao.insert(currentUser);
 
                     Object s = currentUserDao.index();
                     System.out.println(s);

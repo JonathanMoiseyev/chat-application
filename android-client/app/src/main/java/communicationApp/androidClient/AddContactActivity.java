@@ -31,80 +31,95 @@ public class AddContactActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_contact);
 
         db = MainActivity.db;
-
-
         chatDao = db.chatDao();
         currentUser = db.currentUserDao();
 
         Button btnAddContact = findViewById(R.id.btnAddContact);
         btnAddContact.setOnClickListener(v -> {
-         // Get username and password from EditTexts
-            EditText etUsername = findViewById(R.id.etUsername);
-            String username = etUsername.getText().toString();
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
 
-            // Contact server to add contact
-            HttpURLConnection urlConnection = null;
+                        // Get username and password from EditTexts
+                        EditText etUsername = findViewById(R.id.etUsername);
+                        String username = etUsername.getText().toString();
 
-            try {
-                // Create request
-                URL url = new URL(getString(R.string.apiURL) + "/Chats");
-                urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setRequestMethod("POST");
-                urlConnection.setRequestProperty("Content-Type", "application/json");
-                urlConnection.setRequestProperty("Accept", "text/plain");
-                urlConnection.setRequestProperty("Authorization", "Bearer " + currentUser.get(0).getToken());
-                urlConnection.setDoOutput(true);
+                        // Contact server to add contact
+                        HttpURLConnection urlConnection = null;
 
-                JSONObject requestData = new JSONObject();
-                requestData.put("username", username);
+                        CurrentUser s = currentUser.get(0);
+                        String ss = s.getToken();
+                        System.out.println("sadsad");
 
-                // Send request
-                DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream());
-                wr.writeBytes(requestData.toString());
-                wr.flush();
-                wr.close();
+                        try {
+                            // Create request
+                            URL url = new URL(getString(R.string.apiURL) + "/Chats");
+                            urlConnection = (HttpURLConnection) url.openConnection();
+                            urlConnection.setRequestMethod("POST");
+                            urlConnection.setRequestProperty("accept", "*/*");
+                            urlConnection.setRequestProperty("Authorization", "bearer " + currentUser.get(0).getToken());
+                            urlConnection.setRequestProperty("Content-Type", "application/json");
+                            urlConnection.setDoOutput(true);
 
-                int responseCode = urlConnection.getResponseCode();
+                            JSONObject requestData = new JSONObject();
+                            requestData.put("username", username);
 
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    InputStream inputStream = urlConnection.getInputStream();
+                            // Send request
+                            DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream());
+                            wr.writeBytes(requestData.toString());
+                            wr.flush();
+                            wr.close();
 
-                    // Get response object
-                    StringBuilder response = new StringBuilder();
-                    int data;
+                            int responseCode = urlConnection.getResponseCode();
 
-                    while ((data = inputStream.read()) != -1) {
-                        response.append((char) data);
+                            if (responseCode == HttpURLConnection.HTTP_OK) {
+                                InputStream inputStream = urlConnection.getInputStream();
+
+                                // Get response object
+                                StringBuilder response = new StringBuilder();
+                                int data;
+
+                                while ((data = inputStream.read()) != -1) {
+                                    response.append((char) data);
+                                }
+
+                                JSONObject responseData = new JSONObject(response.toString());
+
+                                // Extract the data from the response, and save it to a local variable
+                                int id = responseData.getInt("id");
+                                JSONObject user = responseData.getJSONObject("user");
+
+                                int contactId = -1;
+                                String contactUsername = user.getString("username");
+                                String contactDisplayName = user.getString("displayName");
+                                String contactProfilePic = user.getString("profilePic");
+
+                                // Save contact to local database
+                                User contact = new User(contactId, contactUsername, contactDisplayName, contactProfilePic);
+                                Chat chat = new Chat(id, contact, "");
+                                chatDao.insert(chat);
+
+                                // Close activity
+                                finish();
+                            } else {
+                                Toast.makeText(getApplicationContext(), R.string.user_does_not_exist, Toast.LENGTH_LONG).show();
+                            }
+                        } catch (Exception e) {
+                            Log.e(TAG, "Error sending registration data", e);
+                            System.out.println("asdasd");
+                        } finally {
+                            if (urlConnection != null) {
+                                urlConnection.disconnect();
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-
-                    JSONObject responseData = new JSONObject(response.toString());
-
-                    // Extract the data from the response, and save it to a local variable
-                    int id = responseData.getInt("id");
-                    JSONObject user = responseData.getJSONObject("user");
-
-                    int contactId = -1;
-                    String contactUsername = user.getString("username");
-                    String contactDisplayName = user.getString("displayName");
-                    String contactProfilePic = user.getString("profilePic");
-
-                    // Save contact to local database
-                    User contact = new User(contactId, contactUsername, contactDisplayName, contactProfilePic);
-                    Chat chat = new Chat(id, contact, "");
-                    chatDao.insert(chat);
-
-                    // Close activity
-                    finish();
-                } else {
-                    Toast.makeText(getApplicationContext(), R.string.user_does_not_exist, Toast.LENGTH_LONG).show();
                 }
-            } catch (IOException | JSONException e) {
-                Log.e(TAG, "Error sending registration data", e);
-            } finally {
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-                }
-            }
+            });
+
+            thread.start();
         });
     }
 }
