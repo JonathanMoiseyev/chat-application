@@ -21,6 +21,7 @@ import communicationApp.androidClient.adapters.ChatsListAdapter;
 import communicationApp.androidClient.entities.Chat;
 import communicationApp.androidClient.entities.Settings;
 import communicationApp.androidClient.entities.SettingsDao;
+import communicationApp.androidClient.entities.User;
 
 public class ContactListActivity extends AppCompatActivity {
     private List<Chat> chats;
@@ -56,9 +57,17 @@ public class ContactListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contact_list);
 
         RecyclerView lstContacts = findViewById(R.id.lstContacts);
-        final ChatsListAdapter adapter = new ChatsListAdapter(this);
+        ChatsListAdapter adapter = new ChatsListAdapter(this);
         lstContacts.setAdapter(adapter);
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
+
+        String pic = MainActivity.db.currentUserDao().index().get(0).getProfilePic();
+
+        List<Chat> chats = new ArrayList<>();
+        User s = new User(0, "hemiii", "hemhem", pic);
+        chats.add(new Chat("fork", s, "yooo"));
+
+        adapter.setChats(chats);
 
 //        FloatingActionButton btnGoToAddContact = findViewById(R.id.btnGoToAddContact);
 //        btnGoToAddContact.setOnClickListener(v -> {
