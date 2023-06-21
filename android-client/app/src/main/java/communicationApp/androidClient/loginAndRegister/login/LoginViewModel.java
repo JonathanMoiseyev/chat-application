@@ -1,4 +1,4 @@
-package communicationApp.androidClient.login;
+package communicationApp.androidClient.loginAndRegister.login;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

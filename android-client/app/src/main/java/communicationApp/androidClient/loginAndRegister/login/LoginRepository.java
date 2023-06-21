@@ -1,4 +1,4 @@
-package communicationApp.androidClient.login;
+package communicationApp.androidClient.loginAndRegister.login;
 
 import communicationApp.androidClient.data.model.LoggedInUser;
 

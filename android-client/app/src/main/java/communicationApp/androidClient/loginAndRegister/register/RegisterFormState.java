@@ -1,4 +1,4 @@
-package communicationApp.androidClient.register;
+package communicationApp.androidClient.loginAndRegister.register;
 
 import androidx.annotation.Nullable;
 

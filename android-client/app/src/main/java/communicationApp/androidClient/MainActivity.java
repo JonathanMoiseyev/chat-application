@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import communicationApp.androidClient.login.LoginActivity;
-import communicationApp.androidClient.register.RegisterActivity;
+import communicationApp.androidClient.loginAndRegister.login.LoginActivity;
+import communicationApp.androidClient.loginAndRegister.register.RegisterActivity;
 
 public class MainActivity extends AppCompatActivity {
     private enum Activities {

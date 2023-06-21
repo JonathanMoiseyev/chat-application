@@ -1,4 +1,4 @@
-package communicationApp.androidClient.register;
+package communicationApp.androidClient.loginAndRegister.register;
 
 import static android.content.ContentValues.TAG;
 

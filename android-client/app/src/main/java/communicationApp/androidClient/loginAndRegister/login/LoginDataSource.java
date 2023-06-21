@@ -1,7 +1,5 @@
-package communicationApp.androidClient.login;
+package communicationApp.androidClient.loginAndRegister.login;
 
-
-import androidx.room.Room;
 
 import org.json.JSONObject;
 

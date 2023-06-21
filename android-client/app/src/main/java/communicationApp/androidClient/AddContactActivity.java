@@ -3,7 +3,6 @@ package communicationApp.androidClient;
 import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +19,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import communicationApp.androidClient.login.LoginDataSource;
+import communicationApp.androidClient.loginAndRegister.login.LoginDataSource;
 
 public class AddContactActivity extends AppCompatActivity {
     private AppDB db;
