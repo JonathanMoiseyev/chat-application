@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
-import communicationApp.androidClient.RegisterActivity;
 import communicationApp.androidClient.Theme;
+import communicationApp.androidClient.loginAndRegister.register.RegisterActivity;
 
 import android.content.Context;
 import android.view.View;

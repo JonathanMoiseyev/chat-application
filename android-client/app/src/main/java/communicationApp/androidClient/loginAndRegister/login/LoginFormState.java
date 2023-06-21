@@ -1,4 +1,4 @@
-package communicationApp.androidClient.login;
+package communicationApp.androidClient.loginAndRegister.login;
 
 import androidx.annotation.Nullable;
 
@@ -12,16 +12,10 @@ class LoginFormState {
     private Integer passwordError;
     private boolean isDataValid;
 
-    LoginFormState(@Nullable Integer usernameError, @Nullable Integer passwordError) {
-        this.usernameError = usernameError;
-        this.passwordError = passwordError;
-        this.isDataValid = false;
-    }
-
-    LoginFormState(boolean isDataValid) {
+    LoginFormState() {
+        isDataValid = false;
         this.usernameError = null;
         this.passwordError = null;
-        this.isDataValid = isDataValid;
     }
 
     @Nullable
@@ -37,4 +31,17 @@ class LoginFormState {
     boolean isDataValid() {
         return isDataValid;
     }
+
+    void setUsernameError(@Nullable Integer usernameError) {
+        this.usernameError = usernameError;
+    }
+
+    void setPasswordError(@Nullable Integer passwordError) {
+        this.passwordError = passwordError;
+    }
+
+    void updateIsDataValid() {
+        isDataValid = usernameError == null && passwordError == null;
+    }
+
 }
