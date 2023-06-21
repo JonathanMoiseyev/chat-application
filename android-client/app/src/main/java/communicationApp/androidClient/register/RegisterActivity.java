@@ -2,8 +2,10 @@ package communicationApp.androidClient.register;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 
@@ -12,6 +14,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -52,11 +56,15 @@ public class RegisterActivity extends AppCompatActivity {
     private Uri selectedImageUri;
     private Bitmap selectedBitmap;
 
+    private RegisterViewModel registerViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        registerViewModel = new RegisterViewModel();
+
 
         editTextUsername = findViewById(R.id.username_et_register);
         editTextPassword = findViewById(R.id.password_et_register);
@@ -67,6 +75,72 @@ public class RegisterActivity extends AppCompatActivity {
         buttonSubmit = findViewById(R.id.submit_button_register);
         cardViewImageContainer = findViewById(R.id.image_container_card_view_register);
         imageViewSelectedImage = findViewById(R.id.selected_image_iv_register);
+
+
+
+        registerViewModel.getRegisterFormState().observe(this, new Observer<RegisterFormState>() {
+            @Override
+            public void onChanged(@Nullable RegisterFormState registerFormState) {
+                if (registerFormState == null) {
+                    return;
+                }
+
+                if (registerFormState.isDataValid()) {
+                    buttonSubmit.setEnabled(true);
+                } else {
+                    buttonSubmit.setEnabled(false);
+
+                    if (registerFormState.getUsernameError() != null) {
+                        editTextUsername.setError(getString(registerFormState.getUsernameError()));
+                    } else {
+                        editTextUsername.setError(null);
+                    }
+
+                    if (registerFormState.getPasswordError() != null) {
+                        editTextPassword.setError(getString(registerFormState.getPasswordError()));
+                    } else {
+                        editTextPassword.setError(null);
+                    }
+
+                    if (registerFormState.getConfirmPasswordError() != null) {
+                        editTextConfirmPassword.setError(getString(registerFormState.getConfirmPasswordError()));
+                    } else {
+                        editTextConfirmPassword.setError(null);
+                    }
+
+                    if (registerFormState.getDisplayNameError() != null) {
+                        editTextDisplayName.setError(getString(registerFormState.getDisplayNameError()));
+                    } else {
+                        editTextDisplayName.setError(null);
+                    }
+                }
+            }
+        });
+
+        TextWatcher afterTextChangedListener = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // ignore
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // ignore
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                registerViewModel.registerDataChanged(editTextUsername.getText().toString(),
+                        editTextPassword.getText().toString(), editTextConfirmPassword.getText().toString(),
+                        editTextDisplayName.getText().toString());
+            }
+        };
+        editTextUsername.addTextChangedListener(afterTextChangedListener);
+        editTextPassword.addTextChangedListener(afterTextChangedListener);
+        editTextConfirmPassword.addTextChangedListener(afterTextChangedListener);
+        editTextDisplayName.addTextChangedListener(afterTextChangedListener);
+
+
 
         signInLink.setOnClickListener(v -> {
             finish();
@@ -104,6 +178,11 @@ public class RegisterActivity extends AppCompatActivity {
                 imageViewSelectedImage.setImageBitmap(selectedBitmap);
                 cardViewImageContainer.setVisibility(View.VISIBLE);
                 buttonChooseImage.setVisibility(View.GONE);
+
+                registerViewModel.registerDataChanged(editTextUsername.getText().toString(),
+                        editTextPassword.getText().toString(), editTextConfirmPassword.getText().toString(),
+                        editTextDisplayName.getText().toString());
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -126,10 +205,6 @@ public class RegisterActivity extends AppCompatActivity {
         // check username
         if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || displayName.isEmpty()) {
             return "Please fill in all fields";
-        } else if (!isPasswordValid(password)) {
-            return "Password must contain at least one lowercase letter, and one number.";
-        } else if (!password.equals(confirmPassword)) {
-            return "Passwords do not match.";
         } else if (selectedImageUri == null) {
             return "Please select a profile picture.";
         } else {

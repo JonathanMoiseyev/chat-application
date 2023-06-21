@@ -6,10 +6,11 @@ import androidx.lifecycle.ViewModel;
 
 import communicationApp.androidClient.data.model.LoggedInUser;
 import communicationApp.androidClient.R;
+import communicationApp.androidClient.loginAndRegister.ValidFieldChecker;
 
 public class LoginViewModel extends ViewModel {
 
-    private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
+    MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
     private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
     private LoginRepository loginRepository;
 
@@ -17,7 +18,7 @@ public class LoginViewModel extends ViewModel {
         this.loginRepository = loginRepository;
     }
 
-    LiveData<LoginFormState> getLoginFormState() {
+    MutableLiveData<LoginFormState> getLoginFormState() {
         return loginFormState;
     }
 
@@ -40,23 +41,18 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void loginDataChanged(String username, String password) {
-        if (!isUserNameValid(username)) {
-            loginFormState.setValue(new LoginFormState(R.string.invalid_username, null));
-        } else if (!isPasswordValid(password)) {
-            loginFormState.setValue(new LoginFormState(null, R.string.invalid_password));
+        LoginFormState newLoginFormState = new LoginFormState();
+
+        if (!ValidFieldChecker.isUsernameValid(username)) {
+            newLoginFormState.setUsernameError(R.string.invalid_username);
         } else {
-            loginFormState.setValue(new LoginFormState(true));
+            newLoginFormState.setUsernameError(null);
         }
-    }
 
-    // username validation check
-    private boolean isUserNameValid(String username) {
-        return username != null && username.trim().length() > 0;
-    }
+        newLoginFormState.setPasswordError(ValidFieldChecker.passwordValidationError(password));
 
-    // a password validation check
-    static final int MIN_PASSWORD_LENGTH = 8;
-    private boolean isPasswordValid(String password) {
-        return password != null && password.trim().length() >= MIN_PASSWORD_LENGTH;
+        newLoginFormState.updateIsDataValid();
+
+        loginFormState.setValue(newLoginFormState);
     }
 }
