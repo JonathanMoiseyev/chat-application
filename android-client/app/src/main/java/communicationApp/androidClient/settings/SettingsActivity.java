@@ -25,7 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private EditText ipEditText;
+    private EditText urlEditText;
     private Spinner themeSpinner;
 
     private Theme theme = Theme.BASIC;
@@ -58,7 +58,7 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         // Initialize views
-        ipEditText = findViewById(R.id.ip_edittext);
+        urlEditText = findViewById(R.id.url_edittext);
         themeSpinner = findViewById(R.id.theme_spinner);
 
         // Set up theme spinner with custom adapter
@@ -87,20 +87,20 @@ public class SettingsActivity extends AppCompatActivity {
         SettingsDao settingsDao = MainActivity.db.settingsDao();
         Settings settings = settingsDao.index().get(0);
 
-        // Set the IP address and theme to the saved settings
-        ipEditText.setText(settings.getServerUrl());
+        // Set the URL address and theme to the saved settings
+        urlEditText.setText(settings.getServerUrl());
     }
 
     private void applyChanges() {
         // Get user input
-        String ipAddress = ipEditText.getText().toString();
+        String urlAddress = urlEditText.getText().toString();
         String selectedTheme = themeSpinner.getSelectedItem().toString();
 
         // Save the preferences on the local database
         Settings settings = new Settings();
         settings.setId(0);
         settings.setTheme(theme);
-        settings.setServerUrl(ipAddress);
+        settings.setServerUrl(urlAddress);
 
         SettingsDao settingsDao = MainActivity.db.settingsDao();
 
