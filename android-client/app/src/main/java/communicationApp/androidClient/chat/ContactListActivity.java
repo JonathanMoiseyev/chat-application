@@ -25,8 +25,7 @@ import communicationApp.androidClient.entities.User;
 
 public class ContactListActivity extends AppCompatActivity {
     private List<Chat> chats;
-//    private ArrayAdapter<Chat> adapter;
-//    private ListView lvContactList;
+    private ChatsListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,23 +56,18 @@ public class ContactListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contact_list);
 
         RecyclerView lstContacts = findViewById(R.id.lstContacts);
-        ChatsListAdapter adapter = new ChatsListAdapter(this);
+        adapter = new ChatsListAdapter(this);
         lstContacts.setAdapter(adapter);
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
 
-        String pic = MainActivity.db.currentUserDao().index().get(0).getProfilePic();
-
-        List<Chat> chats = new ArrayList<>();
-        User s = new User(0, "hemiii", "hemhem", pic);
-        chats.add(new Chat("fork", s, "yooo"));
-
+        chats = MainActivity.db.chatDao().index();
         adapter.setChats(chats);
 
-//        FloatingActionButton btnGoToAddContact = findViewById(R.id.btnGoToAddContact);
-//        btnGoToAddContact.setOnClickListener(v -> {
-//            Intent i = new Intent(this, AddContactActivity.class);
-//            startActivity(i);
-//        });
+        FloatingActionButton btnGoToAddContact = findViewById(R.id.btnGoToAddContact);
+        btnGoToAddContact.setOnClickListener(v -> {
+            Intent i = new Intent(this, AddContactActivity.class);
+            startActivity(i);
+        });
 
 //        chats = new ArrayList<>();
 //        lvContactList = findViewById(R.id.lvContactList);
@@ -83,11 +77,11 @@ public class ContactListActivity extends AppCompatActivity {
 //        lvContactList.setAdapter(adapter);
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        chats.clear();
-//        chats.addAll(MainActivity.db.chatDao().index());
-//        adapter.notifyDataSetChanged();
-//    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        chats.clear();
+        chats.addAll(MainActivity.db.chatDao().index());
+        adapter.setChats(chats);
+    }
 }
