@@ -1,67 +1,124 @@
 package communicationApp.androidClient.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.room.Room;
 
-import communicationApp.androidClient.AppDB;
 import communicationApp.androidClient.R;
+import communicationApp.androidClient.RegisterActivity;
+import communicationApp.androidClient.Theme;
+
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class SettingsActivity extends AppCompatActivity {
-    private SwitchCompat darkModeSwitch;
-    private EditText serverUrlEditText;
-    private Button applyAndExitButton;
 
-    private static boolean darkMode = false;
-    private static String serverUrl = "@string/default_server_url";
+    private EditText ipEditText;
+    private Spinner themeSpinner;
 
-
+    private Theme theme = Theme.BASIC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.DarkTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        darkModeSwitch = findViewById(R.id.switch_dark_mode);
-        darkModeSwitch.setChecked(darkMode);
+        // Initialize views
+        ipEditText = findViewById(R.id.ip_edittext);
+        themeSpinner = findViewById(R.id.theme_spinner);
 
-        serverUrlEditText = findViewById(R.id.edit_server_url);
-        serverUrlEditText.setText(serverUrl);
+        // Set up theme spinner with custom adapter
+        ThemeAdapter adapter = new ThemeAdapter(this, R.layout.spinner_item, getResources().getStringArray(R.array.theme_options));
+        themeSpinner.setAdapter(adapter);
 
-        applyAndExitButton = findViewById(R.id.apply_and_exit_button);
-
-
-
-        applyAndExitButton.setOnClickListener(v -> {
-            if (darkModeSwitch.isChecked()) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                darkMode = true;
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                darkMode = false;
+        // Apply Changes button
+        FloatingActionButton applyButton = findViewById(R.id.apply_button);
+        applyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                applyChanges();
             }
+        });
 
-            serverUrl = serverUrlEditText.getText().toString();
-            // making sure the url ends with a slash
-            if (!serverUrl.endsWith("/")) {
-                serverUrl += "/";
+        // Return button
+        ImageButton returnButton = findViewById(R.id.return_button);
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish(); // Close the settings activity and return to the previous activity
             }
-
-
-
-            //TODO: SAVE THE STATE OF THE URL TO THE DATABASE
-
-
-
-
-            //closing the activity
-            finish();
         });
     }
 
+    private void applyChanges() {
+
+        // Get user input
+        String ipAddress = ipEditText.getText().toString();
+        String selectedTheme = themeSpinner.getSelectedItem().toString();
+
+        // Perform actions based on user input
+        // Here, you can save the IP address and selected theme to shared preferences or perform other operations
+
+        // Set the theme
+        Intent intent = new Intent(this, RegisterActivity.class);
+        intent.putExtra("theme", theme.toString());
+        // Show a toast to indicate changes applied
+        Toast.makeText(this, "Changes applied", Toast.LENGTH_SHORT).show();
+        finish(); // Close the settings activity and return to the previous activity
+        startActivity(intent);
+
+    }
+
+    private class ThemeAdapter extends ArrayAdapter<String> {
+
+        private Context context;
+        private int resource;
+        private String[] items;
+
+        public ThemeAdapter(Context context, int resource, String[] items) {
+            super(context, resource, items);
+            this.context = context;
+            this.resource = resource;
+            this.items = items;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            TextView view = (TextView) super.getView(position, convertView, parent);
+            applyTheme(view);
+            return view;
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            TextView view = (TextView) super.getDropDownView(position, convertView, parent);
+            applyTheme(view);
+            return view;
+        }
+
+        private void applyTheme(TextView view) {
+            String selectedTheme = themeSpinner.getSelectedItem().toString();
+            if (selectedTheme.equals("Basic")) {
+                theme = Theme.BASIC;
+            } else if (selectedTheme.equals("Default")) {
+                theme = Theme.DEFAULT;
+            } else if (selectedTheme.equals("Light")) {
+                theme = Theme.LIGHT;
+            } else if (selectedTheme.equals("Dark")) {
+                theme = Theme.DARK;
+            }
+        }
+    }
 }

@@ -1,0 +1,7 @@
+<TextView android:id="@+id/spinner_item_textview"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    android:padding="16dp"
+    android:layout_centerInParent="true"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

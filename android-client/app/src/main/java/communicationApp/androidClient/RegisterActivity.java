@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -35,6 +36,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import communicationApp.androidClient.login.LoginActivity;
+import communicationApp.androidClient.settings.SettingsActivity;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -43,15 +45,38 @@ public class RegisterActivity extends AppCompatActivity {
 
     private EditText editTextUsername, editTextPassword, editTextConfirmPassword, editTextDisplayName;
     private Button buttonSubmit;
+    private TextView loginLink;
     private FloatingActionButton buttonChooseImage;
     private CardView cardViewImageContainer;
     private ImageView imageViewSelectedImage;
     private Uri selectedImageUri;
     private Bitmap selectedBitmap;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Bundle b = getIntent().getExtras();
+        setTheme(R.style.Base_Theme_AndroidClient);
+
+        if (b != null) {
+            String theme = b.getString("theme");
+            if (theme != null) {
+                switch (theme) {
+                    case "DEFAULT":
+                        setTheme(R.style.Purple_Teal_Theme);
+                        break;
+                    case "LIGHT":
+                        setTheme(R.style.BrightTheme);
+                        break;
+                    case "DARK":
+                        setTheme(R.style.DarkTheme);
+                        break;
+                    default:
+                        setTheme(R.style.Base_Theme_AndroidClient);
+                        break;
+                }
+            }
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
