@@ -99,6 +99,9 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RegisterActivity.this, SettingsActivity.class);
                 startActivity(intent);
+                
+                setResult(MainActivity.RESULT_CODE_TO_OPEN_REGISTER);
+                finish();
             }
         });
 
@@ -182,6 +185,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         signInLink.setOnClickListener(v -> {
+            setResult(MainActivity.RESULT_CODE_TO_OPEN_LOGIN);
             finish();
         });
 
@@ -330,6 +334,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (result.equals("Registration successful")) {
                     // successfull registration
+                    setResult(MainActivity.RESULT_CODE_TO_OPEN_LOGIN);
                     finish();
                 }
             } else {

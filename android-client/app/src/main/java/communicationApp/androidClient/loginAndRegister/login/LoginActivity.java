@@ -75,6 +75,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, SettingsActivity.class);
                 startActivity(intent);
+
+                setResult(MainActivity.RESULT_CODE_TO_OPEN_LOGIN);
+                finish();
             }
         });
 
@@ -90,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
         registerLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setResult(Activity.RESULT_CANCELED);
+                setResult(MainActivity.RESULT_CODE_TO_OPEN_REGISTER);
                 finish();
             }
         });
@@ -173,7 +176,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-        setResult(Activity.RESULT_OK);
+        setResult(MainActivity.RESULT_CODE_TO_OPEN_CONTACT_LIST);
         finish();
     }
 
