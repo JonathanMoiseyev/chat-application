@@ -8,7 +8,6 @@ import android.os.Bundle;
 
 import communicationApp.androidClient.loginAndRegister.login.LoginActivity;
 import communicationApp.androidClient.loginAndRegister.register.RegisterActivity;
-import communicationApp.androidClient.settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity {
     private enum Activities {
@@ -31,8 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        Intent intent = new Intent(this, SettingsActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivityForResult(intent, Activities.LOGIN.ordinal());
     }
 

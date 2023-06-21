@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +43,9 @@ import java.util.regex.Pattern;
 import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
 import communicationApp.androidClient.Theme;
+import communicationApp.androidClient.loginAndRegister.login.LoginActivity;
 import communicationApp.androidClient.settings.Settings;
+import communicationApp.androidClient.settings.SettingsActivity;
 import communicationApp.androidClient.settings.SettingsDao;
 
 
@@ -89,6 +92,15 @@ public class RegisterActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        ImageButton settingsButton = findViewById(R.id.settings_button_register);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         registerViewModel = new RegisterViewModel();
 

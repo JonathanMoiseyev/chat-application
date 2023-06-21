@@ -4,6 +4,8 @@ import android.app.Activity;
 
 import androidx.lifecycle.Observer;
 
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -18,6 +20,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +31,7 @@ import communicationApp.androidClient.Theme;
 import communicationApp.androidClient.data.model.LoggedInUser;
 import communicationApp.androidClient.databinding.ActivityLoginBinding;
 import communicationApp.androidClient.settings.Settings;
+import communicationApp.androidClient.settings.SettingsActivity;
 import communicationApp.androidClient.settings.SettingsDao;
 
 public class LoginActivity extends AppCompatActivity {
@@ -64,6 +68,17 @@ public class LoginActivity extends AppCompatActivity {
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        ImageButton settingsButton = findViewById(R.id.settings_button_login);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         loginViewModel = new LoginViewModel(LoginRepository.getInstance(new LoginDataSource(getString(R.string.apiURL))));
 
