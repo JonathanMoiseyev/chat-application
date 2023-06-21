@@ -6,8 +6,8 @@ import androidx.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 
-import communicationApp.androidClient.login.LoginActivity;
-import communicationApp.androidClient.settings.SettingsActivity;
+import communicationApp.androidClient.loginAndRegister.login.LoginActivity;
+import communicationApp.androidClient.loginAndRegister.register.RegisterActivity;
 
 public class MainActivity extends AppCompatActivity {
     private enum Activities {
@@ -23,10 +23,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         db =  Room.databaseBuilder(getApplicationContext(), AppDB.class, "HemiDB")
-                        .fallbackToDestructiveMigration()
-                        .allowMainThreadQueries()
-                        .build();
-
+                .fallbackToDestructiveMigration()
+                .allowMainThreadQueries()
+                .build();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

@@ -1,9 +1,11 @@
-package communicationApp.androidClient;
+package communicationApp.androidClient.loginAndRegister.register;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 
@@ -12,6 +14,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -35,8 +39,7 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import communicationApp.androidClient.login.LoginActivity;
-import communicationApp.androidClient.settings.SettingsActivity;
+import communicationApp.androidClient.R;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -47,40 +50,21 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView signInLink;
 
     private Button buttonSubmit;
-    private TextView loginLink;
     private FloatingActionButton buttonChooseImage;
     private CardView cardViewImageContainer;
     private ImageView imageViewSelectedImage;
     private Uri selectedImageUri;
     private Bitmap selectedBitmap;
 
+    private RegisterViewModel registerViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Bundle b = getIntent().getExtras();
-        setTheme(R.style.Base_Theme_AndroidClient);
-
-        if (b != null) {
-            String theme = b.getString("theme");
-            if (theme != null) {
-                switch (theme) {
-                    case "DEFAULT":
-                        setTheme(R.style.Purple_Teal_Theme);
-                        break;
-                    case "LIGHT":
-                        setTheme(R.style.BrightTheme);
-                        break;
-                    case "DARK":
-                        setTheme(R.style.DarkTheme);
-                        break;
-                    default:
-                        setTheme(R.style.Base_Theme_AndroidClient);
-                        break;
-                }
-            }
-        }
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        registerViewModel = new RegisterViewModel();
+
 
         editTextUsername = findViewById(R.id.username_et_register);
         editTextPassword = findViewById(R.id.password_et_register);
@@ -92,9 +76,73 @@ public class RegisterActivity extends AppCompatActivity {
         cardViewImageContainer = findViewById(R.id.image_container_card_view_register);
         imageViewSelectedImage = findViewById(R.id.selected_image_iv_register);
 
+
+
+        registerViewModel.getRegisterFormState().observe(this, new Observer<RegisterFormState>() {
+            @Override
+            public void onChanged(@Nullable RegisterFormState registerFormState) {
+                if (registerFormState == null) {
+                    return;
+                }
+
+                if (registerFormState.isDataValid()) {
+                    buttonSubmit.setEnabled(true);
+                } else {
+                    buttonSubmit.setEnabled(false);
+
+                    if (registerFormState.getUsernameError() != null) {
+                        editTextUsername.setError(getString(registerFormState.getUsernameError()));
+                    } else {
+                        editTextUsername.setError(null);
+                    }
+
+                    if (registerFormState.getPasswordError() != null) {
+                        editTextPassword.setError(getString(registerFormState.getPasswordError()));
+                    } else {
+                        editTextPassword.setError(null);
+                    }
+
+                    if (registerFormState.getConfirmPasswordError() != null) {
+                        editTextConfirmPassword.setError(getString(registerFormState.getConfirmPasswordError()));
+                    } else {
+                        editTextConfirmPassword.setError(null);
+                    }
+
+                    if (registerFormState.getDisplayNameError() != null) {
+                        editTextDisplayName.setError(getString(registerFormState.getDisplayNameError()));
+                    } else {
+                        editTextDisplayName.setError(null);
+                    }
+                }
+            }
+        });
+
+        TextWatcher afterTextChangedListener = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // ignore
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // ignore
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                registerViewModel.registerDataChanged(editTextUsername.getText().toString(),
+                        editTextPassword.getText().toString(), editTextConfirmPassword.getText().toString(),
+                        editTextDisplayName.getText().toString());
+            }
+        };
+        editTextUsername.addTextChangedListener(afterTextChangedListener);
+        editTextPassword.addTextChangedListener(afterTextChangedListener);
+        editTextConfirmPassword.addTextChangedListener(afterTextChangedListener);
+        editTextDisplayName.addTextChangedListener(afterTextChangedListener);
+
+
+
         signInLink.setOnClickListener(v -> {
-            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-            startActivity(intent);
             finish();
         });
 
@@ -130,6 +178,11 @@ public class RegisterActivity extends AppCompatActivity {
                 imageViewSelectedImage.setImageBitmap(selectedBitmap);
                 cardViewImageContainer.setVisibility(View.VISIBLE);
                 buttonChooseImage.setVisibility(View.GONE);
+
+                registerViewModel.registerDataChanged(editTextUsername.getText().toString(),
+                        editTextPassword.getText().toString(), editTextConfirmPassword.getText().toString(),
+                        editTextDisplayName.getText().toString());
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -152,10 +205,6 @@ public class RegisterActivity extends AppCompatActivity {
         // check username
         if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || displayName.isEmpty()) {
             return "Please fill in all fields";
-        } else if (!isPasswordValid(password)) {
-            return "Password must contain at least one lowercase letter, and one number.";
-        } else if (!password.equals(confirmPassword)) {
-            return "Passwords do not match.";
         } else if (selectedImageUri == null) {
             return "Please select a profile picture.";
         } else {
@@ -241,9 +290,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this, result, Toast.LENGTH_SHORT).show();
 
                 if (result.equals("Registration successful")) {
-                    // Handle successful registration here, e.g., start the next activity
-                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                    startActivity(intent);
+                    // successfull registration
                     finish();
                 }
             } else {
