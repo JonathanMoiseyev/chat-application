@@ -1,4 +1,4 @@
-package communicationApp.androidClient;
+package communicationApp.androidClient.entities;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

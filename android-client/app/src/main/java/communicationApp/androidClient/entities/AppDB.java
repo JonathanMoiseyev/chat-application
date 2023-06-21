@@ -1,11 +1,7 @@
-package communicationApp.androidClient;
+package communicationApp.androidClient.entities;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
-
-import communicationApp.androidClient.data.model.LoggedInUser;
-import communicationApp.androidClient.settings.Settings;
-import communicationApp.androidClient.settings.SettingsDao;
 
 @Database(entities = {CurrentUser.class, Chat.class, Settings.class}, version = 7)
 public abstract class AppDB extends RoomDatabase {

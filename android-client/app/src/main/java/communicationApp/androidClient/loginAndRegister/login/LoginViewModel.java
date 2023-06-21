@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import communicationApp.androidClient.data.model.LoggedInUser;
+import communicationApp.androidClient.loginAndRegister.login.model.LoggedInUser;
 import communicationApp.androidClient.R;
 import communicationApp.androidClient.loginAndRegister.ValidFieldChecker;
 

@@ -22,10 +22,10 @@
             android:exported="false"
             android:label="@string/title_activity_login" />
         <activity
-            android:name=".AddContactActivity"
+            android:name=".chat.AddContactActivity"
             android:exported="false" />
         <activity
-            android:name=".ContactListActivity"
+            android:name=".chat.ContactListActivity"
             android:exported="false" />
         <activity
             android:name=".loginAndRegister.register.RegisterActivity"

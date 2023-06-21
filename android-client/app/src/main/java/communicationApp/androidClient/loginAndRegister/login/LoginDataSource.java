@@ -3,11 +3,10 @@ package communicationApp.androidClient.loginAndRegister.login;
 
 import org.json.JSONObject;
 
-import communicationApp.androidClient.AppDB;
-import communicationApp.androidClient.CurrentUser;
-import communicationApp.androidClient.CurrentUserDao;
+import communicationApp.androidClient.entities.CurrentUser;
+import communicationApp.androidClient.entities.CurrentUserDao;
 import communicationApp.androidClient.MainActivity;
-import communicationApp.androidClient.data.model.LoggedInUser;
+import communicationApp.androidClient.loginAndRegister.login.model.LoggedInUser;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

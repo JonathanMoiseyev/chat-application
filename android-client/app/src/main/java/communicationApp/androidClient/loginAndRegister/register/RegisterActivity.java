@@ -43,10 +43,9 @@ import java.util.regex.Pattern;
 import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
 import communicationApp.androidClient.Theme;
-import communicationApp.androidClient.loginAndRegister.login.LoginActivity;
-import communicationApp.androidClient.settings.Settings;
+import communicationApp.androidClient.entities.Settings;
 import communicationApp.androidClient.settings.SettingsActivity;
-import communicationApp.androidClient.settings.SettingsDao;
+import communicationApp.androidClient.entities.SettingsDao;
 
 
 public class RegisterActivity extends AppCompatActivity {
