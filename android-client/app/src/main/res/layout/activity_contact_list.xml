@@ -7,17 +7,17 @@
     tools:context=".chat.ContactListActivity"
     >
 
-    <HorizontalScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints">
+        android:layout_height="match_parent"
+        android:id="@+id/swipeRefreshLayout">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </ImageView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lstContacts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-    </HorizontalScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ListView
         android:id="@+id/lvContactList"

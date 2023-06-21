@@ -26,11 +26,11 @@ public class User {
         return name;
     }
 
-    String getDisplayName() {
+    public String getDisplayName() {
         return displayName;
     }
 
-    String getProfilePic() {
+    public String getProfilePic() {
         return profilePic;
     }
 
