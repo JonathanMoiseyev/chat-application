@@ -44,6 +44,8 @@ public class RegisterActivity extends AppCompatActivity {
     private static final int STORAGE_PERMISSION_CODE = 2;
 
     private EditText editTextUsername, editTextPassword, editTextConfirmPassword, editTextDisplayName;
+    private TextView signInLink;
+
     private Button buttonSubmit;
     private TextView loginLink;
     private FloatingActionButton buttonChooseImage;
@@ -84,10 +86,17 @@ public class RegisterActivity extends AppCompatActivity {
         editTextPassword = findViewById(R.id.password_et_register);
         editTextConfirmPassword = findViewById(R.id.confirm_password_et_register);
         editTextDisplayName = findViewById(R.id.display_name_et_register);
+        signInLink = findViewById(R.id.login_link_register);
         buttonChooseImage = findViewById(R.id.select_image_btn_register);
         buttonSubmit = findViewById(R.id.submit_button_register);
         cardViewImageContainer = findViewById(R.id.image_container_card_view_register);
         imageViewSelectedImage = findViewById(R.id.selected_image_iv_register);
+
+        signInLink.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
         buttonChooseImage.setOnClickListener(v -> showImageChooser());
 
