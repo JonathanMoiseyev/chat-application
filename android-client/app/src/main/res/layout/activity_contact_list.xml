@@ -7,25 +7,18 @@
     tools:context=".chat.ContactListActivity"
     >
 
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/swipeRefreshLayout">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/lstContacts"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lstContacts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-    <ListView
-        android:id="@+id/lvContactList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null"
-        tools:layout_editor_absoluteX="-9dp"
-        tools:layout_editor_absoluteY="-245dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnGoToAddContact"

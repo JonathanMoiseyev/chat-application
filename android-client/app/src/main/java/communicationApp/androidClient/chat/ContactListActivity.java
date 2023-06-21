@@ -80,6 +80,10 @@ public class ContactListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        Object s = MainActivity.db.chatDao().index();
+
+
         chats.clear();
         chats.addAll(MainActivity.db.chatDao().index());
         adapter.setChats(chats);
