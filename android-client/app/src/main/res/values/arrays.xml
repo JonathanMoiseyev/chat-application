@@ -1,0 +1,10 @@
+<resources>
+    <!-- Other string resources -->
+
+    <string-array name="theme_options">
+        <item>Basic</item>
+        <item>Default</item>
+        <item>Light</item>
+        <item>Dark</item>
+    </string-array>
+</resources>

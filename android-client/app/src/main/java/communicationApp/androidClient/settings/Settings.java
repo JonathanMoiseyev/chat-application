@@ -3,19 +3,21 @@ package communicationApp.androidClient.settings;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import communicationApp.androidClient.Theme;
+
 @Entity
 public class Settings {
     @PrimaryKey
     private int id;
-    private boolean darkMode = false;
+    private Theme theme = Theme.BASIC;
     private String serverUrl = "@string/default_server_url";
 
-    public boolean isDarkMode() {
-        return darkMode;
+    public Theme getTheme() {
+        return theme;
     }
 
-    public void setDarkMode(boolean darkMode) {
-        this.darkMode = darkMode;
+    public void setTheme(Theme theme) {
+        this.theme = theme;
     }
 
     public String getServerUrl() {

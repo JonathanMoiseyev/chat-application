@@ -1,6 +1,7 @@
 package communicationApp.androidClient;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,10 +16,17 @@ public class MainActivity extends AppCompatActivity {
         CHAT
     }
 
+    public static AppDB db;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        db =  Room.databaseBuilder(getApplicationContext(), AppDB.class, "HemiDB")
+                .fallbackToDestructiveMigration()
+                .allowMainThreadQueries()
+                .build();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

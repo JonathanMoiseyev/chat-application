@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import communicationApp.androidClient.AppDB;
 import communicationApp.androidClient.CurrentUser;
 import communicationApp.androidClient.CurrentUserDao;
+import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.data.model.LoggedInUser;
 
 import java.io.DataInputStream;
@@ -22,11 +23,8 @@ import java.net.URL;
 public class LoginDataSource {
     static private String apiURL;
 
-    static public AppDB db;
-
-    LoginDataSource(String apiURL, AppDB db) {
+    LoginDataSource(String apiURL) {
         LoginDataSource.apiURL = apiURL;
-        this.db = db;
     }
 
     private static class LoginNetworkRunnable implements Runnable {
@@ -98,7 +96,7 @@ public class LoginDataSource {
                     result = new Result.Success<LoggedInUser>(user);
 
                     // Save the logged in user to the local database
-                    CurrentUserDao currentUserDao = db.currentUserDao();
+                    CurrentUserDao currentUserDao = MainActivity.db.currentUserDao();
 
                     if (currentUserDao.index().size() == 0) {
                         CurrentUser currentUser = new CurrentUser(0, token, username, displayName, profilePic);
