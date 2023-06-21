@@ -122,7 +122,7 @@ public class AddContactActivity extends AppCompatActivity {
                                 JSONObject responseData = new JSONObject(response.toString());
 
                                 // Extract the data from the response, and save it to a local variable
-                                int id = responseData.getInt("id");
+                                String id = responseData.getString("id");
                                 JSONObject user = responseData.getJSONObject("user");
 
                                 int contactId = -1;

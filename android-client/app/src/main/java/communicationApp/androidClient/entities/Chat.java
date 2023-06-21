@@ -1,5 +1,6 @@
 package communicationApp.androidClient.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
@@ -9,19 +10,20 @@ import communicationApp.androidClient.entities.UserConverter;
 
 @Entity
 public class Chat {
-   @PrimaryKey(autoGenerate = true)
-   private int id;
+   @PrimaryKey
+   @NonNull
+   private String id;
    @TypeConverters(UserConverter.class)
    private User contact;
    private String lastMessage;
 
-    public Chat(int id, User contact, String lastMessage) {
+    public Chat(String id, User contact, String lastMessage) {
         this.id = id;
         this.contact = contact;
         this.lastMessage = lastMessage;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -33,7 +35,7 @@ public class Chat {
         return lastMessage;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
