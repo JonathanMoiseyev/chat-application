@@ -1,34 +1,46 @@
 package communicationApp.androidClient;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ContactListActivity extends AppCompatActivity {
-    private AppDB db;
-    private ChatDao chatDao;
+    private List<Chat> chats;
+    private ArrayAdapter<Chat> adapter;
+    private ListView lvContactList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
 
-        db = Room.databaseBuilder(getApplicationContext(), AppDB.class, "HemiDB")
-                .allowMainThreadQueries()
-                .build();
-
-        chatDao = db.chatDao();
-
         FloatingActionButton btnGoToAddContact = findViewById(R.id.btnGoToAddContact);
         btnGoToAddContact.setOnClickListener(v -> {
             Intent i = new Intent(this, AddContactActivity.class);
             startActivity(i);
         });
+
+        chats = new ArrayList<>();
+        lvContactList = findViewById(R.id.lvContactList);
+        adapter = new ArrayAdapter<Chat>(this,
+                                                android.R.layout.simple_list_item_1,
+                                                chats);
+        lvContactList.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        chats.clear();
+        chats.addAll(MainActivity.db.chatDao().index());
+        adapter.notifyDataSetChanged();
     }
 }
