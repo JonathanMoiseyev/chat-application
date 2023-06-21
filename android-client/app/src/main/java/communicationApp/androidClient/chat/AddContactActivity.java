@@ -1,4 +1,4 @@
-package communicationApp.androidClient;
+package communicationApp.androidClient.chat;
 
 import static android.content.ContentValues.TAG;
 
@@ -10,17 +10,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import communicationApp.androidClient.settings.Settings;
-import communicationApp.androidClient.settings.SettingsDao;
+import communicationApp.androidClient.MainActivity;
+import communicationApp.androidClient.R;
+import communicationApp.androidClient.Theme;
+import communicationApp.androidClient.entities.AppDB;
+import communicationApp.androidClient.entities.Chat;
+import communicationApp.androidClient.entities.ChatDao;
+import communicationApp.androidClient.entities.CurrentUser;
+import communicationApp.androidClient.entities.CurrentUserDao;
+import communicationApp.androidClient.entities.User;
+import communicationApp.androidClient.entities.Settings;
+import communicationApp.androidClient.entities.SettingsDao;
 
 
 public class AddContactActivity extends AppCompatActivity {

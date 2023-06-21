@@ -1,8 +1,11 @@
-package communicationApp.androidClient;
+package communicationApp.androidClient.entities;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
+
+import communicationApp.androidClient.entities.User;
+import communicationApp.androidClient.entities.UserConverter;
 
 @Entity
 public class Chat {

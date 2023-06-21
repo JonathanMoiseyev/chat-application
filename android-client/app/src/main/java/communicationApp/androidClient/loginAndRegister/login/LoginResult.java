@@ -2,7 +2,7 @@ package communicationApp.androidClient.loginAndRegister.login;
 
 import androidx.annotation.Nullable;
 
-import communicationApp.androidClient.data.model.LoggedInUser;
+import communicationApp.androidClient.loginAndRegister.login.model.LoggedInUser;
 
 /**
  * Authentication result : success (user details) or error message.

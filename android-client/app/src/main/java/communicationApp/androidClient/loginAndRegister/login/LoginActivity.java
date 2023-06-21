@@ -1,17 +1,13 @@
 package communicationApp.androidClient.loginAndRegister.login;
 
-import android.app.Activity;
-
 import androidx.lifecycle.Observer;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,15 +20,14 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import communicationApp.androidClient.AppDB;
 import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
 import communicationApp.androidClient.Theme;
-import communicationApp.androidClient.data.model.LoggedInUser;
+import communicationApp.androidClient.loginAndRegister.login.model.LoggedInUser;
 import communicationApp.androidClient.databinding.ActivityLoginBinding;
-import communicationApp.androidClient.settings.Settings;
+import communicationApp.androidClient.entities.Settings;
 import communicationApp.androidClient.settings.SettingsActivity;
-import communicationApp.androidClient.settings.SettingsDao;
+import communicationApp.androidClient.entities.SettingsDao;
 
 public class LoginActivity extends AppCompatActivity {
 
