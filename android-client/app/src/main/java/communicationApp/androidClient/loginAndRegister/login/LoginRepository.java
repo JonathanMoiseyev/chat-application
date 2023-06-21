@@ -1,6 +1,6 @@
 package communicationApp.androidClient.loginAndRegister.login;
 
-import communicationApp.androidClient.data.model.LoggedInUser;
+import communicationApp.androidClient.loginAndRegister.login.model.LoggedInUser;
 
 /**
  * Class that requests authentication and user information from the remote data source and

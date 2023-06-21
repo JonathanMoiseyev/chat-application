@@ -1,8 +1,6 @@
 package communicationApp.androidClient.settings;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,7 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
 import communicationApp.androidClient.Theme;
-import communicationApp.androidClient.loginAndRegister.register.RegisterActivity;
+import communicationApp.androidClient.entities.Settings;
+import communicationApp.androidClient.entities.SettingsDao;
 
 import android.content.Context;
 import android.view.View;

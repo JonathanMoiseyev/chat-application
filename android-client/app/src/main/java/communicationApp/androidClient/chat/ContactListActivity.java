@@ -1,4 +1,4 @@
-package communicationApp.androidClient;
+package communicationApp.androidClient.chat;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,8 +12,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-import communicationApp.androidClient.settings.Settings;
-import communicationApp.androidClient.settings.SettingsDao;
+import communicationApp.androidClient.MainActivity;
+import communicationApp.androidClient.R;
+import communicationApp.androidClient.Theme;
+import communicationApp.androidClient.entities.Chat;
+import communicationApp.androidClient.entities.Settings;
+import communicationApp.androidClient.entities.SettingsDao;
 
 public class ContactListActivity extends AppCompatActivity {
     private List<Chat> chats;

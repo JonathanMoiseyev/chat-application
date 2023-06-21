@@ -1,4 +1,4 @@
-package communicationApp.androidClient.settings;
+package communicationApp.androidClient.entities;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
