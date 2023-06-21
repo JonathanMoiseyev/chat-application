@@ -26,6 +26,11 @@ public class Settings {
 
     public void setServerUrl(String serverUrl) {
         this.serverUrl = serverUrl;
+
+        // making sure that the server url ends with a slash
+        if (!this.serverUrl.endsWith("/")) {
+            this.serverUrl += "/";
+        }
     }
 
     public int getId() {

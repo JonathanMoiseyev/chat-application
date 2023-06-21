@@ -79,8 +79,10 @@ public class AddContactActivity extends AppCompatActivity {
                         System.out.println("sadsad");
 
                         try {
+                            String apiURL = MainActivity.db.settingsDao().index().get(0).getServerUrl() + "api";
+
                             // Create request
-                            URL url = new URL(getString(R.string.apiURL) + "/Chats");
+                            URL url = new URL(apiURL + "/Chats");
                             urlConnection = (HttpURLConnection) url.openConnection();
                             urlConnection.setRequestMethod("POST");
                             urlConnection.setRequestProperty("accept", "*/*");

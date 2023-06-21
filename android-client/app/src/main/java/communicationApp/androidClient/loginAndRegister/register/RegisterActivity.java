@@ -289,7 +289,9 @@ public class RegisterActivity extends AppCompatActivity {
 
             HttpURLConnection urlConnection = null;
             try {
-                URL url = new URL(getString(R.string.apiURL) + "/Users");
+                String apiURL = MainActivity.db.settingsDao().index().get(0).getServerUrl() + "api";
+
+                URL url = new URL(apiURL + "/Users");
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setRequestProperty("Content-Type", "application/json");

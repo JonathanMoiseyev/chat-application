@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-        loginViewModel = new LoginViewModel(LoginRepository.getInstance(new LoginDataSource(getString(R.string.apiURL))));
+        loginViewModel = new LoginViewModel(LoginRepository.getInstance(new LoginDataSource()));
 
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
