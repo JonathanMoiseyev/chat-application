@@ -113,12 +113,9 @@ public class SettingsActivity extends AppCompatActivity {
         // Perform actions based on user input
         // Here, you can save the IP address and selected theme to shared preferences or perform other operations
 
-        Intent intent = new Intent(this, RegisterActivity.class);
-
         // Show a toast to indicate changes applied
         Toast.makeText(this, "Changes applied", Toast.LENGTH_SHORT).show();
         finish(); // Close the settings activity and return to the previous activity
-        startActivity(intent);
     }
 
     private class ThemeAdapter extends ArrayAdapter<String> {
