@@ -22,9 +22,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import communicationApp.androidClient.AppDB;
+import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
+import communicationApp.androidClient.Theme;
 import communicationApp.androidClient.data.model.LoggedInUser;
 import communicationApp.androidClient.databinding.ActivityLoginBinding;
+import communicationApp.androidClient.settings.Settings;
+import communicationApp.androidClient.settings.SettingsDao;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -33,6 +37,29 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        try {
+            SettingsDao settingsDao = MainActivity.db.settingsDao();
+            Settings settings = settingsDao.index().get(0);
+            Theme theme = settings.getTheme();
+
+            switch (theme.ordinal()) {
+                case 1:
+                    setTheme(R.style.Purple_Teal_Theme);
+                    break;
+                case 2:
+                    setTheme(R.style.BrightTheme);
+                    break;
+                case 3:
+                    setTheme(R.style.DarkTheme);
+                    break;
+                default:
+                    setTheme(R.style.Base_Theme_AndroidClient);
+                    break;
+            }
+        } catch (Exception e) {
+            setTheme(R.style.Base_Theme_AndroidClient);
+        }
+
         super.onCreate(savedInstanceState);
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
