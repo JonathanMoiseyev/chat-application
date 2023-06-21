@@ -1,80 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <!-- Title -->
+    <TextView
+        android:id="@+id/title_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textSize="24sp"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true" />
+
+    <!-- IP Address -->
+    <TextView
+        android:id="@+id/ip_label_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Server IP Address"
+        android:textSize="18sp"
+        android:layout_below="@id/title_textview"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true" />
+
+    <!-- Theme Selection -->
+    <EditText
+        android:id="@+id/ip_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp">
+        android:layout_below="@id/ip_label_textview"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="9dp"
+        android:gravity="center"
+        android:hint="Enter IP address"
+        android:inputType="text" />
 
-        <TextView
-            android:id="@+id/title_settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="16dp"
-            android:text="Settings"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/theme_label_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Theme"
+        android:textSize="18sp"
+        android:layout_below="@id/ip_edittext"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:id="@+id/text_server_url"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/title_settings"
-            android:layout_marginTop="16dp"
-            android:text="Server URL"
-            android:textSize="16sp" />
+    <!-- Return Button -->
+    <Spinner
+        android:id="@+id/theme_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/theme_label_textview"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
+        android:gravity="center"
+        android:spinnerMode="dropdown"/>
+    <ImageButton
+        android:id="@+id/return_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="16dp"/>
 
-        <EditText
-            android:id="@+id/edit_server_url"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/text_server_url"
-            android:layout_marginHorizontal="20dp"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/apply_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_check_foreground"
+        android:contentDescription="Exit" />
 
-            android:layout_marginTop="8dp"
-            android:layout_centerInParent="true"
-            android:hint="@string/enter_server_url"
-            android:minHeight="48dp"
-            android:inputType="text" />
-
-
-
-
-
-        <TextView
-            android:id="@+id/text_dark_mode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/edit_server_url"
-            android:layout_marginTop="32dp"
-            android:text="Dark Mode"
-            android:textSize="16sp" />
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switch_dark_mode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/text_dark_mode"
-            android:layout_marginTop="8dp"
-            android:padding="16dp"
-            android:shadowColor="@color/light_purple"/>
-
-
-        <Button
-            android:id="@+id/apply_and_exit_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/switch_dark_mode"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:text="@string/apply_settings_button_text" />
-    </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>

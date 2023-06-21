@@ -76,8 +76,8 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@id/display_name_et_register"
             android:layout_marginTop="16dp"
-            android:src="@drawable/ic_add"
-            android:backgroundTint="@color/light_purple" />
+            android:src="@drawable/ic_add"/>
+<!--            android:backgroundTint="@color/light_purple" />-->
 
         <androidx.cardview.widget.CardView
             android:id="@+id/image_container_card_view_register"
@@ -88,8 +88,9 @@
             android:layout_marginTop="16dp"
             android:padding="8dp"
             app:cardCornerRadius="250dp"
-            app:cardBackgroundColor="@color/light_purple"
             android:visibility="gone" >
+<!--            app:cardBackgroundColor="@color/light_purple"-->
+
 
             <androidx.cardview.widget.CardView
                 android:layout_width="147dp"
@@ -115,8 +116,8 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="18dp"
             android:background="@drawable/rounded_button"
-            android:text="@string/sign_in_button_text"
-            android:textColor="@android:color/white" />
+            android:text="@string/sign_in_button_text"/>
+<!--            android:textColor="@android:color/white" />-->
 
 
         <LinearLayout
@@ -134,7 +135,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/signup_link_register"
+                android:id="@+id/login_link_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"

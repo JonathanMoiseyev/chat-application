@@ -36,6 +36,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import communicationApp.androidClient.login.LoginActivity;
+import communicationApp.androidClient.settings.SettingsActivity;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -46,15 +47,38 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView signInLink;
 
     private Button buttonSubmit;
+    private TextView loginLink;
     private FloatingActionButton buttonChooseImage;
     private CardView cardViewImageContainer;
     private ImageView imageViewSelectedImage;
     private Uri selectedImageUri;
     private Bitmap selectedBitmap;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Bundle b = getIntent().getExtras();
+        setTheme(R.style.Base_Theme_AndroidClient);
+
+        if (b != null) {
+            String theme = b.getString("theme");
+            if (theme != null) {
+                switch (theme) {
+                    case "DEFAULT":
+                        setTheme(R.style.Purple_Teal_Theme);
+                        break;
+                    case "LIGHT":
+                        setTheme(R.style.BrightTheme);
+                        break;
+                    case "DARK":
+                        setTheme(R.style.DarkTheme);
+                        break;
+                    default:
+                        setTheme(R.style.Base_Theme_AndroidClient);
+                        break;
+                }
+            }
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
@@ -62,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
         editTextPassword = findViewById(R.id.password_et_register);
         editTextConfirmPassword = findViewById(R.id.confirm_password_et_register);
         editTextDisplayName = findViewById(R.id.display_name_et_register);
-        signInLink = findViewById(R.id.signup_link_register);
+        signInLink = findViewById(R.id.login_link_register);
         buttonChooseImage = findViewById(R.id.select_image_btn_register);
         buttonSubmit = findViewById(R.id.submit_button_register);
         cardViewImageContainer = findViewById(R.id.image_container_card_view_register);

@@ -1,11 +1,13 @@
 package communicationApp.androidClient;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import communicationApp.androidClient.login.LoginActivity;
+import communicationApp.androidClient.settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity {
     private enum Activities {
@@ -14,16 +16,27 @@ public class MainActivity extends AppCompatActivity {
         CHAT
     }
 
+    public static AppDB db;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        db =  Room.databaseBuilder(getApplicationContext(), AppDB.class, "HemiDB")
+                        .fallbackToDestructiveMigration()
+                        .allowMainThreadQueries()
+                        .build();
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivityForResult(intent, Activities.LOGIN.ordinal());
+//        Intent intent = new Intent(this, SettingsActivity.class);
+//        startActivityForResult(intent, Activities.LOGIN.ordinal());
+
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
 
     }
 
