@@ -41,4 +41,9 @@ public class Chat {
     public void setLastMessage(String lastMessage) {
        this.lastMessage = lastMessage;
     }
+
+    @Override
+    public String toString() {
+        return this.contact.displayName;
+    }
 }
