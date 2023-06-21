@@ -34,7 +34,15 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         try {
             SettingsDao settingsDao = MainActivity.db.settingsDao();
-            Settings settings = settingsDao.index().get(0);
+
+            Settings settings;
+            if (settingsDao.index().size() > 0) {
+                settings = settingsDao.index().get(0);
+            } else {
+                settings = new Settings();
+                settingsDao.insert(settings);
+            }
+
             Theme theme = settings.getTheme();
 
             switch (theme.ordinal()) {

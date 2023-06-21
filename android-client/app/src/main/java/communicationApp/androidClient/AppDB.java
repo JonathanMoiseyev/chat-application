@@ -7,7 +7,7 @@ import communicationApp.androidClient.data.model.LoggedInUser;
 import communicationApp.androidClient.settings.Settings;
 import communicationApp.androidClient.settings.SettingsDao;
 
-@Database(entities = {CurrentUser.class, Chat.class, Settings.class}, version = 7)
+@Database(entities = {CurrentUser.class, Chat.class, Settings.class}, version = 8)
 public abstract class AppDB extends RoomDatabase {
     public abstract ChatDao chatDao();
     public abstract CurrentUserDao currentUserDao();
