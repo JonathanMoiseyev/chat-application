@@ -24,8 +24,8 @@ import communicationApp.androidClient.entities.SettingsDao;
 
 public class ContactListActivity extends AppCompatActivity {
     private List<Chat> chats;
-    private ArrayAdapter<Chat> adapter;
-    private ListView lvContactList;
+//    private ArrayAdapter<Chat> adapter;
+//    private ListView lvContactList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,6 @@ public class ContactListActivity extends AppCompatActivity {
             setTheme(R.style.Base_Theme_AndroidClient);
         }
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
 
@@ -61,11 +60,11 @@ public class ContactListActivity extends AppCompatActivity {
         lstContacts.setAdapter(adapter);
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
 
-        FloatingActionButton btnGoToAddContact = findViewById(R.id.btnGoToAddContact);
-        btnGoToAddContact.setOnClickListener(v -> {
-            Intent i = new Intent(this, AddContactActivity.class);
-            startActivity(i);
-        });
+//        FloatingActionButton btnGoToAddContact = findViewById(R.id.btnGoToAddContact);
+//        btnGoToAddContact.setOnClickListener(v -> {
+//            Intent i = new Intent(this, AddContactActivity.class);
+//            startActivity(i);
+//        });
 
 //        chats = new ArrayList<>();
 //        lvContactList = findViewById(R.id.lvContactList);
@@ -75,11 +74,11 @@ public class ContactListActivity extends AppCompatActivity {
 //        lvContactList.setAdapter(adapter);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        chats.clear();
-        chats.addAll(MainActivity.db.chatDao().index());
-        adapter.notifyDataSetChanged();
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        chats.clear();
+//        chats.addAll(MainActivity.db.chatDao().index());
+//        adapter.notifyDataSetChanged();
+//    }
 }

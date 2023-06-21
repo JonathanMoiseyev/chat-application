@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -31,16 +32,17 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.View
 
     private final LayoutInflater mInflater;
     private List<Chat> mChats; // Cached copy of chats
-    private View.OnClickListener mOnClickListener;
+//    private View.OnClickListener mOnClickListener;
 
     public ChatsListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(android.view.ViewGroup parent, int viewType) {
+    @NonNull
+    public ViewHolder onCreateViewHolder(@NonNull android.view.ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.chat_list_item, parent, false);
-        view.setOnClickListener(mOnClickListener);
+//        view.setOnClickListener(mOnClickListener);
         return new ViewHolder(view);
     }
 
