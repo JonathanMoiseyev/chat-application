@@ -19,6 +19,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import communicationApp.androidClient.settings.Settings;
+import communicationApp.androidClient.settings.SettingsDao;
+
 
 public class AddContactActivity extends AppCompatActivity {
     private AppDB db;
@@ -27,6 +30,29 @@ public class AddContactActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        try {
+            SettingsDao settingsDao = MainActivity.db.settingsDao();
+            Settings settings = settingsDao.index().get(0);
+            Theme theme = settings.getTheme();
+
+            switch (theme.ordinal()) {
+                case 1:
+                    setTheme(R.style.Purple_Teal_Theme);
+                    break;
+                case 2:
+                    setTheme(R.style.BrightTheme);
+                    break;
+                case 3:
+                    setTheme(R.style.DarkTheme);
+                    break;
+                default:
+                    setTheme(R.style.Base_Theme_AndroidClient);
+                    break;
+            }
+        } catch (Exception e) {
+            setTheme(R.style.Base_Theme_AndroidClient);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
 
@@ -53,8 +79,10 @@ public class AddContactActivity extends AppCompatActivity {
                         System.out.println("sadsad");
 
                         try {
+                            String apiURL = MainActivity.db.settingsDao().index().get(0).getServerUrl() + "api";
+
                             // Create request
-                            URL url = new URL(getString(R.string.apiURL) + "/Chats");
+                            URL url = new URL(apiURL + "/Chats");
                             urlConnection = (HttpURLConnection) url.openConnection();
                             urlConnection.setRequestMethod("POST");
                             urlConnection.setRequestProperty("accept", "*/*");

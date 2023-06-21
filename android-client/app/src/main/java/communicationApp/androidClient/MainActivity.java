@@ -18,6 +18,10 @@ public class MainActivity extends AppCompatActivity {
 
     public static AppDB db;
 
+    public static final int RESULT_CODE_TO_OPEN_LOGIN = 1;
+    public static final int RESULT_CODE_TO_OPEN_REGISTER = 2;
+    public static final int RESULT_CODE_TO_OPEN_CONTACT_LIST = 3;
+
 
 
     @Override
@@ -39,24 +43,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
 
-        if (requestCode == Activities.LOGIN.ordinal()) {
-            if (resultCode == RESULT_OK) {
-                intent = new Intent(this, ContactListActivity.class);
-                startActivityForResult(intent, Activities.CHAT.ordinal());
-            } else {
-                intent = new Intent(this, RegisterActivity.class);
-                startActivityForResult(intent, Activities.REGISTER.ordinal());
-            }
-        }
-
-        else if (requestCode == Activities.REGISTER.ordinal()) {
-            intent = new Intent(this, LoginActivity.class);
-            startActivityForResult(intent, Activities.LOGIN.ordinal());
-        }
-
-        else { //if (requestCode == Activities.CHAT.ordinal()) {
-            intent = new Intent(this, LoginActivity.class);
-            startActivityForResult(intent, Activities.LOGIN.ordinal());
+        if (resultCode == RESULT_CODE_TO_OPEN_REGISTER) {
+            Intent registerIntent = new Intent(this, RegisterActivity.class);
+            startActivityForResult(registerIntent, Activities.REGISTER.ordinal());
+        } else if (resultCode == RESULT_CODE_TO_OPEN_LOGIN) {
+            Intent loginIntent = new Intent(this, LoginActivity.class);
+            startActivityForResult(loginIntent, Activities.LOGIN.ordinal());
+        } else if (resultCode == RESULT_CODE_TO_OPEN_CONTACT_LIST) {
+            Intent chatIntent = new Intent(this, ContactListActivity.class);
+            startActivityForResult(chatIntent, Activities.CHAT.ordinal());
+        } else {
+            // re enter the login activity
+            Intent loginIntent = new Intent(this, LoginActivity.class);
+            startActivityForResult(loginIntent, Activities.LOGIN.ordinal());
         }
 
     }

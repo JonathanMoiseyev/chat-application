@@ -21,11 +21,6 @@ import java.net.URL;
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
 public class LoginDataSource {
-    static private String apiURL;
-
-    LoginDataSource(String apiURL) {
-        LoginDataSource.apiURL = apiURL;
-    }
 
     private static class LoginNetworkRunnable implements Runnable {
         private Result<LoggedInUser> result;
@@ -49,7 +44,7 @@ public class LoginDataSource {
             try {
                 // handle loggedInUser authentication:
 
-
+                String apiURL = MainActivity.db.settingsDao().index().get(0).getServerUrl() + "api";
                 URL url = new URL(apiURL + "/Tokens");
                 clientForToken = (HttpURLConnection) url.openConnection();
                 clientForToken.setRequestMethod("POST");

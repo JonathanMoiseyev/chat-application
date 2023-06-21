@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,7 +40,13 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
+import communicationApp.androidClient.Theme;
+import communicationApp.androidClient.loginAndRegister.login.LoginActivity;
+import communicationApp.androidClient.settings.Settings;
+import communicationApp.androidClient.settings.SettingsActivity;
+import communicationApp.androidClient.settings.SettingsDao;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -60,8 +67,43 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        try {
+            SettingsDao settingsDao = MainActivity.db.settingsDao();
+            Settings settings = settingsDao.index().get(0);
+            Theme theme = settings.getTheme();
+
+            switch (theme.ordinal()) {
+                case 1:
+                    setTheme(R.style.Purple_Teal_Theme);
+                    break;
+                case 2:
+                    setTheme(R.style.BrightTheme);
+                    break;
+                case 3:
+                    setTheme(R.style.DarkTheme);
+                    break;
+                default:
+                    setTheme(R.style.Base_Theme_AndroidClient);
+                    break;
+            }
+        } catch (Exception e) {
+            setTheme(R.style.Base_Theme_AndroidClient);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        ImageButton settingsButton = findViewById(R.id.settings_button_register);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, SettingsActivity.class);
+                startActivity(intent);
+                
+                setResult(MainActivity.RESULT_CODE_TO_OPEN_REGISTER);
+                finish();
+            }
+        });
 
         registerViewModel = new RegisterViewModel();
 
@@ -143,6 +185,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         signInLink.setOnClickListener(v -> {
+            setResult(MainActivity.RESULT_CODE_TO_OPEN_LOGIN);
             finish();
         });
 
@@ -246,7 +289,9 @@ public class RegisterActivity extends AppCompatActivity {
 
             HttpURLConnection urlConnection = null;
             try {
-                URL url = new URL(getString(R.string.apiURL) + "/Users");
+                String apiURL = MainActivity.db.settingsDao().index().get(0).getServerUrl() + "api";
+
+                URL url = new URL(apiURL + "/Users");
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setRequestProperty("Content-Type", "application/json");
@@ -291,6 +336,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (result.equals("Registration successful")) {
                     // successfull registration
+                    setResult(MainActivity.RESULT_CODE_TO_OPEN_LOGIN);
                     finish();
                 }
             } else {

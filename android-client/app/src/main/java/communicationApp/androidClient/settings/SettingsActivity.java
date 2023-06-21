@@ -25,19 +25,40 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private EditText ipEditText;
+    private EditText urlEditText;
     private Spinner themeSpinner;
 
     private Theme theme = Theme.BASIC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.DarkTheme);
+        try {
+            SettingsDao settingsDao = MainActivity.db.settingsDao();
+            Settings settings = settingsDao.index().get(0);
+            Theme theme = settings.getTheme();
+
+            switch (theme.ordinal()) {
+                case 1:
+                    setTheme(R.style.Purple_Teal_Theme);
+                    break;
+                case 2:
+                    setTheme(R.style.BrightTheme);
+                    break;
+                case 3:
+                    setTheme(R.style.DarkTheme);
+                    break;
+                default:
+                    setTheme(R.style.Base_Theme_AndroidClient);
+                    break;
+            }
+        } catch (Exception e) {
+            setTheme(R.style.Base_Theme_AndroidClient);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
         // Initialize views
-        ipEditText = findViewById(R.id.ip_edittext);
+        urlEditText = findViewById(R.id.url_edittext);
         themeSpinner = findViewById(R.id.theme_spinner);
 
         // Set up theme spinner with custom adapter
@@ -61,36 +82,40 @@ public class SettingsActivity extends AppCompatActivity {
                 finish(); // Close the settings activity and return to the previous activity
             }
         });
+
+        // Get the saved settings from the local database
+        SettingsDao settingsDao = MainActivity.db.settingsDao();
+        Settings settings = settingsDao.index().get(0);
+
+        // Set the URL address and theme to the saved settings
+        urlEditText.setText(settings.getServerUrl());
     }
 
     private void applyChanges() {
-
         // Get user input
-        String ipAddress = ipEditText.getText().toString();
+        String urlAddress = urlEditText.getText().toString();
         String selectedTheme = themeSpinner.getSelectedItem().toString();
 
         // Save the preferences on the local database
         Settings settings = new Settings();
         settings.setId(0);
         settings.setTheme(theme);
-        settings.setServerUrl(ipAddress);
+        settings.setServerUrl(urlAddress);
 
         SettingsDao settingsDao = MainActivity.db.settingsDao();
-        settingsDao.insert(settings);
 
+        if (settingsDao.index().size() > 0) {
+            settingsDao.delete(settingsDao.index().get(0));
+        }
+
+        settingsDao.insert(settings);
 
         // Perform actions based on user input
         // Here, you can save the IP address and selected theme to shared preferences or perform other operations
 
-        // Set the theme
-        Intent intent = new Intent(this, RegisterActivity.class);
-        intent.putExtra("theme", theme.toString());
         // Show a toast to indicate changes applied
         Toast.makeText(this, "Changes applied", Toast.LENGTH_SHORT).show();
         finish(); // Close the settings activity and return to the previous activity
-        startActivity(intent);
-
-
     }
 
     private class ThemeAdapter extends ArrayAdapter<String> {

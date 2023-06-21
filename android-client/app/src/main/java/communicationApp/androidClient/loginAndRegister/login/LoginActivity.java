@@ -4,6 +4,8 @@ import android.app.Activity;
 
 import androidx.lifecycle.Observer;
 
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -18,13 +20,19 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import communicationApp.androidClient.AppDB;
+import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
+import communicationApp.androidClient.Theme;
 import communicationApp.androidClient.data.model.LoggedInUser;
 import communicationApp.androidClient.databinding.ActivityLoginBinding;
+import communicationApp.androidClient.settings.Settings;
+import communicationApp.androidClient.settings.SettingsActivity;
+import communicationApp.androidClient.settings.SettingsDao;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -33,12 +41,49 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        try {
+            SettingsDao settingsDao = MainActivity.db.settingsDao();
+            Settings settings = settingsDao.index().get(0);
+            Theme theme = settings.getTheme();
+
+            switch (theme.ordinal()) {
+                case 1:
+                    setTheme(R.style.Purple_Teal_Theme);
+                    break;
+                case 2:
+                    setTheme(R.style.BrightTheme);
+                    break;
+                case 3:
+                    setTheme(R.style.DarkTheme);
+                    break;
+                default:
+                    setTheme(R.style.Base_Theme_AndroidClient);
+                    break;
+            }
+        } catch (Exception e) {
+            setTheme(R.style.Base_Theme_AndroidClient);
+        }
+
         super.onCreate(savedInstanceState);
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        loginViewModel = new LoginViewModel(LoginRepository.getInstance(new LoginDataSource(getString(R.string.apiURL))));
+        ImageButton settingsButton = findViewById(R.id.settings_button_login);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SettingsActivity.class);
+                startActivity(intent);
+
+                setResult(MainActivity.RESULT_CODE_TO_OPEN_LOGIN);
+                finish();
+            }
+        });
+
+
+
+        loginViewModel = new LoginViewModel(LoginRepository.getInstance(new LoginDataSource()));
 
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
@@ -48,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
         registerLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setResult(Activity.RESULT_CANCELED);
+                setResult(MainActivity.RESULT_CODE_TO_OPEN_REGISTER);
                 finish();
             }
         });
@@ -131,7 +176,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-        setResult(Activity.RESULT_OK);
+        setResult(MainActivity.RESULT_CODE_TO_OPEN_CONTACT_LIST);
         finish();
     }
 

@@ -13,12 +13,12 @@
         android:layout_marginTop="16dp"
         android:layout_centerHorizontal="true" />
 
-    <!-- IP Address -->
+    <!-- URL Address -->
     <TextView
-        android:id="@+id/ip_label_textview"
+        android:id="@+id/url_label_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Server IP Address"
+        android:text="Server URL Address"
         android:textSize="18sp"
         android:layout_below="@id/title_textview"
         android:layout_marginTop="16dp"
@@ -26,14 +26,14 @@
 
     <!-- Theme Selection -->
     <EditText
-        android:id="@+id/ip_edittext"
+        android:id="@+id/url_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ip_label_textview"
+        android:layout_below="@id/url_label_textview"
         android:layout_marginHorizontal="50dp"
         android:layout_marginTop="9dp"
         android:gravity="center"
-        android:hint="Enter IP address"
+        android:hint="Enter URL address"
         android:inputType="text" />
 
     <TextView
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:text="Theme"
         android:textSize="18sp"
-        android:layout_below="@id/ip_edittext"
+        android:layout_below="@id/url_edittext"
         android:layout_marginTop="16dp"
         android:layout_centerHorizontal="true" />
 
@@ -58,22 +58,31 @@
         android:layout_marginRight="16dp"
         android:gravity="center"
         android:spinnerMode="dropdown"/>
+
     <ImageButton
         android:id="@+id/return_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_margin="16dp"/>
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_return_foreground" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/apply_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_check_foreground"
-        android:contentDescription="Exit" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="Submit and exit"
+        android:src="@drawable/ic_check_foreground" />
 
 </RelativeLayout>
