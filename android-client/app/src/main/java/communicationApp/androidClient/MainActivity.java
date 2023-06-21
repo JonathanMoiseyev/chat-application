@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import communicationApp.androidClient.login.LoginActivity;
+import communicationApp.androidClient.register.RegisterActivity;
 
 public class MainActivity extends AppCompatActivity {
     private enum Activities {

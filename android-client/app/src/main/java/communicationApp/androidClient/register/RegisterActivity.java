@@ -1,4 +1,4 @@
-package communicationApp.androidClient;
+package communicationApp.androidClient.register;
 
 import static android.content.ContentValues.TAG;
 
@@ -35,7 +35,7 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import communicationApp.androidClient.login.LoginActivity;
+import communicationApp.androidClient.R;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -69,8 +69,6 @@ public class RegisterActivity extends AppCompatActivity {
         imageViewSelectedImage = findViewById(R.id.selected_image_iv_register);
 
         signInLink.setOnClickListener(v -> {
-            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-            startActivity(intent);
             finish();
         });
 
@@ -217,9 +215,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this, result, Toast.LENGTH_SHORT).show();
 
                 if (result.equals("Registration successful")) {
-                    // Handle successful registration here, e.g., start the next activity
-                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                    startActivity(intent);
+                    // successfull registration
                     finish();
                 }
             } else {
