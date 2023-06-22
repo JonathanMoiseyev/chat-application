@@ -1,6 +1,10 @@
 package communicationApp.androidClient.chat;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,14 +19,17 @@ import java.util.List;
 import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
 import communicationApp.androidClient.Theme;
+import communicationApp.androidClient.adapters.ChatsListAdapter;
 import communicationApp.androidClient.entities.Chat;
 import communicationApp.androidClient.entities.Settings;
 import communicationApp.androidClient.entities.SettingsDao;
+import communicationApp.androidClient.entities.User;
 
 public class ContactListActivity extends AppCompatActivity {
     private List<Chat> chats;
-    private ArrayAdapter<Chat> adapter;
-    private ListView lvContactList;
+    private ChatsListAdapter adapter;
+
+    public static String chosenChatId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +56,21 @@ public class ContactListActivity extends AppCompatActivity {
             setTheme(R.style.Base_Theme_AndroidClient);
         }
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
+
+        RecyclerView lstContacts = findViewById(R.id.lstContacts);
+
+        DividerItemDecoration itemDecorator = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        itemDecorator.setDrawable(ContextCompat.getDrawable(this, R.drawable.divider));
+        lstContacts.addItemDecoration(itemDecorator);
+
+        adapter = new ChatsListAdapter(this);
+        lstContacts.setAdapter(adapter);
+        lstContacts.setLayoutManager(new LinearLayoutManager(this));
+
+        chats = MainActivity.db.chatDao().index();
+        adapter.setChats(chats);
 
         FloatingActionButton btnGoToAddContact = findViewById(R.id.btnGoToAddContact);
         btnGoToAddContact.setOnClickListener(v -> {
@@ -59,19 +78,23 @@ public class ContactListActivity extends AppCompatActivity {
             startActivity(i);
         });
 
-        chats = new ArrayList<>();
-        lvContactList = findViewById(R.id.lvContactList);
-        adapter = new ArrayAdapter<Chat>(this,
-                                                android.R.layout.simple_list_item_1,
-                                                chats);
-        lvContactList.setAdapter(adapter);
+//        chats = new ArrayList<>();
+//        lvContactList = findViewById(R.id.lvContactList);
+//        adapter = new ArrayAdapter<Chat>(this,
+//                                                android.R.layout.simple_list_item_1,
+//                                                chats);
+//        lvContactList.setAdapter(adapter);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        Object s = MainActivity.db.chatDao().index();
+
+
         chats.clear();
         chats.addAll(MainActivity.db.chatDao().index());
-        adapter.notifyDataSetChanged();
+        adapter.setChats(chats);
     }
 }

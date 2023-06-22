@@ -1,0 +1,36 @@
+<!-- Define your chat screen layout here -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- RecyclerView to display the messages -->
+
+    <!-- Input field for typing messages -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lstMessages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp" />
+
+    <Button
+        android:id="@+id/buttonSend"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="47dp"
+        android:text="Send" />
+
+    <EditText
+        android:id="@+id/editTextMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:hint="Type your message here" />
+
+
+    <!-- Button to send messages -->
+
+</RelativeLayout>

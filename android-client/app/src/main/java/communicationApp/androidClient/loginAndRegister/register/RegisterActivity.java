@@ -301,7 +301,7 @@ public class RegisterActivity extends AppCompatActivity {
                 requestData.put("username", username);
                 requestData.put("password", password);
                 requestData.put("displayName", displayName);
-                requestData.put("profilePic", bitmapToBase64(image));
+                requestData.put("profilePic", getString(R.string.base64_image_prefix) + bitmapToBase64(image));
 
                 DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream());
                 wr.writeBytes(requestData.toString());

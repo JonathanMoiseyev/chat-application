@@ -22,15 +22,15 @@ public class User {
         return id;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
-    String getDisplayName() {
+    public String getDisplayName() {
         return displayName;
     }
 
-    String getProfilePic() {
+    public String getProfilePic() {
         return profilePic;
     }
 

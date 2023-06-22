@@ -9,8 +9,8 @@
     <string name="sign_up_link_text">Sign Up</string>
     <string name="sign_in_page_header_text">Sign in to your account</string>
     <string name="sign_in_page_button_text">Continue</string>
-    <string name="login_failed">incorrect username or password</string>
-
+    <string name="incorrect_login_details">incorrect username or password</string>
+    <string name="connection_error">error connecting to server</string>
     <string name="invalid_username">username can not be empty</string>
 
     <string name="password_not_long_enough">password must be at least 8 characters</string>
@@ -42,4 +42,5 @@
     <string name="user_does_not_exist">User does not exist</string>
     <string name="enter_server_url">Enter Server URL</string>
     <string name="apply_settings_button_text">Apply and Exit</string>
+    <string name="base64_image_prefix">data:image/png;base64,</string>
 </resources>
