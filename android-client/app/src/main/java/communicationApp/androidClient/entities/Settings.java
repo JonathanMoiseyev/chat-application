@@ -10,7 +10,7 @@ import communicationApp.androidClient.Theme;
 public class Settings {
     @PrimaryKey
     private int id;
-    private Theme theme = Theme.BASIC;
+    private Theme theme = Theme.DEFAULT;
     private String serverUrl = "http://10.0.2.2:5000/";
 
     public Theme getTheme() {

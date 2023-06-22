@@ -9,6 +9,8 @@ import android.os.Bundle;
 import communicationApp.androidClient.chat.MessagesActivity;
 import communicationApp.androidClient.chat.ContactListActivity;
 import communicationApp.androidClient.entities.AppDB;
+import communicationApp.androidClient.entities.Settings;
+import communicationApp.androidClient.entities.SettingsDao;
 import communicationApp.androidClient.loginAndRegister.login.LoginActivity;
 import communicationApp.androidClient.loginAndRegister.register.RegisterActivity;
 
@@ -33,6 +35,15 @@ public class MainActivity extends AppCompatActivity {
                 .fallbackToDestructiveMigration()
                 .allowMainThreadQueries()
                 .build();
+
+
+        // making sure the settings are set
+        SettingsDao settingsDao = MainActivity.db.settingsDao();
+        if (settingsDao.index().size() == 0) {
+            Settings settings = new Settings();
+            settingsDao.insert(settings);
+        }
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
