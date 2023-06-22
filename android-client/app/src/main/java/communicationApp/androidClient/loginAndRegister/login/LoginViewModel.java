@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.net.ConnectException;
+
 import communicationApp.androidClient.loginAndRegister.login.model.LoggedInUser;
 import communicationApp.androidClient.R;
 import communicationApp.androidClient.loginAndRegister.ValidFieldChecker;
@@ -34,7 +36,12 @@ public class LoginViewModel extends ViewModel {
             LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
             loginResult.setValue(new LoginResult(data));
         } else {
-            loginResult.setValue(new LoginResult(R.string.login_failed));
+            Exception error = ((Result.Error) result).getError();
+            if (error instanceof ConnectException) {
+                loginResult.setValue(new LoginResult(R.string.connection_error));
+            } else {
+                loginResult.setValue(new LoginResult(R.string.incorrect_login_details));
+            }
         }
 
 
