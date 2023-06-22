@@ -43,8 +43,6 @@ public class LoginViewModel extends ViewModel {
                 loginResult.setValue(new LoginResult(R.string.incorrect_login_details));
             }
         }
-
-
     }
 
     public void loginDataChanged(String username, String password) {
