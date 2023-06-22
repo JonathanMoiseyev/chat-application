@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
 import communicationApp.androidClient.chat.AddContactActivity;
 import communicationApp.androidClient.chat.ContactListActivity;
@@ -61,7 +62,6 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.View
 
             holder.displayName.setText(current.getContact().getDisplayName());
             String lastMessage = current.getLastMessage();
-            lastMessage = "fat man in a little purple coat";
             if (lastMessage.length() > MAX_MESSAGE_LENGTH) {
                 lastMessage = lastMessage.substring(0, MAX_MESSAGE_LENGTH) + "...";
             }
