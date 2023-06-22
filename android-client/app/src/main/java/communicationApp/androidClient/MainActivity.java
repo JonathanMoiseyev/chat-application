@@ -6,6 +6,7 @@ import androidx.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 
+import communicationApp.androidClient.chat.MessagesActivity;
 import communicationApp.androidClient.chat.ContactListActivity;
 import communicationApp.androidClient.entities.AppDB;
 import communicationApp.androidClient.loginAndRegister.login.LoginActivity;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, ChatActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivityForResult(intent, Activities.LOGIN.ordinal());
     }
 

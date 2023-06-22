@@ -22,7 +22,7 @@ public class User {
         return id;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
