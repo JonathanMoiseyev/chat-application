@@ -125,10 +125,11 @@ public class AddContactActivity extends AppCompatActivity {
                                 String id = responseData.getString("id");
                                 JSONObject user = responseData.getJSONObject("user");
 
-                                int contactId = -1;
+                                int contactId = -1; // TODO: FIX
                                 String contactUsername = user.getString("username");
                                 String contactDisplayName = user.getString("displayName");
                                 String contactProfilePic = user.getString("profilePic");
+                                contactProfilePic = contactProfilePic.substring(getString(R.string.base64_image_prefix).length());
 
                                 // Save contact to local database
                                 User contact = new User(contactId, contactUsername, contactDisplayName, contactProfilePic);

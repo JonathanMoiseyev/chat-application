@@ -42,4 +42,5 @@
     <string name="user_does_not_exist">User does not exist</string>
     <string name="enter_server_url">Enter Server URL</string>
     <string name="apply_settings_button_text">Apply and Exit</string>
+    <string name="base64_image_prefix">data:image/png;base64,</string>
 </resources>
