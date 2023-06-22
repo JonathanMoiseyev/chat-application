@@ -6,6 +6,7 @@ import androidx.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 
+import communicationApp.androidClient.chat.MessagesActivity;
 import communicationApp.androidClient.chat.ContactListActivity;
 import communicationApp.androidClient.entities.AppDB;
 import communicationApp.androidClient.loginAndRegister.login.LoginActivity;

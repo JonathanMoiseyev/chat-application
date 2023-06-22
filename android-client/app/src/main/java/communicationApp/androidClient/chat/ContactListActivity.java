@@ -27,6 +27,8 @@ public class ContactListActivity extends AppCompatActivity {
     private List<Chat> chats;
     private ChatsListAdapter adapter;
 
+    public static String chosenChatId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {

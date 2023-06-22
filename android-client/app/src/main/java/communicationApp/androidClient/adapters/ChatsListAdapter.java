@@ -1,6 +1,9 @@
 package communicationApp.androidClient.adapters;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -14,6 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import communicationApp.androidClient.R;
+import communicationApp.androidClient.chat.AddContactActivity;
+import communicationApp.androidClient.chat.ContactListActivity;
+import communicationApp.androidClient.chat.MessagesActivity;
 import communicationApp.androidClient.entities.Chat;
 
 public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.ViewHolder> {
@@ -32,7 +38,6 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.View
 
     private final LayoutInflater mInflater;
     private List<Chat> mChats; // Cached copy of chats
-//    private View.OnClickListener mOnClickListener;
 
     public ChatsListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
@@ -42,7 +47,6 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.View
     @NonNull
     public ViewHolder onCreateViewHolder(@NonNull android.view.ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.chat_list_item, parent, false);
-//        view.setOnClickListener(mOnClickListener);
         return new ViewHolder(view);
     }
 
@@ -56,6 +60,13 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.View
             holder.displayName.setText(current.getContact().getDisplayName());
             holder.lastMessage.setText(current.getLastMessage());
             holder.profilePic.setImageBitmap(BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length));
+
+            holder.itemView.setOnClickListener(v -> {
+                ContactListActivity.chosenChatId = current.getId();
+
+                Intent i = new Intent(v.getContext(), MessagesActivity.class);
+                startActivity(v.getContext(), i, null);
+            });
         } else {
             // Covers the case of data not being ready yet.
             holder.displayName.setText("No Chats");
