@@ -81,10 +81,6 @@ public class AddContactActivity extends AppCompatActivity {
                         // Contact server to add contact
                         HttpURLConnection urlConnection = null;
 
-                        CurrentUser s = currentUser.get(0);
-                        String ss = s.getToken();
-                        System.out.println("sadsad");
-
                         try {
                             String apiURL = MainActivity.db.settingsDao().index().get(0).getServerUrl() + "api";
 
@@ -143,7 +139,6 @@ public class AddContactActivity extends AppCompatActivity {
                             }
                         } catch (Exception e) {
                             Log.e(TAG, "Error sending registration data", e);
-                            System.out.println("asdasd");
                         } finally {
                             if (urlConnection != null) {
                                 urlConnection.disconnect();
