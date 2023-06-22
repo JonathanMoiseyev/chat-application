@@ -21,10 +21,13 @@ import java.util.List;
 
 import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
+import communicationApp.androidClient.Theme;
 import communicationApp.androidClient.adapters.MessageListAdapter;
 import communicationApp.androidClient.entities.AppDB;
 import communicationApp.androidClient.entities.Message;
 import communicationApp.androidClient.entities.MessageDao;
+import communicationApp.androidClient.entities.Settings;
+import communicationApp.androidClient.entities.SettingsDao;
 import communicationApp.androidClient.loginAndRegister.login.Result;
 
 
@@ -99,6 +102,29 @@ public class MessagesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        try {
+            SettingsDao settingsDao = MainActivity.db.settingsDao();
+            Settings settings = settingsDao.index().get(0);
+            Theme theme = settings.getTheme();
+
+            switch (theme.ordinal()) {
+                case 1:
+                    setTheme(R.style.Purple_Teal_Theme);
+                    break;
+                case 2:
+                    setTheme(R.style.BrightTheme);
+                    break;
+                case 3:
+                    setTheme(R.style.DarkTheme);
+                    break;
+                default:
+                    setTheme(R.style.Base_Theme_AndroidClient);
+                    break;
+            }
+        } catch (Exception e) {
+            setTheme(R.style.Base_Theme_AndroidClient);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
 
