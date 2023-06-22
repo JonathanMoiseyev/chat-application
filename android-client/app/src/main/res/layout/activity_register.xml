@@ -101,8 +101,6 @@
             android:padding="8dp"
             app:cardCornerRadius="250dp"
             android:visibility="gone" >
-<!--            app:cardBackgroundColor="@color/light_purple"-->
-
 
             <androidx.cardview.widget.CardView
                 android:layout_width="147dp"

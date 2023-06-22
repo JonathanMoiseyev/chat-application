@@ -23,6 +23,8 @@ import communicationApp.androidClient.chat.MessagesActivity;
 import communicationApp.androidClient.entities.Chat;
 
 public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.ViewHolder> {
+
+    public static int MAX_MESSAGE_LENGTH = 24;
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView displayName;
         private final TextView lastMessage;
@@ -58,7 +60,12 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.View
             byte[] decodedBytes = Base64.decode(current.getContact().getProfilePic(), Base64.DEFAULT);
 
             holder.displayName.setText(current.getContact().getDisplayName());
-            holder.lastMessage.setText(current.getLastMessage());
+            String lastMessage = current.getLastMessage();
+            lastMessage = "fat man in a little purple coat";
+            if (lastMessage.length() > MAX_MESSAGE_LENGTH) {
+                lastMessage = lastMessage.substring(0, MAX_MESSAGE_LENGTH) + "...";
+            }
+            holder.lastMessage.setText(lastMessage);
             holder.profilePic.setImageBitmap(BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length));
 
             holder.itemView.setOnClickListener(v -> {
