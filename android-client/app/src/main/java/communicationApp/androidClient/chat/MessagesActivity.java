@@ -166,6 +166,8 @@ public class MessagesActivity extends AppCompatActivity {
             EditText txtMessage = findViewById(R.id.editTextMessage);
             String content = txtMessage.getText().toString().trim();
 
+            txtMessage.setText("");
+
             if (!content.isEmpty()) {
                 // TODO: this is where the message should be sent to the server
 
