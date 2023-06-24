@@ -1,17 +1,16 @@
 package communicationApp.androidClient.chat;
 
+import android.content.Context;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Base64;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,7 +20,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,17 +27,12 @@ import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
 import communicationApp.androidClient.Theme;
 import communicationApp.androidClient.adapters.MessageListAdapter;
-import communicationApp.androidClient.entities.AppDB;
-import communicationApp.androidClient.entities.Chat;
-import communicationApp.androidClient.entities.ChatDao;
-import communicationApp.androidClient.entities.CurrentUser;
-import communicationApp.androidClient.entities.CurrentUserDao;
+
 import communicationApp.androidClient.entities.Message;
 import communicationApp.androidClient.entities.MessageDao;
 import communicationApp.androidClient.entities.Settings;
 import communicationApp.androidClient.entities.SettingsDao;
 import communicationApp.androidClient.entities.User;
-import communicationApp.androidClient.loginAndRegister.login.Result;
 
 
 public class MessagesActivity extends AppCompatActivity {
@@ -200,6 +193,34 @@ public class MessagesActivity extends AppCompatActivity {
                     adapter.setMessages(MainActivity.db.messageDao().get(ContactListActivity.chosenChatId));
                 }
 
+            }
+        });
+
+
+        Context thisContext = this;
+        MainActivity.refresher.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                //Initialize contact with User DB
+                User contact = MainActivity.db.chatDao().get(ContactListActivity.chosenChatId).getContact();
+                byte[] decodedBytes = Base64.decode(contact.getProfilePic(), Base64.DEFAULT);
+
+                // Initialize views
+                ImageView image = findViewById(R.id.profilePic);
+                image.setImageBitmap(BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length));
+
+                TextView displayName = findViewById(R.id.displayName);
+                displayName.setText(contact.getDisplayName());
+
+                RecyclerView lstMessages = findViewById(R.id.lstMessages);
+                adapter = new MessageListAdapter(thisContext);
+                lstMessages.setAdapter(adapter);
+                lstMessages.setLayoutManager(new LinearLayoutManager(thisContext));
+
+
+                // Render stored messages
+                messages = MainActivity.db.messageDao().get(ContactListActivity.chosenChatId);
+                adapter.setMessages(messages);
             }
         });
     }

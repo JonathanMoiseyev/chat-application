@@ -12,7 +12,6 @@ import java.util.List;
 public interface ChatDao {
     @Query("SELECT * FROM Chat")
     List<Chat> index();
-
     @Query("SELECT * FROM Chat WHERE id = :id")
     Chat get(String id);
 

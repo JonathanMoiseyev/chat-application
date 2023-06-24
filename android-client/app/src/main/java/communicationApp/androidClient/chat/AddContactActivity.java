@@ -23,7 +23,6 @@ import communicationApp.androidClient.Theme;
 import communicationApp.androidClient.entities.AppDB;
 import communicationApp.androidClient.entities.Chat;
 import communicationApp.androidClient.entities.ChatDao;
-import communicationApp.androidClient.entities.CurrentUser;
 import communicationApp.androidClient.entities.CurrentUserDao;
 import communicationApp.androidClient.entities.User;
 import communicationApp.androidClient.entities.Settings;

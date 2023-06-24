@@ -3,6 +3,7 @@ package communicationApp.androidClient;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 
 import android.Manifest;
@@ -34,10 +35,13 @@ public class MainActivity extends AppCompatActivity {
     public static final int RESULT_CODE_TO_OPEN_REGISTER = 2;
     public static final int RESULT_CODE_TO_OPEN_CONTACT_LIST = 3;
 
+    public static MutableLiveData<Boolean> refresher;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        refresher = new MutableLiveData<>(false);
+        
         db =  Room.databaseBuilder(getApplicationContext(), AppDB.class, "HemiDB")
                 .fallbackToDestructiveMigration()
                 .allowMainThreadQueries()

@@ -2,6 +2,7 @@ package communicationApp.androidClient.chat;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -84,13 +85,23 @@ public class ContactListActivity extends AppCompatActivity {
 //                                                android.R.layout.simple_list_item_1,
 //                                                chats);
 //        lvContactList.setAdapter(adapter);
+
+
+
+        MainActivity.refresher.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                // refreshing the activity
+                chats.clear();
+                chats.addAll(MainActivity.db.chatDao().index());
+                adapter.setChats(chats);
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        Object s = MainActivity.db.chatDao().index();
 
         chats.clear();
         chats.addAll(MainActivity.db.chatDao().index());
