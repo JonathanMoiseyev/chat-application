@@ -14,6 +14,8 @@ import android.os.Bundle;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.util.Objects;
+
 import communicationApp.androidClient.chat.ContactListActivity;
 import communicationApp.androidClient.entities.AppDB;
 import communicationApp.androidClient.entities.Settings;
@@ -29,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static AppDB db;
-    public static String fireBaseToken;
+    public static String fireBaseToken = "";
 
     public static final int RESULT_CODE_TO_OPEN_LOGIN = 1;
     public static final int RESULT_CODE_TO_OPEN_REGISTER = 2;
@@ -58,19 +60,23 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
+        String[] permissions = {Manifest.permission.POST_NOTIFICATIONS};
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED ) {
+            ActivityCompat.requestPermissions(this, permissions, 1);
+            finish();
+        }
 
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(MainActivity.this, instanceIdResult -> {
             fireBaseToken = instanceIdResult.getToken();
         });
 
 
+
+
         Intent intent = new Intent(this, LoginActivity.class);
         startActivityForResult(intent, Activities.LOGIN.ordinal());
 
-        String[] permissions = {Manifest.permission.POST_NOTIFICATIONS};
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED ) {
-            ActivityCompat.requestPermissions(this, permissions, 1);
-        }
+
     }
 
 
