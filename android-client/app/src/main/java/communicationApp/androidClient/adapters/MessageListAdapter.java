@@ -68,8 +68,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             String loggedInUser = MainActivity.db.currentUserDao().index().get(0).getUserName();
             String sender = loggedInUser;
 
-//            TODO: replace with sender.equals(loggedInUser)
-            if (position % 2 == 0) {
+            if (sender.equals(loggedInUser)) {
                 params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
                 messageContent.setBackground(holder.itemView.getResources().getDrawable(R.drawable.rounded_button));
             } else {
