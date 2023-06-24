@@ -1,5 +1,7 @@
 package communicationApp.androidClient.chat;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
@@ -9,11 +11,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,10 +38,66 @@ import communicationApp.androidClient.entities.SettingsDao;
 import communicationApp.androidClient.entities.User;
 
 public class ContactListActivity extends AppCompatActivity {
-    private List<Chat> chats;
+    private List<Chat> chats = new ArrayList<>();
     private ChatsListAdapter adapter;
 
     public static String chosenChatId;
+
+    private void getContactsFromServer() {
+        Thread thread = new Thread(() -> {
+            HttpURLConnection urlConnection = null;
+
+            try {
+                String apiURL = MainActivity.db.settingsDao().index().get(0).getServerUrl() + "api";
+
+                // Create request
+                URL url = new URL(apiURL + "/Chats");
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.setRequestProperty("accept", "text/plain");
+                urlConnection.setRequestProperty("Authorization", "bearer " + MainActivity.db.currentUserDao().index().get(0).getToken());
+
+                // Send request
+                int responseCode = urlConnection.getResponseCode();
+
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStream inputStream = urlConnection.getInputStream();
+
+                    // Get response object
+                    StringBuilder response = new StringBuilder();
+                    int data;
+
+                    while ((data = inputStream.read()) != -1) {
+                        response.append((char) data);
+                    }
+
+                    // Cast the response array to arraylist of Chats, and save on the local db
+                    JSONArray chatsJsonArray = new JSONArray(response.toString());
+                    chats = new ArrayList<>();
+
+                    for (int i = 0; i < chatsJsonArray.length(); i++) {
+                        JSONObject chatJsonObject = chatsJsonArray.getJSONObject(i);
+                        JSONObject userJsonObject = chatJsonObject.getJSONObject("user");
+
+                        User user = new User(-1, userJsonObject.getString("username"), userJsonObject.getString("displayName"), userJsonObject.getString("profilePic"));
+                        Chat chat = new Chat(chatJsonObject.getString("id"), user, chatJsonObject.getString("lastMessage"));
+
+                        chats.add(chat);
+                    }
+
+                    adapter.setChats(chats);
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "Error sending registration data", e);
+            } finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+            }
+        });
+
+        thread.start();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +137,7 @@ public class ContactListActivity extends AppCompatActivity {
         lstContacts.setAdapter(adapter);
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
 
-        chats = MainActivity.db.chatDao().index();
-        adapter.setChats(chats);
+        getContactsFromServer();
 
         FloatingActionButton btnGoToAddContact = findViewById(R.id.btnGoToAddContact);
         btnGoToAddContact.setOnClickListener(v -> {
@@ -92,7 +158,12 @@ public class ContactListActivity extends AppCompatActivity {
             @Override
             public void onChanged(Boolean aBoolean) {
                 // refreshing the activity
-                chats.clear();
+                if (chats != null) {
+                    chats.clear();
+                } else {
+                    chats = new ArrayList<>();
+                }
+
                 chats.addAll(MainActivity.db.chatDao().index());
                 adapter.setChats(chats);
             }
@@ -103,7 +174,12 @@ public class ContactListActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        chats.clear();
+        if (chats != null) {
+            chats.clear();
+        } else {
+            chats = new ArrayList<>();
+        }
+
         chats.addAll(MainActivity.db.chatDao().index());
         adapter.setChats(chats);
     }

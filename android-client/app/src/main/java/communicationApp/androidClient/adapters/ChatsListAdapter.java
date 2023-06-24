@@ -60,8 +60,8 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.View
             Chat current = mChats.get(position);
             String chatId = current.getId();
 
-
-            byte[] decodedBytes = Base64.decode(current.getContact().getProfilePic(), Base64.DEFAULT);
+            String profilePicStr = current.getContact().getProfilePic().substring(current.getContact().getProfilePic().indexOf(",") + 1);
+            byte[] decodedBytes = Base64.decode(profilePicStr, Base64.DEFAULT);
 
             holder.displayName.setText(current.getContact().getDisplayName());
 
@@ -72,9 +72,6 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.View
                 lastMessageStr = lastMessage.getContent();
                 MainActivity.db.chatDao().get(chatId).setLastMessage(lastMessageStr);
             }
-
-
-
 
             if (lastMessageStr.length() > MAX_MESSAGE_LENGTH) {
                 lastMessageStr = lastMessageStr.substring(0, MAX_MESSAGE_LENGTH) + "...";
