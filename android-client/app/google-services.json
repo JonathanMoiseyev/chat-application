@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "812994582627",
+    "project_id": "mitkadem2hwfirebase",
+    "storage_bucket": "mitkadem2hwfirebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:812994582627:android:f2e6015ad8e505e036c056",
+        "android_client_info": {
+          "package_name": "communicationApp.androidClient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "812994582627-vuio55o2pvc79b8uql3t4dnhbbakvr7f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxWbjNbc7-2zEdNgJ0RcT5R3ISGxsQauk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "812994582627-vuio55o2pvc79b8uql3t4dnhbbakvr7f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
