@@ -65,10 +65,8 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
             TextView messageContent = holder.itemView.findViewById(R.id.messageContent);
 
-            String loggedInUser = MainActivity.db.currentUserDao().index().get(0).getUserName();
-            String sender = loggedInUser;
 
-            if (sender.equals(loggedInUser)) {
+            if (current.isSentByMe()) {
                 params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
                 messageContent.setBackground(holder.itemView.getResources().getDrawable(R.drawable.rounded_button));
             } else {

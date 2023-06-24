@@ -65,7 +65,7 @@ public class FirebaseMsgService extends FirebaseMessagingService {
             }
 
             MainActivity.db.messageDao().insert(new Message(chatId, message.getNotification().getBody(),
-                    new Date().toString(), contactUsername));
+                    new Date().toString(), contactUsername, false));
 
             // refreshing the activity
             try{

@@ -186,7 +186,7 @@ public class MessagesActivity extends AppCompatActivity {
 
                     // TODO: finish this line: message = new Message(...);
                     Message message = new Message(ContactListActivity.chosenChatId, content, new Date().toString(),
-                            MainActivity.db.chatDao().get(ContactListActivity.chosenChatId).getContact().getName());
+                            MainActivity.db.chatDao().get(ContactListActivity.chosenChatId).getContact().getName(), true);
                     messageDao.insert(message);
 
                     // Update the screen
