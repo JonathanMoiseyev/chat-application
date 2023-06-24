@@ -4,7 +4,7 @@ const app = express();
 const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(5555, server);
+const io = new Server(5553, server);
 
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -23,9 +23,9 @@ mongoose.connect("mongodb://127.0.0.1:27017/HemiDB", {
 });
 
 io.on("connection", function (socket) {
-    socket.on("msg", function (msg) {
-        io.emit(msg.reciverUserName, msg);
-    });
+    // socket.on("msg", function (msg) {
+    //     io.emit(msg.reciverUserName, msg);
+    // });
 
     socket.on("new contact", function (msg) {
         io.emit(
@@ -40,3 +40,6 @@ app.use("/api/Users", routerUser);
 app.use("/api/Chats", routerChat);
 
 app.listen(5000);
+
+
+module.exports = {io}

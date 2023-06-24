@@ -12,7 +12,7 @@ function Chat({ user, setUser }) {
     
 
 
-    const socket = io("ws://localhost:5555", { transports: ["websocket"] });
+    const socket = io("ws://localhost:5553", { transports: ["websocket"] });
 
     socket.on(user.username, function(msg) {
         user.contacts.forEach((contact) => {

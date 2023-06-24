@@ -50,6 +50,8 @@ public class LoginDataSource {
 
                 clientForToken.setRequestProperty("accept", "*/*");
                 clientForToken.setRequestProperty("Content-Type", "application/json");
+                System.out.println(MainActivity.fireBaseToken);
+                clientForToken.setRequestProperty("androidtoken", MainActivity.fireBaseToken);
 
                 clientForToken.setDoOutput(true);
 

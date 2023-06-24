@@ -1,6 +1,28 @@
 const Chat = require("../models/chat");
 const User = require("../models/user");
 const Message = require("../models/message");
+const firebaseKey = require("../firebaseKey.json");
+const admin = require("firebase-admin");
+
+admin.initializeApp({
+    credential: admin.credential.cert(firebaseKey)
+});
+
+const sendMsgToAndroid = (fcm_token, title, body) => {
+
+    admin.messaging().send({
+        notification: {
+            title: title,
+            body: body
+        },
+        token: fcm_token
+    });
+}
+
+const io = require("socket.io")();
+
+
+
 
 const getChats = async (username) => {
     const chats = await Chat.find({ users: { $elemMatch: { username: username } } });
@@ -94,6 +116,25 @@ const addChatMessage = async (chatId, username, message) => {
     await msg.save();
     chat.messages.push(msg);
     await chat.save();
+
+    chat.users.forEach(async (user) => {
+        if (user != null && user.username !== username) {
+            const reciver = await User.findOne({ username: user.username });
+            if (reciver.androidToken === "" || reciver.androidToken == null) {
+                // send via socket io
+                io.emit(reciver.username, {msg: msg, sender: msg.sender, reciverUserName: reciver.username});
+            }
+
+            else {
+                // send notification through firebase
+
+            
+                sendMsgToAndroid(reciver.androidToken, msg.sender.username + ":", msg.content);
+            }
+        }
+    });
+
+
 
     return msg;
 };

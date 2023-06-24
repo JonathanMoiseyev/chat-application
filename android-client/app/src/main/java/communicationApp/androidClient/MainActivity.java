@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static AppDB db;
+    public static String fireBaseToken;
 
     public static final int RESULT_CODE_TO_OPEN_LOGIN = 1;
     public static final int RESULT_CODE_TO_OPEN_REGISTER = 2;
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(MainActivity.this, instanceIdResult -> {
-            String newToken = instanceIdResult.getToken();
+            fireBaseToken = instanceIdResult.getToken();
         });
 
 
