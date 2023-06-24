@@ -16,11 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
 import communicationApp.androidClient.chat.AddContactActivity;
 import communicationApp.androidClient.chat.ContactListActivity;
 import communicationApp.androidClient.chat.MessagesActivity;
 import communicationApp.androidClient.entities.Chat;
+import communicationApp.androidClient.entities.Message;
 
 public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.ViewHolder> {
 
@@ -56,16 +58,28 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         if (mChats != null) {
             Chat current = mChats.get(position);
+            String chatId = current.getId();
+
 
             byte[] decodedBytes = Base64.decode(current.getContact().getProfilePic(), Base64.DEFAULT);
 
             holder.displayName.setText(current.getContact().getDisplayName());
-            String lastMessage = current.getLastMessage();
-            lastMessage = "fat man in a little purple coat";
-            if (lastMessage.length() > MAX_MESSAGE_LENGTH) {
-                lastMessage = lastMessage.substring(0, MAX_MESSAGE_LENGTH) + "...";
+
+            List<Message> messages = MainActivity.db.messageDao().get(chatId);
+            String lastMessageStr = "";
+            if (messages.size() > 0) {
+                Message lastMessage = messages.get(messages.size() - 1);
+                lastMessageStr = lastMessage.getContent();
+                MainActivity.db.chatDao().get(chatId).setLastMessage(lastMessageStr);
             }
-            holder.lastMessage.setText(lastMessage);
+
+
+
+
+            if (lastMessageStr.length() > MAX_MESSAGE_LENGTH) {
+                lastMessageStr = lastMessageStr.substring(0, MAX_MESSAGE_LENGTH) + "...";
+            }
+            holder.lastMessage.setText(lastMessageStr);
             holder.profilePic.setImageBitmap(BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length));
 
             holder.itemView.setOnClickListener(v -> {

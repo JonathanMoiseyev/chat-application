@@ -92,7 +92,6 @@ public class ContactListActivity extends AppCompatActivity {
 
         Object s = MainActivity.db.chatDao().index();
 
-
         chats.clear();
         chats.addAll(MainActivity.db.chatDao().index());
         adapter.setChats(chats);

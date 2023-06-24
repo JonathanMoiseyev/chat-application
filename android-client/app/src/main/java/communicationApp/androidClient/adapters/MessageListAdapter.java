@@ -1,16 +1,22 @@
 package communicationApp.androidClient.adapters;
 
 import android.view.LayoutInflater;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
+import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
 import communicationApp.androidClient.entities.Chat;
+import communicationApp.androidClient.entities.CurrentUserDao;
 import communicationApp.androidClient.entities.Message;
 
 public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.ViewHolder> {
@@ -44,11 +50,46 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         if (mMessages != null) {
             Message current = mMessages.get(position);
             holder.messageContent.setText(current.getContent());
-            holder.timestamp.setText(current.getTimestamp().toString());
+
+            String timestamp = current.getTimestamp().toString();
+            try {
+                String trimmedTimeStamp = current.getTimestamp().toString();
+                trimmedTimeStamp = trimmedTimeStamp.substring(0, ordinalIndexOf(timestamp, ":", 2));
+                timestamp = trimmedTimeStamp.substring(ordinalIndexOf(timestamp, " ", 3) + 1);
+            } finally {
+                holder.timestamp.setText(timestamp);
+            }
+
+            ConstraintLayout constraintLayout = holder.itemView.findViewById(R.id.messageLayout);
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) constraintLayout.getLayoutParams();
+
+            TextView messageContent = holder.itemView.findViewById(R.id.messageContent);
+
+            String loggedInUser = MainActivity.db.currentUserDao().index().get(0).getUserName();
+            String sender = loggedInUser;
+
+//            TODO: replace with sender.equals(loggedInUser)
+            if (position % 2 == 0) {
+                params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                messageContent.setBackground(holder.itemView.getResources().getDrawable(R.drawable.rounded_button));
+            } else {
+                params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                messageContent.setBackground(holder.itemView.getResources().getDrawable(R.drawable.rounded_button_secondary_color));
+            }
+
+            constraintLayout.setLayoutParams(params);
+
         } else {
             // Covers the case of data not being ready yet.
             holder.messageContent.setText("No messages");
         }
+    }
+
+    private int ordinalIndexOf(String str, String substr, int n) {
+        int pos = str.indexOf(substr);
+        while (--n > 0 && pos != -1)
+            pos = str.indexOf(substr, pos + 1);
+        return pos;
     }
 
     @Override

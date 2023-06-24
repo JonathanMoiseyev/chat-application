@@ -44,8 +44,7 @@
         android:layout_marginStart="13dp"
         android:gravity="center_vertical"
         android:textStyle="bold"
-        android:text="fat name"
-         />
+        android:text="fat name" />
 
     <TextView
         android:id="@+id/lastMessage"

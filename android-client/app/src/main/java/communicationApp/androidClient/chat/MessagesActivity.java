@@ -1,9 +1,15 @@
 package communicationApp.androidClient.chat;
 
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,10 +30,15 @@ import communicationApp.androidClient.R;
 import communicationApp.androidClient.Theme;
 import communicationApp.androidClient.adapters.MessageListAdapter;
 import communicationApp.androidClient.entities.AppDB;
+import communicationApp.androidClient.entities.Chat;
+import communicationApp.androidClient.entities.ChatDao;
+import communicationApp.androidClient.entities.CurrentUser;
+import communicationApp.androidClient.entities.CurrentUserDao;
 import communicationApp.androidClient.entities.Message;
 import communicationApp.androidClient.entities.MessageDao;
 import communicationApp.androidClient.entities.Settings;
 import communicationApp.androidClient.entities.SettingsDao;
+import communicationApp.androidClient.entities.User;
 import communicationApp.androidClient.loginAndRegister.login.Result;
 
 
@@ -128,7 +139,17 @@ public class MessagesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
 
+        //Initialize contact with User DB
+        User contact = MainActivity.db.chatDao().get(ContactListActivity.chosenChatId).getContact();
+        byte[] decodedBytes = Base64.decode(contact.getProfilePic(), Base64.DEFAULT);
+
         // Initialize views
+        ImageView image = findViewById(R.id.profilePic);
+        image.setImageBitmap(BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length));
+
+        TextView displayName = findViewById(R.id.displayName);
+        displayName.setText(contact.getDisplayName());
+
         RecyclerView lstMessages = findViewById(R.id.lstMessages);
         adapter = new MessageListAdapter(this);
         lstMessages.setAdapter(adapter);
@@ -140,10 +161,12 @@ public class MessagesActivity extends AppCompatActivity {
         adapter.setMessages(messages);
 
         // Add event listener to send button
-        Button btnSend = findViewById(R.id.buttonSend);
+        ImageButton btnSend = findViewById(R.id.buttonSend);
         btnSend.setOnClickListener(v -> {
             EditText txtMessage = findViewById(R.id.editTextMessage);
             String content = txtMessage.getText().toString().trim();
+
+            txtMessage.setText("");
 
             if (!content.isEmpty()) {
                 // TODO: this is where the message should be sent to the server
