@@ -55,7 +55,7 @@ public class MessagesActivity extends AppCompatActivity {
             HttpURLConnection clientForSendingMessage = null;
             try {
                 String apiURL = MainActivity.db.settingsDao().index().get(0).getServerUrl() + "api";
-                    URL url = new URL(apiURL + "/Chats/" + chatId + "/Messages");
+                URL url = new URL(apiURL + "/Chats/" + chatId + "/Messages");
                 clientForSendingMessage = (HttpURLConnection) url.openConnection();
                 clientForSendingMessage.setRequestMethod("POST");
                 clientForSendingMessage.setRequestProperty("accept", "text/plain");
