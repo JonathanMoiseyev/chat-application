@@ -10,10 +10,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -36,10 +42,13 @@ import communicationApp.androidClient.R;
 import communicationApp.androidClient.Theme;
 import communicationApp.androidClient.adapters.ChatsListAdapter;
 import communicationApp.androidClient.entities.Chat;
+import communicationApp.androidClient.entities.CurrentUser;
 import communicationApp.androidClient.entities.Message;
 import communicationApp.androidClient.entities.Settings;
 import communicationApp.androidClient.entities.SettingsDao;
 import communicationApp.androidClient.entities.User;
+import communicationApp.androidClient.loginAndRegister.register.RegisterActivity;
+import communicationApp.androidClient.settings.SettingsActivity;
 
 public class ContactListActivity extends AppCompatActivity {
     private List<Chat> chats = new ArrayList<>();
@@ -226,15 +235,25 @@ public class ContactListActivity extends AppCompatActivity {
             startActivity(i);
         });
 
-//        chats = new ArrayList<>();
-//        lvContactList = findViewById(R.id.lvContactList);
-//        adapter = new ArrayAdapter<Chat>(this,
-//                                                android.R.layout.simple_list_item_1,
-//                                                chats);
-//        lvContactList.setAdapter(adapter);
+        ImageView profilePic = findViewById(R.id.profilePic);
+        TextView displayName = findViewById(R.id.displayName);
 
+        CurrentUser currentUser = MainActivity.db.currentUserDao().index().get(0);
 
+        String profilePicStr = currentUser.getProfilePic().substring(currentUser.getProfilePic().indexOf(",") + 1);;
+        byte[] decodedBytes = Base64.decode(profilePicStr, Base64.DEFAULT);
 
+        profilePic.setImageBitmap(BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length));
+        displayName.setText(currentUser.getDisplayName());
+
+        ImageButton settingsButton = findViewById(R.id.settings_button_contact_list);
+        settingsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ContactListActivity.this, SettingsActivity.class);
+            startActivity(intent);
+
+            setResult(MainActivity.RESULT_CODE_TO_OPEN_REGISTER);
+            finish();
+        });
         MainActivity.refresher.observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
