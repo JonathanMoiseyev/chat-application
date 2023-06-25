@@ -47,7 +47,7 @@ to view it in your browser.
 
 ## Design
 
-### Client workflow
+### Web Client workflow
 
 The client is built on React. It is responsible for displaying the user interface, and communicating with the server.
 
@@ -60,6 +60,19 @@ sequenceDiagram
     Client-->>+Server: ... + Token
     Server-->>-Client: ...
 ```
+
+### Android Client workflow
+
+The android client is very similar to the web client. The only difference is that the android client uses Firebase to receive notifications from the server, instead of web sockets. 
+
+Also, in the android client we intreduce two new abilities:
+
+* Changing the server address.
+* Changing the default applicaiton theme (eg. dark mode).
+
+These changes can be made from the settings menu. 
+
+
 
 ### Server API
 
@@ -98,9 +111,20 @@ graph LR;
 
 In order to get real time updates, the server uses web sockets to notify the client when a new message is sent in a chat. The client then updates the chat's messages.
 
+### Firebase
+
+Similiary to the web sockets, the server uses Firebase to notify the android client when new activities occur - making it push new notifications to the user. 
+
+
 ### Notes
 
-- When a user (_user a_) adds another contact (_user b_), _user b_ **appears** in _user a's_ contact list. Yet, _user a_ **does not appear** in _user b`s_ contact list, until _user a_ sends _user b_ a message. This is our **intended** functionality as whatsapp behaves similarly. 
+- When a user  (say, _user a_) adds another contact (say, _user b_), _user b_ **appears** in _user a's_ contact list. Yet, _user a_ **does not appear** in _user b`s_ contact list, until _user a_ sends _user b_ a message. This is our **intended** functionality as whatsapp behaves similarly. 
+
+-  In order to help the server identify which client the user's using (so the server will know whether to send a web socket or a firebase notification), at login, the android client sends a flag to the server. This mean that one can't use the android client and the web client at the same time.
+
+- When opening the app, it's important to allow it to send notifications - otherwise the client won't show any updates. Furthermore, we rocommend allowing this functionality in advance.
+
+- The android client supports english, textual messages only.
 
 
 ## Authors
