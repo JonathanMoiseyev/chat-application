@@ -81,7 +81,7 @@ public class FirebaseMsgService extends FirebaseMessagingService {
                         MainActivity.db.messageDao().insert(new Message(chatId, message.getNotification().getBody(),
                                 gmtTime, contactUsername, false));
                     }
-                    else if (type.equals("new chat")) {
+                    else if (type.equals("new contact")) {
                         //making sure we don't have this chat yet
                         if (MainActivity.db.chatDao().get(chatId) == null) {
                             //adding the chat to the database
