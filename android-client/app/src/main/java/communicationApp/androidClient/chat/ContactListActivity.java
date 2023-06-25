@@ -21,18 +21,22 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
 import communicationApp.androidClient.Theme;
 import communicationApp.androidClient.adapters.ChatsListAdapter;
 import communicationApp.androidClient.entities.Chat;
+import communicationApp.androidClient.entities.Message;
 import communicationApp.androidClient.entities.Settings;
 import communicationApp.androidClient.entities.SettingsDao;
 import communicationApp.androidClient.entities.User;
@@ -43,19 +47,62 @@ public class ContactListActivity extends AppCompatActivity {
 
     public static String chosenChatId;
 
+
+    private JSONArray getChatMessagesFromServer(String chatId, String apiURL, String token) {
+        HttpURLConnection urlConnection = null;
+
+        try {
+            // Create request
+            URL url = new URL(apiURL + "/Chats/" + chatId + "/Messages");
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("GET");
+            urlConnection.setRequestProperty("accept", "text/plain");
+            urlConnection.setRequestProperty("Authorization", "bearer " + token);
+
+            // Get response
+            int responseCode = urlConnection.getResponseCode();
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                InputStream inputStream = urlConnection.getInputStream();
+
+                // Get response object
+                StringBuilder response = new StringBuilder();
+                int data;
+
+                while ((data = inputStream.read()) != -1) {
+                    response.append((char) data);
+                }
+
+                // Cast the response array to arraylist of Messages
+                JSONArray messagesJsonArray = new JSONArray(response.toString());
+                return messagesJsonArray;
+            } else {
+                return null;
+            }
+        } catch(Exception exception) {
+            Log.e(TAG, exception.getMessage());
+            return null;
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+        }
+    }
+
     private void getContactsFromServer() {
         Thread thread = new Thread(() -> {
             HttpURLConnection urlConnection = null;
 
             try {
                 String apiURL = MainActivity.db.settingsDao().index().get(0).getServerUrl() + "api";
+                String token = MainActivity.db.currentUserDao().index().get(0).getToken();
 
                 // Create request
                 URL url = new URL(apiURL + "/Chats");
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.setRequestProperty("accept", "text/plain");
-                urlConnection.setRequestProperty("Authorization", "bearer " + MainActivity.db.currentUserDao().index().get(0).getToken());
+                urlConnection.setRequestProperty("Authorization", "bearer " + token);
 
                 // Send request
                 int responseCode = urlConnection.getResponseCode();
@@ -73,6 +120,7 @@ public class ContactListActivity extends AppCompatActivity {
 
                     // Cast the response array to arraylist of Chats, and save on the local db
                     JSONArray chatsJsonArray = new JSONArray(response.toString());
+                    List<Chat> currentChats = MainActivity.db.chatDao().index();
                     chats = new ArrayList<>();
 
                     for (int i = 0; i < chatsJsonArray.length(); i++) {
@@ -83,9 +131,42 @@ public class ContactListActivity extends AppCompatActivity {
                         Chat chat = new Chat(chatJsonObject.getString("id"), user, chatJsonObject.getString("lastMessage"));
 
                         chats.add(chat);
+
+                        // If the chat is not already on the local db, add it
+                        boolean isInArray = false;
+
+                        for (Chat currentChat : currentChats) {
+                            if (currentChat.getId().equals(chat.getId())) {
+                                isInArray = true;
+                            }
+                        }
+
+                        if (!isInArray) {
+                            MainActivity.db.chatDao().insert(chat);
+                        }
                     }
 
                     adapter.setChats(chats);
+
+                    // Get messages from each chat
+                    String currentUserUsername = MainActivity.db.currentUserDao().index().get(0).getUserName();
+
+                    for (Chat chat : chats) {
+                        JSONArray messagesJsonArray = getChatMessagesFromServer(chat.getId(), apiURL, token);
+
+                        if (messagesJsonArray != null) {
+                            for (int i = 0; i < messagesJsonArray.length(); i++) {
+                                JSONObject messageJsonObject = messagesJsonArray.getJSONObject(i);
+                                JSONObject senderJsonObject = messageJsonObject.getJSONObject("sender");
+
+                                boolean isSentByMe = senderJsonObject.getString("username").equals(currentUserUsername);
+
+                                // TODO: date!!!!
+                                Message message = new Message(chat.getId(), messageJsonObject.getString("content"), "", senderJsonObject.getString("username"), isSentByMe);
+                                MainActivity.db.messageDao().insert(message);
+                            }
+                        }
+                    }
                 }
             } catch (Exception e) {
                 Log.e(TAG, "Error sending registration data", e);

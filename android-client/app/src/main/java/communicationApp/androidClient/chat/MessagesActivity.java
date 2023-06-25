@@ -28,6 +28,7 @@ import communicationApp.androidClient.R;
 import communicationApp.androidClient.Theme;
 import communicationApp.androidClient.adapters.MessageListAdapter;
 
+import communicationApp.androidClient.entities.Chat;
 import communicationApp.androidClient.entities.Message;
 import communicationApp.androidClient.entities.MessageDao;
 import communicationApp.androidClient.entities.Settings;
@@ -133,6 +134,8 @@ public class MessagesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_messages);
 
         //Initialize contact with User DB
+        List<Chat> sss = MainActivity.db.chatDao().index();
+        Chat c = MainActivity.db.chatDao().get(ContactListActivity.chosenChatId);
         User contact = MainActivity.db.chatDao().get(ContactListActivity.chosenChatId).getContact();
         byte[] decodedBytes = Base64.decode(contact.getProfilePic(), Base64.DEFAULT);
 
