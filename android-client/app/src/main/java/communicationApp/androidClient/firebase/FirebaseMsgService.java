@@ -19,8 +19,10 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
+import java.util.TimeZone;
 
 import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
@@ -72,8 +74,12 @@ public class FirebaseMsgService extends FirebaseMessagingService {
                 if (type != null) {
                     if (type.equals("new message")) {
                         // adding the message to the chat
+                        SimpleDateFormat formatter = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy");
+                        formatter.setTimeZone(TimeZone.getTimeZone("GMT+00:00"));
+                        String gmtTime = formatter.format(new Date());
+
                         MainActivity.db.messageDao().insert(new Message(chatId, message.getNotification().getBody(),
-                                new Date().toString(), contactUsername, false));
+                                gmtTime, contactUsername, false));
                     }
                     else if (type.equals("new chat")) {
                         //making sure we don't have this chat yet

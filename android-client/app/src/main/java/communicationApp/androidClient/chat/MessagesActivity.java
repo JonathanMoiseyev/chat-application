@@ -20,8 +20,10 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
@@ -188,7 +190,11 @@ public class MessagesActivity extends AppCompatActivity {
 
 
                     // TODO: finish this line: message = new Message(...);
-                    Message message = new Message(ContactListActivity.chosenChatId, content, new Date().toString(),
+                    SimpleDateFormat formatter = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy");
+                    formatter.setTimeZone(TimeZone.getTimeZone("GMT+00:00"));
+                    String gmtTime = formatter.format(new Date());
+
+                    Message message = new Message(ContactListActivity.chosenChatId, content, gmtTime,
                             MainActivity.db.chatDao().get(ContactListActivity.chosenChatId).getContact().getName(), true);
                     messageDao.insert(message);
 
