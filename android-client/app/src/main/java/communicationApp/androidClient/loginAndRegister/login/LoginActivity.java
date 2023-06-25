@@ -61,6 +61,13 @@ public class LoginActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
+
+        // Check if user is already logged in
+        if (MainActivity.db.currentUserDao().index().size() != 0) {
+            setResult(MainActivity.RESULT_CODE_TO_OPEN_CONTACT_LIST);
+            finish();
+        }
+
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
