@@ -27,4 +27,7 @@ public interface MessageDao {
 
     @Delete
     void delete(Message... messages);
+
+    @Query("DELETE FROM Message")
+    void deleteAll();
 }
