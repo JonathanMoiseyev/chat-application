@@ -66,10 +66,13 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             TextView messageContent = holder.itemView.findViewById(R.id.messageContent);
 
 
-            if (current.isSentByMe()) {
+                if (current.isSentByMe()) {
+                params.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
                 params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+
                 messageContent.setBackground(holder.itemView.getResources().getDrawable(R.drawable.rounded_button));
             } else {
+                params.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
                 params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
                 messageContent.setBackground(holder.itemView.getResources().getDrawable(R.drawable.rounded_button_secondary_color));
             }
