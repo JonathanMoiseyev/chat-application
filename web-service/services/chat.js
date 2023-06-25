@@ -9,13 +9,6 @@ admin.initializeApp({
 });
 
 const sendMsgToAndroid = (fcm_token, title, body, data) => {
-
-    console.log('here')
-    console.log(data)
-    console.log(fcm_token)
-    console.log(title)
-    console.log(body)
-    
     admin.messaging().send({
         notification: {
             title: title,
