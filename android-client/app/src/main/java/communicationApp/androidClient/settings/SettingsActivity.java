@@ -115,7 +115,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
 
                 MainActivity.db.messageDao().deleteAll();
-                MainActivity.db.settingsDao().delete(MainActivity.db.settingsDao().index().get(0));
+                MainActivity.db.chatDao().deleteAll();
                 MainActivity.db.currentUserDao().delete(MainActivity.db.currentUserDao().index().get(0));
                 finish();
             }

@@ -191,6 +191,11 @@ public class ContactListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (MainActivity.db.currentUserDao().index().size() == 0) {
+            setResult(MainActivity.RESULT_CODE_TO_OPEN_LOGIN);
+            finish();
+        }
+
         try {
             SettingsDao settingsDao = MainActivity.db.settingsDao();
             Settings settings = settingsDao.index().get(0);
@@ -250,9 +255,6 @@ public class ContactListActivity extends AppCompatActivity {
         settingsButton.setOnClickListener(v -> {
             Intent intent = new Intent(ContactListActivity.this, SettingsActivity.class);
             startActivity(intent);
-
-            setResult(MainActivity.RESULT_CODE_TO_OPEN_REGISTER);
-            finish();
         });
         MainActivity.refresher.observe(this, new Observer<Boolean>() {
             @Override
@@ -272,6 +274,11 @@ public class ContactListActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        if (MainActivity.db.currentUserDao().index().size() == 0) {
+            setResult(MainActivity.RESULT_CODE_TO_OPEN_LOGIN);
+            finish();
+        }
+
         super.onResume();
 
         if (chats != null) {
