@@ -132,6 +132,8 @@ Similiary to the web sockets, the server uses Firebase to notify the android cli
 
 - When a user adds one as a new contact in the android client, a notification is pushed to one's device. However, in order to render the new contact, one must refresh the app by pressing "back" in his device. 
 
+- **Imortant:** Since we are using the free tiers of Firebase and MongoDB, the application only supports very small images - preferably around 222 bytes.
+
 
 ## Authors
 [Jonathan Kelsi](https://github.com/JonathanKelsi)  
