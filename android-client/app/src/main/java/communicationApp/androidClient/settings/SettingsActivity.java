@@ -12,6 +12,7 @@ import communicationApp.androidClient.R;
 import communicationApp.androidClient.Theme;
 import communicationApp.androidClient.entities.Settings;
 import communicationApp.androidClient.entities.SettingsDao;
+import communicationApp.androidClient.loginAndRegister.login.LoginDataSource;
 import communicationApp.androidClient.loginAndRegister.register.RegisterActivity;
 
 import android.content.Context;
@@ -113,6 +114,8 @@ public class SettingsActivity extends AppCompatActivity {
                     Toast.makeText(SettingsActivity.this, "You are not logged in", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                LoginDataSource.logout();
 
                 MainActivity.db.messageDao().deleteAll();
                 MainActivity.db.chatDao().deleteAll();
