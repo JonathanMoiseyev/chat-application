@@ -192,8 +192,11 @@ public class MessagesActivity extends AppCompatActivity {
                             MainActivity.db.chatDao().get(ContactListActivity.chosenChatId).getContact().getName(), true);
                     messageDao.insert(message);
 
+                    messages = MainActivity.db.messageDao().get(ContactListActivity.chosenChatId);
+                    lstMessages.scrollToPosition(messages.size() - 1);
+
                     // Update the screen
-                    adapter.setMessages(MainActivity.db.messageDao().get(ContactListActivity.chosenChatId));
+                    adapter.setMessages(messages);
                 }
 
             }
@@ -220,10 +223,11 @@ public class MessagesActivity extends AppCompatActivity {
                 lstMessages.setAdapter(adapter);
                 lstMessages.setLayoutManager(new LinearLayoutManager(thisContext));
 
-
                 // Render stored messages
                 messages = MainActivity.db.messageDao().get(ContactListActivity.chosenChatId);
+                lstMessages.scrollToPosition(messages.size() - 1);
                 adapter.setMessages(messages);
+
             }
         });
     }
