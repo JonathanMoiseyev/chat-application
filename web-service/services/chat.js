@@ -180,4 +180,5 @@ module.exports = {
     deleteChat,
     addChatMessage,
     getChatMessages,
+    getChatMessage: getChatMessages
 };
