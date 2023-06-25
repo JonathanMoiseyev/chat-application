@@ -132,6 +132,8 @@ Similiary to the web sockets, the server uses Firebase to notify the android cli
 
 - **Imortant:** Since we are using the free tiers of Firebase and MongoDB, the application only supports very small images - preferably around 222 bytes.
 
+- If needed, one can refresh the profile pictures of his contacts by pressing "back" on his device.
+
 
 ## Authors
 [Jonathan Kelsi](https://github.com/JonathanKelsi)  
