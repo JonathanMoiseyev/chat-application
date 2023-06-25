@@ -17,16 +17,16 @@ This project requires the following dependencies:
 
 Clone the repository: 
 ```bash
-git clone https://github.com/yuvalgrofman/ap2-a3
+git clone https://github.com/JonathanMoiseyev/ap2-a4
 ```
 
-Download the necessary dependencies for both the client and the server, by running 
+Download the necessary dependencies for both the web-client and the server, by running 
 
 ```
-npm i
+npm i --force
 ```
 
-in both the client and the server directories.
+in both the web-client and the server directories.
 
 ### Executing The Program
 
@@ -36,7 +36,7 @@ To run the server, navigate to the server directory, and run the following comma
 node app.js
 ```
 
-To run the client, run the following command in the client directory:
+To run the web client, run the following command in the web client directory:
 
 ```bash
 npm start
@@ -44,6 +44,8 @@ npm start
 
 then open [http://localhost:3000](http://localhost:3000) 
 to view it in your browser.
+
+To run the android client, open the android studio app on the android client folder. make sure that your android sdk has a correct config, and run it from there (offcourse you can run it both on an emulator, a phisycal device).
 
 ## Design
 
@@ -124,7 +126,9 @@ Similiary to the web sockets, the server uses Firebase to notify the android cli
 
 - When opening the app, it's important to allow it to send notifications - otherwise the client won't show any updates. Furthermore, we rocommend allowing this functionality in advance.
 
-- The android client supports english, textual messages only.
+- The android client supports english, textual messages only (only ascii charachters)
+
+- The message date times show up with times from the GMT time zone
 
 
 ## Authors
