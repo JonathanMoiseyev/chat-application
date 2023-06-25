@@ -9,6 +9,12 @@ admin.initializeApp({
 });
 
 const sendMsgToAndroid = (fcm_token, title, body, data) => {
+
+    console.log('here')
+    console.log(data)
+    console.log(fcm_token)
+    console.log(title)
+    console.log(body)
     
     admin.messaging().send({
         notification: {
@@ -18,6 +24,8 @@ const sendMsgToAndroid = (fcm_token, title, body, data) => {
         data: data,
         token: fcm_token
     });
+
+    console.log('here again')
 }
 
 const io = require("socket.io")();

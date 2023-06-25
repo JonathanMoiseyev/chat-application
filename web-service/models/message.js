@@ -1,12 +1,10 @@
 const mongoose = require("mongoose");
 const User = require("./user").schema;
 
-const timeZone = require('mongoose-timezone');
-
 const Message = new mongoose.Schema({
     created: {  
         type: Date,
-        default: new Date()
+        default: Date.now
     },
 
     sender: {
@@ -19,5 +17,4 @@ const Message = new mongoose.Schema({
     }
 });
 
-Message.plugin(timeZone)
 module.exports = mongoose.model('Message', Message);
