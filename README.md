@@ -45,7 +45,7 @@ npm start
 then open [http://localhost:3000](http://localhost:3000) 
 to view it in your browser.
 
-To run the android client, open the android studio app on the android client folder. make sure that your android sdk has a correct config, and run it from there (offcourse you can run it both on an emulator, a phisycal device).
+To run the android client, open the android studio app on the android client folder. make sure that your android sdk has a correct config, and run it from there (of course you can run it both on an emulator, a phisycal device).
 
 ## Design
 
