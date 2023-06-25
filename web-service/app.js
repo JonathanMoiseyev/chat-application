@@ -23,16 +23,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/HemiDB", {
 });
 
 io.on("connection", function (socket) {
-    // socket.on("msg", function (msg) {
-    //     io.emit(msg.reciverUserName, msg);
-    // });
-
-    socket.on("new contact", function (msg) {
-        io.emit(
-            JSON.stringify({ type: "new contact", receiverUserName: msg.receiverUserName }),
-            { sender: msg.sender, chatId: msg.chatId }
-        );
-    });
+    // do nothing
 });
 
 app.use("/api/Tokens", routerToken);

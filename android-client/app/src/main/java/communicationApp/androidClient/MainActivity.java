@@ -60,15 +60,15 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        String[] permissions = {Manifest.permission.POST_NOTIFICATIONS};
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED ) {
-            ActivityCompat.requestPermissions(this, permissions, 1);
-            finish();
-        }
-
-        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(MainActivity.this, instanceIdResult -> {
-            fireBaseToken = instanceIdResult.getToken();
-        });
+//        String[] permissions = {Manifest.permission.POST_NOTIFICATIONS};
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED ) {
+//            ActivityCompat.requestPermissions(this, permissions, 1);
+//            finish();
+//        }
+//
+//        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(MainActivity.this, instanceIdResult -> {
+//            fireBaseToken = instanceIdResult.getToken();
+//        });
 
 
 

@@ -127,7 +127,7 @@ public class ContactListActivity extends AppCompatActivity {
                         JSONObject chatJsonObject = chatsJsonArray.getJSONObject(i);
                         JSONObject userJsonObject = chatJsonObject.getJSONObject("user");
 
-                        User user = new User(-1, userJsonObject.getString("username"), userJsonObject.getString("displayName"), userJsonObject.getString("profilePic"));
+                        User user = new User(userJsonObject.getString("username"), userJsonObject.getString("displayName"), userJsonObject.getString("profilePic"));
                         Chat chat = new Chat(chatJsonObject.getString("id"), user, chatJsonObject.getString("lastMessage"));
 
                         chats.add(chat);

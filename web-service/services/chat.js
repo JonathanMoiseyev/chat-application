@@ -8,13 +8,14 @@ admin.initializeApp({
     credential: admin.credential.cert(firebaseKey)
 });
 
-const sendMsgToAndroid = (fcm_token, title, body) => {
-
+const sendMsgToAndroid = (fcm_token, title, body, data) => {
+    
     admin.messaging().send({
         notification: {
             title: title,
             body: body
         },
+        data: data,
         token: fcm_token
     });
 }
@@ -70,6 +71,22 @@ const createChat = async (username, newContactUsername) => {
     const user = await User.findOne({ username: username });
     const newChat = new Chat({ users: [user, contact], messages: [] });
     await newChat.save();
+
+
+    if (contact.androidToken === "" || contact.androidToken == null) {
+        // send via socket io
+        io.emit(
+            JSON.stringify({ type: "new contact", receiverUserName: contact.username }),
+            {sender: user, chatId: newChat._id.toString()});
+    }
+    else {
+        // send notification through firebase
+        sendMsgToAndroid(contact.androidToken, "new chat", contact.displayName + " added you to a new chat",
+                {"sender": JSON.stringify(user), "chatId": newChat._id.toString(), "type": "new contact"});
+    }
+
+
+
 
     return {
         id: newChat._id,
@@ -127,9 +144,8 @@ const addChatMessage = async (chatId, username, message) => {
 
             else {
                 // send notification through firebase
-
-            
-                sendMsgToAndroid(reciver.androidToken, msg.sender.username + ":", msg.content);
+                sendMsgToAndroid(reciver.androidToken, msg.sender.displayName + ":", msg.content, 
+                            {"sender": JSON.stringify(msg.sender), "chatId": chatId, "type": "new message"});
             }
         }
     });

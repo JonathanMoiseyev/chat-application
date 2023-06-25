@@ -1,13 +1,10 @@
 package communicationApp.androidClient.firebase;
 
 
-import static com.google.android.material.internal.ContextUtils.getActivity;
-
 import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 
@@ -20,14 +17,16 @@ import androidx.core.app.NotificationManagerCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import org.json.JSONObject;
+
 import java.util.Date;
+import java.util.Map;
 
 import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
 import communicationApp.androidClient.entities.Chat;
 import communicationApp.androidClient.entities.Message;
 import communicationApp.androidClient.entities.User;
-import communicationApp.androidClient.loginAndRegister.register.RegisterActivity;
 
 public class FirebaseMsgService extends FirebaseMessagingService {
     @Override
@@ -49,32 +48,50 @@ public class FirebaseMsgService extends FirebaseMessagingService {
                 notificationManager.notify(1, builder.build());
             }
 
+            Map<String, String> data = message.getData();
+            if (data.containsKey("type") && data.containsKey("sender") && data.containsKey("chatId")) {
 
-            // adding the message to the chat
-            String title = message.getNotification().getTitle();
-            String contactUsername = title.substring(0, title.length() - 1);
+                String contactJsonString = data.get("sender");
+                JSONObject contactJson;
+                String contactUsername;
+                String contactDisplayName;
+                String profilePicture;
 
-            String chatId = null;
-            for (Chat c : MainActivity.db.chatDao().index()) {
-                if (c.getContact().getName().equals(contactUsername)) {
-                    c.setLastMessage(message.getNotification().getBody());
-                    MainActivity.db.chatDao().update(c);
+                try {
+                    contactJson = new JSONObject(contactJsonString);
+                    contactUsername = contactJson.getString("username");
+                    contactDisplayName = contactJson.getString("displayName");
+                    profilePicture = contactJson.getString("profilePic");
+                } catch (Exception e) {
+                    return; //TODO: handle this exception
+                }
 
-                    chatId = c.getId();
+                String chatId = data.get("chatId");
+
+                String type = data.get("type");
+                if (type != null) {
+                    if (type.equals("new message")) {
+                        // adding the message to the chat
+                        MainActivity.db.messageDao().insert(new Message(chatId, message.getNotification().getBody(),
+                                new Date().toString(), contactUsername, false));
+                    }
+                    else if (type.equals("new chat")) {
+                        //making sure we don't have this chat yet
+                        if (MainActivity.db.chatDao().get(chatId) == null) {
+                            //adding the chat to the database
+                            User newContact = new User(contactUsername, contactDisplayName, profilePicture);
+                            MainActivity.db.chatDao().insert(new Chat(chatId, newContact, ""));
+                        }
+                    }
+
+                    // refreshing the activity
+                    try {
+                        MainActivity.refresher.postValue(!MainActivity.refresher.getValue().booleanValue());
+                    } catch (Exception e) {
+                        MainActivity.refresher.postValue(true);
+                    }
                 }
             }
-
-            MainActivity.db.messageDao().insert(new Message(chatId, message.getNotification().getBody(),
-                    new Date().toString(), contactUsername, false));
-
-            // refreshing the activity
-            try{
-                MainActivity.refresher.postValue(!MainActivity.refresher.getValue().booleanValue());
-            } catch (Exception e) {
-                MainActivity.refresher.postValue(true);
-            }
-
-
         }
     }
 
