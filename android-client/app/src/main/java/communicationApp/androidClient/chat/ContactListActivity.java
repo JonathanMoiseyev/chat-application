@@ -158,6 +158,7 @@ public class ContactListActivity extends AppCompatActivity {
                     adapter.setChats(chats);
 
                     // Get messages from each chat
+                    MainActivity.db.messageDao().deleteAll();
                     String currentUserUsername = MainActivity.db.currentUserDao().index().get(0).getUserName();
 
                     for (Chat chat : chats) {
@@ -170,8 +171,10 @@ public class ContactListActivity extends AppCompatActivity {
 
                                 boolean isSentByMe = senderJsonObject.getString("username").equals(currentUserUsername);
 
-                                // TODO: date!!!!
-                                Message message = new Message(chat.getId(), messageJsonObject.getString("content"), "", senderJsonObject.getString("username"), isSentByMe);
+                                String date = messageJsonObject.get("created").toString();
+                                int indexOfT = date.indexOf("T");
+                                date = date.substring(indexOfT + 1);
+                                Message message = new Message(chat.getId(), messageJsonObject.getString("content"), date, senderJsonObject.getString("username"), isSentByMe);
                                 MainActivity.db.messageDao().insert(message);
                             }
                         }

@@ -171,5 +171,5 @@ module.exports = {
     getChat,
     deleteChat,
     addChatMessage,
-    getChatMessage: getChatMessages,
+    getChatMessages,
 };
