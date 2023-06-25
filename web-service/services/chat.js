@@ -1,6 +1,37 @@
 const Chat = require("../models/chat");
 const User = require("../models/user");
 const Message = require("../models/message");
+const firebaseKey = require("../firebaseKey.json");
+const admin = require("firebase-admin");
+
+admin.initializeApp({
+    credential: admin.credential.cert(firebaseKey)
+});
+
+const sendMsgToAndroid = (fcm_token, title, body, data) => {
+
+    console.log('here')
+    console.log(data)
+    console.log(fcm_token)
+    console.log(title)
+    console.log(body)
+    
+    admin.messaging().send({
+        notification: {
+            title: title,
+            body: body
+        },
+        data: data,
+        token: fcm_token
+    });
+
+    console.log('here again')
+}
+
+const io = require("socket.io")();
+
+
+
 
 const getChats = async (username) => {
     const chats = await Chat.find({ users: { $elemMatch: { username: username } } });
@@ -49,6 +80,22 @@ const createChat = async (username, newContactUsername) => {
     const newChat = new Chat({ users: [user, contact], messages: [] });
     await newChat.save();
 
+
+    if (contact.androidToken === "" || contact.androidToken == null) {
+        // send via socket io
+        io.emit(
+            JSON.stringify({ type: "new contact", receiverUserName: contact.username }),
+            {sender: user, chatId: newChat._id.toString()});
+    }
+    else {
+        // send notification through firebase
+        sendMsgToAndroid(contact.androidToken, "new chat", contact.displayName + " added you to a new chat",
+                {"sender": JSON.stringify(user), "chatId": newChat._id.toString(), "type": "new contact"});
+    }
+
+
+
+
     return {
         id: newChat._id,
         user: {
@@ -95,6 +142,24 @@ const addChatMessage = async (chatId, username, message) => {
     chat.messages.push(msg);
     await chat.save();
 
+    chat.users.forEach(async (user) => {
+        if (user != null && user.username !== username) {
+            const reciver = await User.findOne({ username: user.username });
+            if (reciver.androidToken === "" || reciver.androidToken == null) {
+                // send via socket io
+                io.emit(reciver.username, {msg: msg, sender: msg.sender, reciverUserName: reciver.username});
+            }
+
+            else {
+                // send notification through firebase
+                sendMsgToAndroid(reciver.androidToken, msg.sender.displayName + ":", msg.content, 
+                            {"sender": JSON.stringify(msg.sender), "chatId": chatId, "type": "new message"});
+            }
+        }
+    });
+
+
+
     return msg;
 };
 
@@ -114,5 +179,6 @@ module.exports = {
     getChat,
     deleteChat,
     addChatMessage,
-    getChatMessage: getChatMessages,
+    getChatMessages,
+    getChatMessage: getChatMessages
 };

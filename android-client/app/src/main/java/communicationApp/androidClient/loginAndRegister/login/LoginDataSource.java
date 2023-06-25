@@ -25,11 +25,13 @@ public class LoginDataSource {
         private Result<LoggedInUser> result;
         private String username;
         private String password;
+        private boolean isDisconnect;
 
-        LoginNetworkRunnable(String username, String password) {
+        LoginNetworkRunnable(String username, String password, boolean isDisconnect) {
             this.result = null;
             this.username = username;
             this.password = password;
+            this.isDisconnect = isDisconnect;
         }
 
         public Result<LoggedInUser> getResult() {
@@ -50,6 +52,11 @@ public class LoginDataSource {
 
                 clientForToken.setRequestProperty("accept", "*/*");
                 clientForToken.setRequestProperty("Content-Type", "application/json");
+                System.out.println(MainActivity.fireBaseToken);
+
+                if (!isDisconnect) {
+                    clientForToken.setRequestProperty("androidtoken", MainActivity.fireBaseToken);
+                }
 
                 clientForToken.setDoOutput(true);
 
@@ -69,6 +76,9 @@ public class LoginDataSource {
                 DataInputStream tokenInputStream = new DataInputStream(clientForToken.getInputStream());
                 String token = tokenInputStream.readLine();
 
+                if (isDisconnect) {
+                    return;
+                }
 
 
 
@@ -96,7 +106,7 @@ public class LoginDataSource {
                         currentUserDao.delete(currentUserDao.index().get(0));
                     }
 
-                    CurrentUser currentUser = new CurrentUser(0, token, username, displayName, profilePic);
+                    CurrentUser currentUser = new CurrentUser(0, token, username, displayName, profilePic, password);
                     currentUserDao.insert(currentUser);
 
                     Object s = currentUserDao.index();
@@ -133,10 +143,12 @@ public class LoginDataSource {
 
     }
 
-
-
     public Result<LoggedInUser> login(String username, String password) {
-        LoginNetworkRunnable runnable = new LoginNetworkRunnable(username, password);
+        return loginRequest(username, password, false);
+    }
+
+    private static Result<LoggedInUser> loginRequest(String username, String password, boolean isDisconnect) {
+        LoginNetworkRunnable runnable = new LoginNetworkRunnable(username, password, isDisconnect);
         Thread networkThread = new Thread(runnable);
 
         Result<LoggedInUser> result = null;
@@ -155,7 +167,10 @@ public class LoginDataSource {
         return result;
     }
 
-    public void logout() {
-        // TODO: revoke authentication
+    public static void logout() {
+        if (MainActivity.db.currentUserDao().index().size() > 0) {
+            CurrentUser user = MainActivity.db.currentUserDao().index().get(0);
+            loginRequest(user.getUserName(), user.getPassword(), true);
+        }
     }
 }

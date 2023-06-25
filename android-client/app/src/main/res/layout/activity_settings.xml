@@ -59,6 +59,16 @@
         android:gravity="center"
         android:spinnerMode="dropdown"/>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/logout_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="logout"
+        android:layout_below="@id/theme_spinner"
+        android:layout_marginTop="20dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/rounded_button" />
+
     <ImageButton
         android:id="@+id/return_button"
         android:layout_width="wrap_content"

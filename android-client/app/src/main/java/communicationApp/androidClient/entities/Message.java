@@ -16,12 +16,14 @@ public class Message {
     private String timestamp;
 
     public String contactUsername;
+    private boolean isSentByMe;
 
-    public Message(String chatId, String content, String timestamp, String contactUsername) {
+    public Message(String chatId, String content, String timestamp, String contactUsername, boolean isSentByMe) {
         this.chatId = chatId;
         this.content = content;
         this.timestamp = timestamp;
         this.contactUsername = contactUsername;
+        this.isSentByMe = isSentByMe;
     }
 
     public long getId() {
@@ -51,4 +53,8 @@ public class Message {
     }
 
     public void setChatId(String chatId) { this.chatId = chatId; }
+
+    public boolean isSentByMe() {
+        return isSentByMe;
+    }
 }

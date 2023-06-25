@@ -12,6 +12,7 @@ const createUser = async (username, password, displayName, profilePic) => {
         username,
         displayName,
         profilePic,
+        androidToken: "",
     });
 
     await UserPass.create({

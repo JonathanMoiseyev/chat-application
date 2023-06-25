@@ -1,6 +1,8 @@
 package communicationApp.androidClient.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +12,8 @@ import communicationApp.androidClient.R;
 import communicationApp.androidClient.Theme;
 import communicationApp.androidClient.entities.Settings;
 import communicationApp.androidClient.entities.SettingsDao;
+import communicationApp.androidClient.loginAndRegister.login.LoginDataSource;
+import communicationApp.androidClient.loginAndRegister.register.RegisterActivity;
 
 import android.content.Context;
 import android.view.View;
@@ -96,6 +100,29 @@ public class SettingsActivity extends AppCompatActivity {
 
         // Set the URL address and theme to the saved settings
         urlEditText.setText(settings.getServerUrl());
+
+        Button button = findViewById(R.id.logout_button);
+
+        if (MainActivity.db.currentUserDao().index().size() == 0) {
+            button.setVisibility(View.GONE);
+        }
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (MainActivity.db.currentUserDao().index().size() == 0) {
+                    Toast.makeText(SettingsActivity.this, "You are not logged in", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                LoginDataSource.logout();
+
+                MainActivity.db.messageDao().deleteAll();
+                MainActivity.db.chatDao().deleteAll();
+                MainActivity.db.currentUserDao().delete(MainActivity.db.currentUserDao().index().get(0));
+                finish();
+            }
+        });
     }
 
     private void applyChanges() {

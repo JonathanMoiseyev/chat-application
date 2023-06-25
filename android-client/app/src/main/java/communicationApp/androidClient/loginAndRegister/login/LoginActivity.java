@@ -1,8 +1,12 @@
 package communicationApp.androidClient.loginAndRegister.login;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -19,6 +23,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import communicationApp.androidClient.MainActivity;
 import communicationApp.androidClient.R;
@@ -60,6 +66,22 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         super.onCreate(savedInstanceState);
+
+        String[] permissions = {Manifest.permission.POST_NOTIFICATIONS};
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED ) {
+            ActivityCompat.requestPermissions(this, permissions, 1);
+        }
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(LoginActivity.this, instanceIdResult -> {
+            MainActivity.fireBaseToken = instanceIdResult.getToken();
+        });
+
+
+        // Check if user is already logged in
+        if (MainActivity.db.currentUserDao().index().size() != 0) {
+            setResult(MainActivity.RESULT_CODE_TO_OPEN_CONTACT_LIST);
+            finish();
+        }
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

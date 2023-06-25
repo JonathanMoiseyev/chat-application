@@ -1,10 +1,11 @@
 const UserPass = require('../models/userPass');
+const User = require('../models/user');
 const jwt = require("jsonwebtoken");
 
 const secretKey = "Shhhhh...";
 
-const createToken = async (username, password) => {
-    const user = await UserPass.findOne({ username });
+const createToken = async (username, password, androidToken) => {
+    var user = await UserPass.findOne({ username });
 
     if (user === null) {
         throw new Error('User not found');
@@ -14,6 +15,7 @@ const createToken = async (username, password) => {
         throw new Error('Password is incorrect');
     }
 
+    await User.findOneAndUpdate({ username }, { androidToken });
     return jwt.sign({ username }, secretKey)
 }
 

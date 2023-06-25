@@ -1,12 +1,21 @@
 package communicationApp.androidClient;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 
-import communicationApp.androidClient.chat.MessagesActivity;
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import java.util.Objects;
+
 import communicationApp.androidClient.chat.ContactListActivity;
 import communicationApp.androidClient.entities.AppDB;
 import communicationApp.androidClient.entities.Settings;
@@ -22,15 +31,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static AppDB db;
+    public static String fireBaseToken = "";
 
     public static final int RESULT_CODE_TO_OPEN_LOGIN = 1;
     public static final int RESULT_CODE_TO_OPEN_REGISTER = 2;
     public static final int RESULT_CODE_TO_OPEN_CONTACT_LIST = 3;
 
+    public static MutableLiveData<Boolean> refresher;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        refresher = new MutableLiveData<>(false);
+        
         db =  Room.databaseBuilder(getApplicationContext(), AppDB.class, "HemiDB")
                 .fallbackToDestructiveMigration()
                 .allowMainThreadQueries()
@@ -47,8 +60,12 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
+
+
         Intent intent = new Intent(this, LoginActivity.class);
         startActivityForResult(intent, Activities.LOGIN.ordinal());
+
+
     }
 
 

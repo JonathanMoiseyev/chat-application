@@ -23,7 +23,6 @@ import communicationApp.androidClient.Theme;
 import communicationApp.androidClient.entities.AppDB;
 import communicationApp.androidClient.entities.Chat;
 import communicationApp.androidClient.entities.ChatDao;
-import communicationApp.androidClient.entities.CurrentUser;
 import communicationApp.androidClient.entities.CurrentUserDao;
 import communicationApp.androidClient.entities.User;
 import communicationApp.androidClient.entities.Settings;
@@ -121,14 +120,13 @@ public class AddContactActivity extends AppCompatActivity {
                                 String id = responseData.getString("id");
                                 JSONObject user = responseData.getJSONObject("user");
 
-                                int contactId = -1; // TODO: FIX
                                 String contactUsername = user.getString("username");
                                 String contactDisplayName = user.getString("displayName");
                                 String contactProfilePic = user.getString("profilePic");
                                 contactProfilePic = contactProfilePic.substring(getString(R.string.base64_image_prefix).length());
 
                                 // Save contact to local database
-                                User contact = new User(contactId, contactUsername, contactDisplayName, contactProfilePic);
+                                User contact = new User(contactUsername, contactDisplayName, contactProfilePic);
                                 Chat chat = new Chat(id, contact, "");
                                 chatDao.insert(chat);
 

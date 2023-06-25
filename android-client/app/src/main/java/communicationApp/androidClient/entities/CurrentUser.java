@@ -11,13 +11,15 @@ public class CurrentUser {
     private String userName;
     private String displayName;
     private String profilePic;
+    private String password;
 
-    public CurrentUser(int id, String token, String userName, String displayName, String profilePic) {
+    public CurrentUser(int id, String token, String userName, String displayName, String profilePic, String password) {
         this.id = id;
         this.token = token;
         this.userName = userName;
         this.displayName = displayName;
         this.profilePic = profilePic;
+        this.password = password;
     }
 
     public String getToken() {
@@ -54,5 +56,9 @@ public class CurrentUser {
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }
