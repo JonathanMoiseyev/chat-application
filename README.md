@@ -128,9 +128,12 @@ Similiary to the web sockets, the server uses Firebase to notify the android cli
 
 - The android client supports english, textual messages only (only ascii charachters)
 
+- If needed, one can refresh the profile pictures of his contacts by pressing "back" on his device.
+
 - The message date times show up with times from the GMT time zone
 
 - **Imortant:** Since we are using the free tiers of Firebase and MongoDB, the application only supports very small images - preferably around 222 bytes.
+
 
 
 ## Authors
